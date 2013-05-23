@@ -1,0 +1,2063 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,medium,bold" title="roboto" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <title>C++ Game Analytics | Playtomic analytics and services for C++ games</title>
+      <meta name="keywords" content="c++, c++ api, c++ sdk, playtomic c++, c++ playtomic, c++ analytics, c++ game analytics, game analytics" />
+      <style type="text/css">
+         .tabs { height: 24px; line-height: 24px; margin-bottom: 8px; }
+         .tabs li { padding: 1px; border: 1px solid #DDD; background-color: #F5F5F5; margin: 0px 4px 0px 0px; display: block; float: left; height: 24px; line-height: 24px; padding: 0px 8px; }
+         .tabs a { display: block; font-size: 10px; color: #333; text-decoration: none; font-size: 11px; }
+         .tabs li.selected { background-color: #EEE; border: 1px inset #CCC; background-color: #FFF; }
+         .tabs li.selected a { color: #000; }
+         .tab { display: none; }
+      </style>
+      <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+      <link rel="icon" href="../favicon.ico" type="image/icon" />
+      <link rel="stylesheet" href="api.css" />
+      <style>
+         .goodbye {margin: 10px 0; padding: 10px;background-color: #222;border: 4px solid #333;}
+         .goodbye p { color: #EEE;margin-bottom: 12px;font-size: 15px;line-height: 24px !important; }
+         .goodbye a { font-size: 15px !important;color: #FFF; }
+         .goodbye h2 { font-size: 18px;color: #FFF; margin: 0px 0px 4px 0px}
+         .goodbye a.btn { text-decoration: none !important;padding: 4px; }
+         .goodbye input { padding: 4px; }
+         .goodbye form { margin-bottom: 12px;}
+         .goodbye hr { margin: 12px !important; }
+         #LightBox { background-color: #333; width: 808px; height: 604px; display: none; position: absolute; z-index: 1001; top: 0px; left: 0px; }
+         #Overlay { background-image: url(../images/overlay.png); display: none; position: absolute; z-index: 1000; top: 0px; left: 0px; width: 100%; height: 100%; }
+      </style>
+   </head>
+   <body>
+      <div id="TopBarContainer">
+         <div id="TopBar">
+            <div id="SiteBar">
+               <ul>
+                  <li><a title="Playtomic" href="http://playtomic.com/">Website</a></li>
+                  <li><a title="API Documentation" href="../api.html">API Docs</a></li>
+                  <li><a title="Issue Center" href="#">Issues</a></li>
+                  <li><a title="Feature Wish List" href="#">Wish List</a></li>
+                  <li><a title="Blog" href="#">Blog</a></li>
+                  <!--<li><a href="#">Community</a></li>
+                     <li><a href="/jobs">Jobs</a></li>-->
+                  <li><a title="Game distribution" href="#">Games</a></li>
+                  <li class="last"><a href="http://twitter.com/playtomic">Twitter</a></li>
+               </ul>
+            </div>
+         </div>
+      </div>
+      <div id="Container">
+         <div id="Header">
+            <a id="Logo" href="/"><span title="Playtomic - Game analytics and tools for iPhone, iPod, iPad, Flash, HTML5 and Unity games"></span></a>
+         </div>
+         <div id="APIMenu">
+            <div>
+               <ul>
+                  <li><a class="menulink" href="../api.html">API Home</a></li>
+                  <li><a class="menulink" href="api/dataexporting.html">Data Exporting</a></li>
+                  <li><a class="menulink" href="http://playtomic.org/api/unity3d.html">Unity3d</a></li>
+                  <li><a class="menulink" href="http://playtomic.org/api/html5.html">HTML5</a></li>
+                  <li><a class="menulink" href="http://playtomic.org/api/ios.html">iOS / Objective C</a></li>
+                  <li><a class="menulink" href="http://playtomic.org/api/as3.html">Flash / AS3</a></li>
+                  <li><a class="menulink" href="api/as2.html">Flash / AS2</a></li>
+                  <li><a class="menulink" href="api/cpp.html">C++</a></li>
+                  <li><a class="menulink" href="http://playtomic.org/api/android.html">Android / Java</a></li>
+                  <li><a class="menulink" href="http://playtomic.org/api/csharp.html">Android / Mono</a></li>
+                  <li><a class="menulink" href="api/java.html">Java</a></li>
+               </ul>
+            </div>
+         </div>
+         <div id="APIHeading">
+            <h1>C++ API Documentation</h1>
+         </div>
+         <div id="Content">
+            <div id="APILeft">
+               <ul>
+                  <li id="Section9Handle"><a class="menulink" href="#SettingUp" onclick="javascript:pages.setPage(9);">Setting up</a></li>
+                  <li id="Section1Handle"><a class="menulink" href="#Analytics" onclick="javascript:pages.setPage(1);">Analytics</a></li>
+                  <li id="Section8Handle"><a class="menulink" href="#LinkTracking" onclick="javascript:pages.setPage(8);">Link tracking</a></li>
+                  <li id="Section2Handle"><a class="menulink" href="#LevelSharing" onclick="javascript:pages.setPage(2);">Level sharing</a></li>
+                  <li id="Section3Handle"><a class="menulink" href="#Leaderboards" onclick="javascript:pages.setPage(3);">Leaderboards</a></li>
+                  <li id="Section4Handle"><a class="menulink" href="#GameVars" onclick="javascript:pages.setPage(4);">GameVars</a></li>
+                  <li id="Section5Handle"><a class="menulink" href="#Geolocation" onclick="javascript:pages.setPage(5);">Geolocation</a></li>
+                  <li id="Section6Handle"><a class="menulink" href="#DataLookup" onclick="javascript:pages.setPage(6);">Data lookup</a></li>
+                  <li style="display:none" id="Section10Handle"><a class="menulink" href="#Parse" onclick="javascript:pages.setPage(10);">Parse Database</a></li>
+                  <li id="Section7Handle"><a class="menulink" href="#ErrorCodes" onclick="javascript:pages.setPage(7);">Error codes</a></li>
+               </ul>
+            </div>
+            <div id="APIRight">
+               <div id="Section9">
+                  <h1>Setting up the C++ API</h1>
+                  <p><a class="btn primary" href="#">Download</a>
+                     <a class="btn primary" href="#">Browse on Github</a>
+                  </p>
+                  <p style="color:#900">You will also need to download boost and curl lib to compile the API.  You can download the dependencies package from <a href="#">here.</a></p>
+                  <ul class="tabs">
+                     <li id="tab_VisualStudio"><a href="javascript:setTab('VisualStudio');">Visual Studio</a></li>
+                     <li id="tab_XcodeMacOSX"><a href="javascript:setTab('XcodeMacOSX');">Xcode (Mac OS X)</a></li>
+                     <li id="tab_XcodeiOS"><a href="javascript:setTab('XcodeiOS');">Xcode (iOS)</a></li>
+                     <li id="tab_Android"><a href="javascript:setTab('Android');">Android</a></li>
+                  </ul>
+                  <div id="VisualStudio" class="tab">
+                     <h2>Visual Studio</h2>
+                     <h2>Including prebuilt DLL</h2>
+                     <h3>Configuring project properties</h3>
+                     <p>In C/C++ tab</p>
+                     <ul class="list">
+                        <li>Go to General tab</li>
+                        <li>Add "(PlaytomicPath)/Include; (DependenciesPath)/Boost;(DependenciesPath)/currlib/include" to Additional include directories</li>
+                     </ul>
+                     <p>Go to Preprocessor tab</p>
+                     <ul class="list">
+                        <li>Add "LINK_DLL; BOOST_ALL_NO_LIB; JSON_DLL" to Preprocessor Definitions</li>
+                     </ul>
+                     <p>In Linker tab</p>
+                     <ul class="list">
+                        <li>Go to General tab</li>
+                        <li>Add (PlaytomicPath)/Lib/$(Configuration)Dll  to "Additional Library Directories"</li>
+                     </ul>
+                     <p>In Input tab</p>
+                     <ul class="list">
+                        <li>Add "Playtomic.lib" To Additional Dependencies</li>
+                     </ul>
+                     <h2>Using the prebuilt library</h2>
+                     <h3>Configuring project properties</h3>
+                     <p>In C/C++ tab</p>
+                     <ul class="list">
+                        <li>Go to General tab</li>
+                        <li>Add "(PlaytomicPath)/Include; (PlaytomicPath)/Include/json/include; (PlaytomicPath)/Include/CurlWrap; (PlaytomicPath)/Include/Tools; (DependenciesPath)/Boost; (DependenciesPath)/currlib/include" to your include directories</li>
+                     </ul>
+                     <p>Go to Preprocessor tab</p>
+                     <ul class="list">
+                        <li>Add "BOOST_ALL_NO_LIB" to Preprocessor Definitions</li>
+                     </ul>
+                     <p>In Linker tab</p>
+                     <ul class="list">
+                        <li>Go to General tab</li>
+                        <li>Add (PlaytomicPath)/Lib/$(Configuration) to "Additional Library Directories"</li>
+                        <li>Go to Input tab</li>
+                        <li>Add "libcurld.lib;Playtomic.lib;winmm.lib;ws2_32.lib;wldap32.lib" To Additional Dependencies</li>
+                     </ul>
+                     <p>Initialize Playtomic API in your game with your game credentials</p>
+                     <p>the autoupdate flag defines if the api create a thread to update the timers if you leave this flag as false you should remeber to update playtomic in your main loop</p>
+                     <pre><code class="cpp">Playtomic::CPlaytomic *mInstance = new Playtomic::CPlaytomic( SWFId, GUID, true);
+mInstance->Init();</code></pre>
+                  </div>
+                  <div id="XcodeMacOSX" class="tab">
+                     <h2>Xcode MacOs</h2>
+                     <h2>Using the prebuilt library</h2>
+                     <h3>Configuring project properties</h3>
+                     <p>In your project target</p>
+                     <ul class="list">
+                        <li>Go to Build Settings</li>
+                        <li>Go to Search Paths</li>
+                        <li>Add "$(PLAYTOMIC_PATH)/Tools $(PLAYTOMIC_DEPENDENCIES_PATH)/macos/Boost/** $(PLAYTOMIC_PATH)/ $(PLAYTOMIC_PATH)/json/** $(PLAYTOMIC_PATH)/CurlWrap/**" to Header Search Paths</li>
+                        <li>Add ""$(PLAYTOMIC_DEPENDENCIES_PATH)/macos/Boost/lib/debug" "(PLAYTOMIC_PATH)/Playtomic/Debug" $(PLAYTOMIC_DEPENDENCIES_PATH)/macos/Boost/lib/release"" to library Search Paths</li>
+                     </ul>
+                     <p>Go to Build Phases tab</p>
+                     <p>In Link Binary With Libraries</p>
+                     <ul class="list">
+                        <li>Add "libPlaytomic.a"</li>
+                        <li>Add "libcurl.dylib"</li>
+                        <li>Add "libboost_thread.a"</li>
+                     </ul>
+                     <p>Initialize Playtomic API in your game with your game credentials</p>
+                     <p>the autoupdate flag defines if the api create a thread to update the timers if you leave this flag as false you should remeber to update playtomic in your main loop</p>
+                     <pre><code class="cpp">Playtomic::CPlaytomic *mInstance = new Playtomic::CPlaytomic( SWFId, GUID, true);
+mInstance->Init();</code></pre>
+                  </div>
+                  <div id="XcodeiOS" class="tab">
+                     <h2>Xcode iOS</h2>
+                     <h2>Using the prebuilt framework</h2>
+                     <p>Add these frameworks to your game by clicking the project, then selecting the target -&gt; build phases -&gt; expanding Link Binary with Libraries.</p>
+                     <ul class="list">
+                        <li>Curl.framework</li>
+                        <li>boost.framework</li>
+                        <li>Playtomic.framework</li>
+                     </ul>
+                     <p>Building from source</p>
+                     <ul class="list">
+                        <li>The playtomic xcode project will call a script to rebuild the framework you can find it at $(project_dir)/bild/Framework/</li>
+                        <li>You can find the Curl.framework and boost.framework in the precompiled dependencies $(dependencies_dir)/macos/ </li>
+                     </ul>
+                     <p>Initialize Playtomic API in your game with your game credentials</p>
+                     <p>the autoupdate flag defines if the api create a thread to update the timers if you leave this flag as false you should remeber to update playtomic in your main loop</p>
+                     <pre><code class="cpp">Playtomic::CPlaytomic *mInstance = new Playtomic::CPlaytomic( SWFId, GUID, true);
+mInstance->Init();</code></pre>
+                  </div>
+                  <div id="Android" class="tab">
+                     <h2>Android native</h2>
+                     <h1 style="color:#900">IMPORTANT</h1>
+                     <p style="color:#900">To use playtomic in your project you need to compile the project using <a href="http://www.crystax.net/android/ndk.php">crystax-ndk</a> since the official ndk don't support all the c++ features we use</p>
+                     <h2>Using the prebuilt framework</h2>
+                     <p> in your android.mk add:</p>
+                     <pre><code class="cpp">LOCAL_PATH := $(call my-dir)
+include $(CLEAR_VARS)
+PLAYTOMIC_PATH := #your path to playtomic should go here
+LOCAL_MODULE := Playtomic-prebuilt
+LOCAL_SRC_FILES := $(PLAYTOMIC_PATH)/libs/$(TARGET_ARCH_ABI)/libPlaytomic.so
+include $(PREBUILT_SHARED_LIBRARY)
+include $(CLEAR_VARS)
+
+
+#...
+#...
+#in your project add this
+
+LOCAL_CFLAGS += -fexceptions
+LOCAL_CFLAGS += -D__ARM_ARCH_5__
+LOCAL_CFLAGS += -D__ANDROID__
+PLAYTOMIC_PATH := #your path to playtomic should go here
+
+LOCAL_C_INCLUDES += $(PLAYTOMIC_PATH)/Dependencies/Android/Boost/ \
+					$(PLAYTOMIC_PATH)/CurlWrap/ \
+					$(PLAYTOMIC_PATH)/Tools/ \
+					$(PLAYTOMIC_PATH)/json/include \
+					$(PLAYTOMIC_PATH)/Dependencies/Android/curllib/include/ \
+					$(PLAYTOMIC_PATH)/Playtomic/ \
+                	$(PLAYTOMIC_PATH)/</code></pre>
+                     <h2>Permision</h2>
+                     <p>In your application AndroidManifest.xml you need to add this</p>
+                     <pre><code class="cpp">&lt;uses-permission android:name="android.permission.INTERNET" /&gt;
+&lt;uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /&gt;
+&lt;uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /&gt;</code></pre>
+                     <p>Initialize Playtomic API in your game with your game credentials</p>
+                     <p>the autoupdate flag defines if the api create a thread to update the timers if you leave this flag as false you should remeber to update playtomic in your main loop</p>
+                     <table cellpadding="0" cellspacing="0">
+                        <tr>
+                           <th class="mode">Param</th>
+                           <th class="modewide">Type</th>
+                           <th>Description</th>
+                        </tr>
+                        <tr>
+                           <td>gameId</td>
+                           <td>int</td>
+                           <td>your game id number SWFId you can get it from your dashboard</td>
+                        </tr>
+                        <tr>
+                           <td>gameguid</td>
+                           <td>std::string&</td>
+                           <td>your game GUID number SWFId you can get it from your dashboard</td>
+                        </tr>
+                        <tr>
+                           <td>javaVMPtr</td>
+                           <td>JavaVM*</td>
+                           <td>a pointer to the java virtual machine</td>
+                        </tr>
+                        <tr>
+                           <td>activity</td>
+                           <td>jobject</td>
+                           <td>your aplication object, required to access some android sdk features you should make it global calling NewGlobalRef() you can find more information about this in any JNI reference</td>
+                        </tr>
+                     </table>
+                     <pre><code class="cpp">Playtomic::CPlaytomic *mInstance = new Playtomic::CPlaytomicAndroid(SWFId, GUID, vmPtr, activity, autoUpdate);
+mInstance->Init();</code></pre>
+                  </div>
+               </div>
+               <div id="Section1" style="display: none;">
+                  <h1>Analytics</h1>
+                  <h2>Views / sessions</h2>
+                  <p>A view occurs whenever somebody views your game.  This should go somewhere very early in your code like before the preloader.</p>
+                  <pre><code class="cpp">Log()->View();</code></pre>
+                  <span style="color: #666; font-size: 10px;">Note: We are currently changing the naming to Sessions as it is more appropriate today.  Changes will be applied in next API version.</span>
+                  <h2>Plays / Engages</h2>
+                  <p>This occurs wherever you feel a player has become engaged in your game.  It's subjective, previously we recommended putting it on the play button but that is less suitable in a mobile environment so you should use this at some point early in your game where you feel a player has decided to really play your game rather than open it.</p>
+                  <span style="color: #666; font-size: 10px;">Note: We are currently changing the naming to Engages.  Changes will be applied in next API version.</span>
+                  <h2>Play time, countries and sources</h2>
+                  <p>This data is logged automatically when you send other events.</p>
+                  <pre><code class="cpp">void StartedGame
+{
+            gPlaytomic->Log()->Play();
+            
+            // continue starting game
+            ...</code></pre>
+                  <h2>Freezing, unfreezing and force-sending events</h2>
+                  <p>Note:  This is inherited from the Flash version which runs on a single thread, and is unlikely to be necessary in C++ games.</p>
+                  <p>Events are sent in batches each time the play timer updates (every 30 seconds after the first minute).  If you want to ensure an event gets sent:</p>
+                  <pre><code class="cpp">Log()->ForceSend();</code></pre>
+                  <p>Some games are very resource-intensive and the API might send off a batch of events at exactly the wrong time.  You can freeze and unfreeze the logging at any time by:</p>
+                  <pre><code class="cpp">Log()->Freeze();
+Log()->UnFreeze();</code></pre>
+                  <p>When logging is frozen all events are queued but not sent until you unfreeze the API.</p>
+                  <h2>Custom metrics</h2>
+                  <p>Custom metrics allow you to track how many people do something in your game, for instance how many play on easy, medium or hard, or how many play in English vs. Spanish, or how many view the tutorial or skip it.  Anything you think can help you improve your game.</p>
+                  <p>You can define custom metrics directly in your game and they will be added to Playtomic automatically.  Groups can be automatically assigned via an optional second parameter or set up later in the dashboard.</p>
+                  <p>You can also limit custom metrics to unique-per-view occurances with a third parameter.</p>
+                  <pre><code class="cpp">Log()->CustomMetric("ViewedCredits",""); // metric, names must be alphanumeric
+Log()->CustomMetric("Credits", "Screens"); // metric with group, groups must be alphanumeric
+Log()->CustomMetric("ClickedSponsorsLinks", "Links", true); // unique metric with group</code></pre>
+                  <h2>Level metrics</h2>
+                  <p>Level metrics track events on a per-level basis so you can drill down into your difficulty and retention by identifying which levels have problems and what those problems are.</p>
+                  <p>There are three types of level metrics - counters (like custom metrics), ranged-value and average-value.</p>
+                  <p>Note that you can pass either an integer level number or a string name of the level.  If your game is not using numeric levels (eg an escape game) then you would pass the name of each screen / area as a level.</p>
+                  <p>You can define level metrics directly in your game and they will be added to Playtomic automatically.</p>
+                  <p>Level metrics support unique-per-play occurrances via an optional second parameter.  If the player starts a new game they will be tracked again.</p>
+                  <h2>Counter metrics</h2>
+                  <p>These metrics track how many times something occurs in your levels, for instance deaths and restarts.</p>
+                  <p>One of the most valuable pieces of data you can track is how many people begin each level, this allows you to see where you lose players.</p>
+                  <pre><code class="cpp">Log()->LevelCounterMetric("Deaths", level_number); // names must be alphanumeric
+Log()->LevelCounterMetric("Restarts", "LevelName"); // level names must be alphanumeric
+Log()->LevelCounterMetric("Restarts", "LevelName", true); // unique only</code></pre>
+                  <h2>Average metrics</h2>
+                  <p>These metrics track the average of something in your levels, for instance the average time to finish a level or the average number of retries.  It also tracks the minimum and maximums.</p>
+                  <pre><code class="cpp">Log()->LevelAverageMetric("Time", level_number, seconds);
+Log()->LevelAverageMetric("Retries", level_number, retries);
+Log()->LevelAverageMetric("Retries", level_number, retries, true); // unique only</code></pre>
+                  <h2>Ranged-value metrics</h2>
+                  <p>These metrics track metrics with values, for instance in a golf game you might track how many shots it takes to complete each level, or you might track the % of coins collected on each level.</p>
+                  <pre><code class="cpp">Log()->LevelRangedMetric("Shots", level_number, shots);
+Log()->LevelRangedMetric("PercentCoinsCollected", level_number, int(coins / coinstotal * 100));
+Log()->LevelRangedMetric("Shots", level_number, shots, true); // unique only</code></pre>
+                  <h2>Heatmaps</h2>
+                  <p>Heatmaps allow you to map activity (clicks, deaths, first deaths, or anything else you want) against an image you upload in the dashboard.</p>
+                  <pre><code class="cpp">Log()->Heatmap("Metric", "Heatmap", x, y);</code></pre>
+                  <p>In the dashboard you upload a background image for the heatmap, and then it is shared by any metrics using it.</p>
+               </div>
+               <div id="Section8" style="display: none;">
+                  <h1>Link tracking</h1>
+                  <p>Link tracking allows you to keep track of how many people open URLs in your game, providing you information on unique, total and failed clicks that can fully audited to allow you to identify good sources of traffic and sites that block links.</p>
+                  <p>Link tracking does not change your URL or redirect traffic through a different url!</p>
+                  <h2>How to track a link</h2>
+                  <p>You track a link by passing a URL and some other information to the API.  The API will return true or false if the link opens, everything else is automatic.</p>
+                  <pre><code class="cpp">Link()->Open(const std::string& url, const std::string& name,const std::string& group);</code></pre>
+                  <pre><code class="cpp">Link()->Open("http://website.com/?gameref=my_game", "PlayMoreGames", "Sponsor");</code></pre>
+                  <h2>Domain Totals</h2>
+                  <p>When you track a link it automatically also tracks the totals for the domain in a group it creates called DomainTotals.  The DomainTotals allows you to see how many unique, total and failed clicks occurred for a single domain even if you have multiple, different links to it (eg walkthrough or differently-structured sponsor links).</p>
+               </div>
+               <div id="Section10" style="display: none;">
+                  <a style="display: block; margin-bottom: 10px;" href="https://www.parse.com/users/new?code=playtomic"><img src="/images/parse.png" alt="Parse" width="168" height="51" /></a>
+                  <h2>Parse custom databases</h2>
+                  <p>This feature is provided in conjunction with <a href="https://www.parse.com/users/new?code=playtomic">Parse</a> so you will need to create your account with them before you can use it.</p>
+                  <p>Custom databases allow you to store and manipulate any data you want in any way you want, like:</p>
+                  <ul class="list">
+                     <li>User registration</li>
+                     <li>Mailing list (and send through <a href="http://mailchimp.com/">MailChimp</a>)</li>
+                     <li>Saved games</li>
+                     <li>Surveys &amp; feedback</li>
+                     <li>Messaging</li>
+                     <li>etc</li>
+                  </ul>
+                  <h2>The PFObject</h2>
+                  <p>This object represents a piece of data in your database.  It has the following properties:</p>
+                  <table cellpadding="0" cellspacing="0">
+                     <tr>
+                        <th class="mode">Property</th>
+                        <th class="modewide">Type</th>
+                        <th>Description</th>
+                     </tr>
+                     <tr>
+                        <td>ObjectId</td>
+                        <td>String</td>
+                        <td>If your object already exists in your database it will have this unique identifier.</td>
+                     </tr>
+                     <tr>
+                        <td>ClassName</td>
+                        <td>String</td>
+                        <td>The 'type' of data this is - user, score, etc</td>
+                     </tr>
+                     <tr>
+                        <td>Data</td>
+                        <td>Object</td>
+                        <td>Your actual data to save, eg po.Data.FirstName</td>
+                     </tr>
+                     <tr>
+                        <td>Pointers</td>
+                        <td>Vector.&lt;PFObject&gt;</td>
+                        <td>Any objects related to this (see below)</td>
+                     </tr>
+                     <tr>
+                        <td>UpdatedAt</td>
+                        <td>Date</td>
+                        <td>When the object was last updated in the database</td>
+                     </tr>
+                     <tr>
+                        <td>CreatedAt</td>
+                        <td>Date</td>
+                        <td>When the object was created in the database</td>
+                     </tr>
+                     <tr>
+                        <td>Password</td>
+                        <td>String</td>
+                        <td>If an object has a password when it is saved the password must be included to update it.</td>
+                     </tr>
+                  </table>
+                  <h2>The PFQuery</h2>
+                  <p>This object allows you to construct a query to run against your database to find objects you've saved.</p>
+                  <table cellpadding="0" cellspacing="0">
+                     <tr>
+                        <th class="mode">Property</th>
+                        <th class="modewide">Type</th>
+                        <th>Description</th>
+                     </tr>
+                     <tr>
+                        <td>ClassName</td>
+                        <td>String</td>
+                        <td>The 'type' of data to return - user, score, etc</td>
+                     </tr>
+                     <tr>
+                        <td>WhereData</td>
+                        <td>Object</td>
+                        <td>Data to filter by, eg pq.WhereData.FirstName = 'ben'</td>
+                     </tr>
+                     <tr>
+                        <td>WherePointers</td>
+                        <td>Vector.&lt;PFObject&gt;</td>
+                        <td>Any objects related to this (see below)</td>
+                     </tr>
+                     <tr>
+                        <td>Order</td>
+                        <td>String</td>
+                        <td>What field (from Data) to sort by</td>
+                     </tr>
+                     <tr>
+                        <td>Limit</td>
+                        <td>int</td>
+                        <td>Numner of results to return</td>
+                     </tr>
+                  </table>
+                  <h2>The PFPointer</h2>
+                  <p>This object allows you to create a relationship between two objects - for instance my saved game might point to the inventory items I have.</p>
+                  <table cellpadding="0" cellspacing="0">
+                     <tr>
+                        <th class="mode">Property</th>
+                        <th class="modewide">Type</th>
+                        <th>Description</th>
+                     </tr>
+                     <tr>
+                        <td>FieldName</td>
+                        <td>String</td>
+                        <td>The field this refers to (eg 'FirstName')</td>
+                     </tr>
+                     <tr>
+                        <td>PObject</td>
+                        <td>PFObject</td>
+                        <td>The object to point to</td>
+                     </tr>
+                  </table>
+                  <h2>Saving / updating an object</h2>
+                  <p>You can save any object you want by creating a PFObject and sending it to Parse.Save.  An object will save if it does not have an ObjectId, if it does then it will update.</p>
+                  <pre><code class="cpp">var po:PFObject = new PFObject();
+po.ClassName = "savedgames";
+po.Data.Name = "Ben";
+po.Data.Level = 1;
+po.Data.Stage = 7;
+Parse.Save(po, SaveComplete);
+
+function SaveComplete(po:PFObject, response:Response):void
+{
+    if(response.Success)
+    {
+        trace("Saved object: " + po.ObjectId);
+    }
+    else
+    {
+        trace("Failed to save: " + response.ErrorMessage);
+    }
+}</code></pre>
+                  <h2>Loading an object</h2>
+                  <p>You can load any object as long as you know it's ClassName and ObjectId (which you might obtain from a PFPointer).</p>
+                  <pre><code class="cpp">var po:PFObject = new PFObject();
+po.ClassName = "savedgames";
+po.ObjectID = "asdfasdf";
+Parse.Load(po, LoadComplete);
+
+function LoadComplete(po:PFObject, response:Response):void
+{
+    if(response.Success)
+    {
+        trace("Loaded object: " + po.ObjectId);
+    }
+    else
+    {
+        trace("Failed to load: " + response.ErrorMessage);
+    }
+}</code></pre>
+                  <h2>Finding objects / querying your database</h2>
+                  <p>Using the PFQuery object you can locate data in your database:</p>
+                  <pre><code class="cpp">var pq:PFQuery = new PFQuery();
+pq.ClassName = "savedgames";
+pq.WhereDate.Name = "Ben";
+pq.Limit = 5;
+
+Parse.Find(pq, FindComplete);
+
+function FindComplete(results:Array, response:Response):void
+{
+    if(response.Success)
+    {
+        trace("Loaded objects");
+
+        for(var i=0; i&lt;results.length; i++)
+            trace(results[i].ObjectId);
+    }
+    else
+    {
+        trace("Failed to find: " + response.ErrorMessage);
+    }
+}</code></pre>
+                  <h2>Deleting objects</h2>
+                  <p>You can delete an object easily:</p>
+                  <pre><code class="cpp">// po is a PFObject you've previously loaded from somewhere
+Parse.Delete(po, DeleteComplete);
+            
+function DeleteComplete(response:Response):void
+{
+    if(response.Success)
+    {
+        trace("Deleted object");
+    }
+    else
+    {
+        trace("Failed to delete: " + response.ErrorMessage);
+    }
+}</code></pre>
+               </div>
+               <div id="Section2" style="display: none;">
+                  <h1>Level sharing</h1>
+                  <p>The level sharing API provides a way to store and retrieve user-generated content for your game.  It can operate anonymously or authenticated via any 3rd party service you're already using.</p>
+                  <h2>The PlayerLevel class</h2>
+                  <p>Saving and listing levels uses this class to represent a level.</p>
+                  <table cellpadding="0" cellspacing="0">
+                     <tr>
+                        <th class="mode">Property</th>
+                        <th class="modewide">Type</th>
+                        <th>Description</th>
+                     </tr>
+                     <tr>
+                        <td>PlayerName</td>
+                        <td>String</td>
+                        <td>The name of the player (or "anonymous", "guest", etc), or the name provided by any 3rd party API.</td>
+                     </tr>
+                     <tr>
+                        <td>PlayerId</td>
+                        <td>String</td>
+                        <td>If you're working under a 3rd party API you can include the player's user id</td>
+                     </tr>
+                     <tr>
+                        <td>PlayerSource</td>
+                        <td>String</td>
+                        <td>If you're working under a 3rd party API you can specify which, eg "gamersafe" or "mochicoins"</td>
+                     </tr>
+                     <tr>
+                        <td>Name</td>
+                        <td>String</td>
+                        <td>The name of the level</td>
+                     </tr>
+                     <tr>
+                        <td>Data</td>
+                        <td>String</td>
+                        <td>The data for the level.  You can Base 64 encode a ByteArray to a string if necessary.</td>
+                     </tr>
+                     <tr>
+                        <td>Votes</td>
+                        <td>int</td>
+                        <td>The number of votes the level has</td>
+                     </tr>
+                     <tr>
+                        <td>Score</td>
+                        <td>int</td>
+                        <td>The sum of all votes the level has</td>
+                     </tr>
+                     <tr>
+                        <td>Plays</td>
+                        <td>int</td>
+                        <td>The number of plays the level has</td>
+                     </tr>
+                     <tr>
+                        <td>Rating</td>
+                        <td>int</td>
+                        <td>The rating the level has (score / votes)</td>
+                     </tr>
+                     <tr>
+                        <td>SDate</td>
+                        <td>Date</td>
+                        <td>The date of the level, determined automatically by Playtomic</td>
+                     </tr>
+                     <tr>
+                        <td>RDate</td>
+                        <td>String</td>
+                        <td>The relative date of the level eg "7 minutes ago", determined automatically by Playtomic</td>
+                     </tr>
+                     <tr>
+                        <td>CustomData</td>
+                        <td>Object</td>
+                        <td>Any additional data you want to (or have) attached to a score, like the level the player reached or what character they used</td>
+                     </tr>
+                     <tr>
+                        <td>Thumbnail</td>
+                        <td>String</td>
+                        <td>The URL of the thumbnail, unless you generate them from data (recommended)</td>
+                     </tr>
+                  </table>
+                  <h2>Saving levels</h2>
+                  <pre><code class="cpp">PlayerLevels()->SaveLevel(CLevel& level)</code></pre>
+                  <table cellpadding="0" cellspacing="0">
+                     <tr>
+                        <th class="mode">Parameter</th>
+                        <th class="modewide">Type</th>
+                        <th>Description</th>
+                     </tr>
+                     <tr>
+                        <td>level</td>
+                        <td>PlayerLevel</td>
+                        <td>An instance of PlayerLevel holding the level data</td>
+                     </tr>
+                  </table>
+                  <p>Example saving level:</p>
+                  <pre><code class="cpp">void SaveLevel()
+{
+    CLevel level("My level","PlayerName", "Playerid","Any data");
+    			
+    SLevelListPtr list = gPlaytomic->PlayerLevels()->SaveLevel(level);
+
+    if(list->sSucceded)
+    {
+        std::cout &lt;&lt; "Level saved successfully, the level parameter is ready for use!" ;
+    }
+    else
+    {
+        // failed because of  list->sErrorCode
+    }
+}
+</code></pre>
+                  <h2>Rating levels</h2>
+                  <p>Levels can be rated 1 - 10 by players.  Rating can be done anonymously with some protection against repeat voting, or bound to PlayerIds if you specify them.</p>
+                  <pre><code class="cpp">PlayerLevels()->RateLevelId(const std::string& levelId, int rating);</code></pre>
+                  <table cellpadding="0" cellspacing="0">
+                     <tr>
+                        <th class="mode">Parameter</th>
+                        <th class="modewide">Type</th>
+                        <th>Description</th>
+                     </tr>
+                     <tr>
+                        <td>levelid</td>
+                        <td>String</td>
+                        <td>a_player_level.LevelId</td>
+                     </tr>
+                     <tr>
+                        <td>rating</td>
+                        <td>int</td>
+                        <td>1 - 10</td>
+                     </tr>
+                  </table>
+                  <p>Example rating level:</p>
+                  <pre><code class="cpp">void Rate()
+{
+    CPlaytomicResponsePtr response = Playtomic::gPlaytomic->PlayerLevels()->RateLevelId(name,rating);
+
+    if(response->ResponseSucceded())
+    {
+         std::cout &lt;&lt; "Rating complete" &lt;&lt; std::endl;
+    }
+    else
+    {
+         // Rating failed because of response->ResponseError()
+    }
+ 
+}
+</code></pre>
+                  <h2>Listing levels</h2>
+                  <p>Listing levels can be done by popular or newest, with optional filtering by date ranges and/or custom data.</p>
+                  <pre><code class="cpp">PlayerLevels()->List(const std::string& mode, int page, int perPage,
+							        bool includeData, bool includeThumbs,
+							        const CustomData& customFilter)</code></pre>
+                  <table cellpadding="0" cellspacing="0">
+                     <tr>
+                        <th class="mode">Parameter</th>
+                        <th class="modewide">Type</th>
+                        <th>Description</th>
+                     </tr>
+                     <tr>
+                        <td>mode</td>
+                        <td>string</td>
+                        <td>'popular' or 'newest'</td>
+                     </tr>
+                     <tr>
+                        <td>page</td>
+                        <td>int</td>
+                        <td>The page you want</td>
+                     </tr>
+                     <tr>
+                        <td>perPage</td>
+                        <td>int</td>
+                        <td>The number of levels to return</td>
+                     </tr>
+                     <tr>
+                        <td>includeData</td>
+                        <td>bool</td>
+                        <td>specify true if you want level data returned with the list</td>
+                     </tr>
+                     <tr>
+                        <td>includeThumb</td>
+                        <td>bool</td>
+                        <td>specify true if you want level data thumbnail url included</td>
+                     </tr>
+                     <tr>
+                        <td>customFilter</td>
+                        <td>CustomData</td>
+                        <td>filter by custom data you've saved with levels</td>
+                     </tr>
+                  </table>
+                  <p>An example listing levels:</p>
+                  <pre><code class="cpp">void ListLevels()
+{
+   SLevelListPtr list = gPlaytomic->PlayerLevels()->List("",1,10,false,false,customData);
+
+   if(list->sSucceded)
+   {
+        std::list&lt;Playtomic::CLevel&gt;::iterator it = list->sLevelList.begin();
+        for (; it != list->sLevelList.end(); it++)
+        {
+                std::cout &lt;&lt; "name: " &lt;&lt; it->GetName() &lt;&lt; " LevelId: " 
+                &lt;&lt; (it->GetLevelId()) &lt;&lt; "PlayerName: " &lt;&lt; it->GetPlayerName() &lt;&lt;
+                "date: "&lt;&lt; it->GetRelativeDate() &lt;&lt;std::endl;
+        }
+    }
+    else
+    {
+        // Level list failed to load because of list->sErrorCode
+    }
+}</code></pre>
+                  <h2>Loading levels</h2>
+                  <p>If you do not include the data when you load lists of levels then you can request it seperately:</p>
+                  <pre><code class="cpp">PlayerLevels()->LoadLevel(const std::string& levelId);</code></pre>
+                  <table cellpadding="0" cellspacing="0">
+                     <tr>
+                        <th class="mode">Parameter</th>
+                        <th class="modewide">Type</th>
+                        <th>Description</th>
+                     </tr>
+                     <tr>
+                        <td>levelid</td>
+                        <td>String</td>
+                        <td>a_player_level.LevelId</td>
+                     </tr>
+                  </table>
+                  <p>An example loading a single level</p>
+                  <pre><code class="cpp"> void Load()
+{
+    SLevelListPtr list = gPlaytomic->PlayerLevels()->LoadLevel( level.GetLevelId());
+
+    if(list->sSucceded)
+    {
+       //"Level has been loaded, now you can begin playing it"
+    }
+    else
+    {
+       // level failed to load because of list->sErrorCode
+    }
+}</code></pre>
+                  <h2>Asynchronous Version</h2>
+                  <p>Asynchronous request are similar to  the synchronous request but you need to set a delegate that implement IPlayerLevelDelegate to preocess the request.</p>
+                  <p>To set the delegate you need to call:</p>
+                  <pre><code class="cpp">CPlayerLevels::SetDelegate(IPlayerLevelDelegate* targetDelegate)</code></pre>
+                  <p>When you use the asynchronous calls you need to inherit from IPlayerLevelDelegate and implement its four pure virtual methods:</p>
+                  <pre><code class="cpp">class IPlayerLevelDelegate
+{
+public:
+    virtual void RateLevelComplete(CPlaytomicResponsePtr& result)=0;
+    virtual void LevelListComple(SLevelList& result)=0;
+    virtual void SaveLevelComple(SLevelList& result)=0;
+    virtual void LoadLevelComplete(SLevelList& result)=0;
+};</code></pre>
+                  <p>An example</p>
+                  <pre><code class="cpp">class CMyClass : public IPlayerLevelDelegate
+{
+public:
+    virtual void RateLevelComplete(CPlaytomicResponsePtr& result);
+    virtual void LevelListComple(SLevelList& result);
+    virtual void SaveLevelComple(SLevelList& result);
+    virtual void LoadLevelComplete(SLevelList& result);
+            void CallAsyncRequest();
+};
+
+void MyClass::CallAsyncRequest()
+{
+    CustomData customData;
+    gPlaytomic->PlayerLevels()->SetDelegate(this);
+    Playtomic::CLevel level( "Test Level", "My Name", "234561", "there should be data here");
+	
+    gPlaytomic->PlayerLevels()->SaveLevelAsync(level);
+    gPlaytomic->PlayerLevels()->ListAsync("",1,10,false,false,customData);
+    gPlaytomic->PlayerLevels()->LoadLevelAsync("4e9ef2b94d81233f30921596"); //hardcoded id from the dashboard
+    gPlaytomic->PlayerLevels()->RateLevelIdAsync("4e9ef2b94d81233f30921596",10.0);
+}
+
+void MyClass::RateLevelComplete( CPlaytomicResponsePtr& result )
+{
+    if(result->ResponseSucceded())
+    {
+        std::cout << "rating succeded!" << std::endl;
+    }
+    else
+    {
+        std::cout << "rating failed! Err Code:" 
+                  << result->ResponseError() << std::endl;
+    }
+}
+
+void MyClass::LevelListComple( SLevelList& result )
+{
+    std::cout << std::endl << std::endl << "levels" 
+              << " page: 0" << std::endl << std::endl;
+    std::list&lt;CLevel&gt;::iterator it = result.sLevelList.begin();
+    for (; it != result.sLevelList.end(); it++)
+    {
+        std::cout << "name: " << it->GetName() << " LevelId: " 
+                  << (it->GetLevelId()) << "PlayerName: " << it->GetPlayerName() 
+                  << "date: " << it->GetRelativeDate() << std::endl;
+    }
+}
+
+void MyClass::SaveLevelComple(SLevelList& result )
+{
+    if(!result.sSucceded)
+    {
+        std::cout << "failed to save level, error code :" << result.sErrorCode;
+    }
+}
+
+void MyClass::LoadLevelComplete( SLevelList& result )
+{
+    if(result.sSucceded)
+    {
+        if(result.sLevelList.size() == 0)
+        {
+            std::cout << "could not find the entry:" << std::endl;
+        }
+        else
+        {
+            std::list&lt;CLevel&gt;::iterator it = result.sLevelList.begin();
+            for (; it != result.sLevelList.end(); it++)
+            {
+                std::cout << "name: " << it->GetName() << " LevelId: "
+                          << (it->GetLevelId()) << "PlayerName: " << it->GetPlayerName() 
+                          << "date: " << it->GetRelativeDate() << std::endl;
+            }
+         }
+    }
+    else
+    {
+        std::cout << "failed to get the level!" << std::endl;
+        std::cout << "error number: " << result.sErrorCode << std::endl;
+    }
+} </code></pre>
+               </div>
+               <div id="Section3" style="display: none;">
+                  <h1>Leaderboards</h1>
+                  <p>The Leaderboards API gives you very flexible high and low score leaderboards.  They can be created in your game dynamically or set up in the edit leaderboards page.</p>
+                  <h2>The PlayerScore class</h2>
+                  <p>The leaderboards use the CScore class for representing the players' scores.</p>
+                  <table cellpadding="0" cellspacing="0">
+                     <tr>
+                        <th class="mode">Property</th>
+                        <th class="modewide">Type</th>
+                        <th>Description</th>
+                     </tr>
+                     <tr>
+                        <td>Name</td>
+                        <td>String</td>
+                        <td>The player name.  This can be by the player or provided by any 3rd party</td>
+                     </tr>
+                     <tr>
+                        <td>Points</td>
+                        <td>int</td>
+                        <td>The player's score</td>
+                     </tr>
+                     <tr>
+                        <td>Rank</td>
+                        <td>int</td>
+                        <td>The rank based on your listing parameters.</td>
+                     </tr>
+                     <tr>
+                        <td>RDate</td>
+                        <td>String</td>
+                        <td>The relative date of the score eg "7 minutes ago", determined automatically by Playtomic</td>
+                     </tr>
+                     <tr>
+                        <td>CustomData</td>
+                        <td>CustomData</td>
+                        <td>Any additional data you want to (or have) attached to a level.</td>
+                     </tr>
+                  </table>
+                  <h2>Submitting scores</h2>
+                  <p>Score submission is handled by:</p>
+                  <pre><code class="cpp">Leaderboards()->SaveTable(const std::string& tableName, const CScore& score, bool highest, bool allowDuplicates);</code></pre>
+                  <table cellpadding="0" cellspacing="0">
+                     <tr>
+                        <th class="mode">Parameter</th>
+                        <th class="modewide">Type</th>
+                        <th>Description</th>
+                     </tr>
+                     <tr>
+                        <td>table</td>
+                        <td>String</td>
+                        <td>The score table to submit to, alphanumeric</td>
+                     </tr>
+                     <tr>
+                        <td>score</td>
+                        <td>CScore</td>
+                        <td>An instance of CScore which contains score information</td>
+                     </tr>
+                     <tr>
+                        <td>highest</td>
+                        <td>bool</td>
+                        <td>Leaderboard tables can be created dynamically from within your game so you specify the mode.</td>
+                     </tr>
+                     <tr>
+                        <td>allowDuplicate</td>
+                        <td>bool</td>
+                        <td>If you don't allow duplicates new, worse scores will not be saved by a player.</td>
+                     </tr>
+                  </table>
+                  <pre><code class="cpp">void SubmitScore()
+{
+
+    CScore simpleScore("Player Name", 1000);
+     // submit to the highest-is-best table "highscores"  
+    response = gPlaytomic->Leaderboards()->SaveTable("highscores", simpleScore,true,true);
+    if(response->ResponseSucceded())
+    {
+        std::cout &lt;&lt; "new score entry success!" &lt;&lt;std::endl;
+    }
+    else
+    {
+        std::cout &lt;&lt; "failed to save the score!" &lt;&lt; std::endl;
+        std::cout &lt;&lt; "error number: " &lt;&lt; response->ResponseError() &lt;&lt; std::endl;
+    }
+     // submit an advanced score with custom data
+    CustomData customData;
+    customData.insert(std::make_pair("Character", playerCharacter));
+    customData.insert(std::make_pair("Level", currentLevel));
+    CScore advancedScore("Player Name", 1000, customData);
+    response = gPlaytomic->Leaderboards()->SaveTable("highscores", advancedScore,true,true);
+    if(response->ResponseSucceded())
+    {
+        std::cout &lt;&lt; "new score entry success!" << std::endl;
+    }
+    else
+    {
+        std::cout &lt;&lt; "failed to save the score!" &lt;&lt; std::endl;
+        std::cout &lt;&lt; "error number: " << response->ResponseError() &lt;&lt; std::endl;
+    }
+}</code></pre>
+                  <h2>Showing scores</h2>
+                  <p>Scores are loaded via a simple method that returns an array of CScore objects so you can display the data in your leaderboard.</p>
+                  <pre><code class="cpp">Leaderboards()->ListTable(const std::string& tableName, bool highest, const std::string& mode, int page, int perPage, const CustomData& customFilter);</code></pre>
+                  <table cellpadding="0" cellspacing="0">
+                     <tr>
+                        <th class="mode">Parameter</th>
+                        <th class="modewide">Type</th>
+                        <th>Description</th>
+                     </tr>
+                     <tr>
+                        <td>table</td>
+                        <td>String</td>
+                        <td>Your leaderboard table name, must be alphanumeric</td>
+                     </tr>
+                     <tr>
+                        <td>highest</td>
+                        <td>bool</td>
+                        <td>if the table does not exist it will be created with this mode.</td>
+                     </tr>
+                     <tr>
+                        <td>mode</td>
+                        <td>String</td>
+                        <td>The list mode can return scores from: "last7days" or "last30days" or "alltime" or "today" or "newest" which gives you a stream of unranked scores</td>
+                     </tr>
+                     <tr>
+                        <td>page</td>
+                        <td>int</td>
+                        <td>The page you want </td>
+                     </tr>
+                     <tr>
+                        <td>perPage</td>
+                        <td>int</td>
+                        <td>The number of scores to return</td>
+                     </tr>
+                     <tr>
+                        <td>customFilter</td>
+                        <td>CustomData</td>
+                        <td>Filter by scores with specific CustomData</td>
+                     </tr>
+                  </table>
+                  <pre><code class="cpp">void ShowScores()
+{
+   CustomData filter;
+   SSCoreTablePtr table = gPlaytomic->Leaderboards()->ListTable("Demo Table",true,"last7days", 1,10 , filter);
+
+   if (table->sSucceded)
+   {
+        std::cout &lt;&lt; std::endl &lt;&lt; std::endl &lt;&lt; "scoretable" 
+                  &lt;&lt; " page: 1" << std::endl &lt;&lt; std::endl;
+        std::list&lt;CScore&gt;::iterator it = table->sScoreList.begin();
+        for (; it != table->sScoreList.end(); it++)
+        {
+            std::cout &lt;&lt; "name: " << it->GetName() &lt;&lt; " Score: " 
+                      &lt;&lt; (int)(it->GetPoints()) &lt;&lt; "Rank: " << it->GetRank() &lt;&lt;
+                      "date: "<< it->GetRelativeDate() &lt;&lt; std::endl;
+        }
+   }
+}</code></pre>
+                  <h2>Save and list</h2>
+                  <p>You can now submit scores and at the same time return the leaderboard page that that score is on.</p>
+                  <p>This combines the Save and List approaches from above:</p>
+                  <pre><code class="cpp">gPlaytomic->Leaderboards()->SaveAndListTable(const std::string& tableName, const CScore& score, bool highest, bool allowDuplicates, const std::string& mode, int perPage, const CustomData& customFilter)</code></pre>
+                  <p>Some important notes:</p>
+                  <ul class="list">
+                     <li>You don't specify a page, you specify the PerPage (default 20) and it will automatically decide which page to return based on the submitted score's rank.  If you submit the 1187th best score at 30 per page then it will show you page 39, scores #1170 - #1200.</li>
+                     <li>Ranks are returned, so you are not viewing the top N scores you are viewing the top N scores from rank X onwards.</li>
+                  </ul>
+                  <h2>Asynchronous Version</h2>
+                  <p>Asynchronous request are similar to the synchronous request but you need to set a delegate that implement ILeaderboardDelegate to preocess the request.</p>
+                  <p>To set the delegate you need to call</p>
+                  <pre><code class="cpp"> CLeaderboard::SetDelegate(ILeaderboardDelegate* targetDelegate)</code></pre>
+                  <p>when you use the asynchronous calls you need to inherit from ILeaderboardDelegate and implement its three pure virtual methods:</p>
+                  <pre><code class="cpp">class ILeaderboardDelegate
+{
+public:
+    virtual void SaveComplete(CPlaytomicResponsePtr& result)=0;
+    virtual void ListTableComple(SSCoreTable& result)=0;
+    virtual void SaveAndListComple(SSCoreTable& result)=0;
+};</code></pre>
+                  <p>An example</p>
+                  <pre><code class="cpp">class CMyClass : public ILeaderboardDelegate
+{
+public:
+    virtual void SaveComplete(CPlaytomicResponsePtr& result);
+    virtual void ListTableComple(SSCoreTable& result);
+    virtual void SaveAndListComple(SSCoreTable& result);
+            void CallAsyncRequest();
+};
+
+void MyClass::CallAsyncRequest()
+{
+    CustomData filter;
+	CScore scoreData;
+    gPlaytomic->Leaderboards()->SetDelegate(this);
+    scoreData.SetDefaultValues("Player name", 100);
+    gPlaytomic->Leaderboards()->SaveTableAsync("Demo Table", scoreData,true,true);
+    gPlaytomic->Leaderboards()->SaveAndListTableAsync("Demo Table", scoreData,true,true,"last7days",10 , filter);
+    gPlaytomic->Leaderboards()->ListTableAsync("Demo Table",true,"last7days", 1,10 , filter);
+}
+
+void MyClass::SaveComplete( CPlaytomicResponsePtr& result )
+{
+    if(result->ResponseSucceded())
+    {
+        std::cout << "new score entry success!" << std::endl;
+    }
+    else
+    {
+        std::cout << "failed to save the score!" << std::endl;
+        std::cout << "error number: " << result->ResponseError() << std::endl;
+    }
+}
+
+void MyClass::ListTableComple( SSCoreTable& result )
+{
+	if (result.sSucceded)
+    {
+        std::cout << std::endl << std::endl << "scoretable"
+                  << " page: 0" << std::endl << std::endl;
+        std::list&lt;CScore&gt;::iterator it = result.sScoreList.begin();
+        for (; it != result.sScoreList.end(); it++)
+        {
+            std::cout << "name: " << it->GetName() << " Score: "
+                      << (int)(it->GetPoints()) << "Rank: " << it->GetRank() 
+                      << "date: "<< it->GetRelativeDate() << std::endl;
+        }
+	}
+}
+
+void MyClass::SaveAndListComple( SSCoreTable& result )
+{
+    if (result.sSucceded)
+    {
+        std::cout << std::endl << std::endl << "scoretable"
+                  << " page: 0" << std::endl << std::endl;
+        std::list&lt;CScore&gt;::iterator it = result.sScoreList.begin();
+        for (; it != result.sScoreList.end(); it++)
+        {
+            std::cout << "name: " << it->GetName() << " Score: " 
+                      << (int)(it->GetPoints()) << "Rank: " << it->GetRank() 
+                      << "date: " << it->GetRelativeDate() << std::endl;
+        }
+    }
+    else
+    {
+        std::cout << "failed to save the score!" << std::endl;
+        std::cout << "error number: " << result.sErrorCode << std::endl;
+    }
+}</code></pre>
+               </div>
+               <div id="Section4" style="display: none;">
+                  <h1>GameVars</h1>
+                  <p>GameVars let you change the value of key variables in your game any time you want.  They must be configured in the edit GameVars page in advance.</p>
+                  <p>It is called via:</p>
+                  <pre><code class="cpp">GameVars()->Load();
+GameVars()->LoadAsync(RequestDelegate targetDelegate);</code></pre>
+                  <p>The targetDelegate parameter is your function that receives a CPlaytomicResponsePtr reference</p>
+                  <pre><code class="cpp">// our variables with default, original values
+int gBaseHitPoints = 100;
+int gBaseGold = 50;
+
+void InitialiseGame()
+{
+   // load GameVars
+   CPlaytomicResponsePtr response = gPlaytomic->GameVars()->Load();
+   if (response->ResponseSucceded())
+   {
+        FData array;
+        array = response->ResponseData();
+        if(array.size() == 0)
+        {
+            std::cout << " empty game vars" << std::endl;
+            break;
+        }
+        else
+        {
+            FData value;
+            for (size_t i = 0; i < array.size(); i++)
+            {
+                value = array[i];
+                FData name;
+                name = value.get("Name", name);
+                FData varValue;
+                varValue = value.get("Value",varValue);
+                
+                std::cout << name.asString() << "=" << varValue.asString() << std::endl; 
+            }
+        }
+   }
+   // carry on initializing your game
+}</code></pre>
+                  <h2>Asynchronous Version</h2>
+                  <pre><code class="cpp">// our variables with default, original values
+int gBaseHitPoints = 100;
+int gBaseGold = 50;
+
+void InitialiseGame()
+{
+   // load GameVars
+   gPlaytomic->GameVars()->LoadAsync(fastdelegate::MakeDelegate(this,&amp;MyClass::GameVarsDelegate));
+   
+    // carry on initializing your game
+}
+
+void MyClass::GameVarsDelegate(CPlaytomicResponsePtr& response)
+{
+   if (response->ResponseSucceded())
+   {
+        FData array;
+        array = response->ResponseData();
+        if(array.size() == 0)
+        {
+            std::cout << " empty game vars" << std::endl;
+            break;
+        }
+        else
+        {
+            FData value;
+            for (size_t i = 0; i < array.size(); i++)
+            {
+                value = array[i];
+                FData name;
+                name = value.get("Name", name);
+                FData varValue;
+                varValue = value.get("Value",varValue);
+                
+                std::cout << name.asString() << "=" << varValue.asString() << std::endl; 
+            }
+        }
+   }
+}
+</code></pre>
+               </div>
+               <div id="Section5" style="display: none;">
+                  <h1>Geolocation</h1>
+                  <p>The GeoIP service identifies which country the player is from, returning their country code and name.</p>
+                  <p>It is called via:</p>
+                  <pre><code class="cpp">GeoIP()->Load();
+GeoIP()->LoadAsync(RequestDelegate targetDelegate)</code></pre>
+                  <p>The delegate method receives a CPlaytomicResponsePtr reference with an object that has Code and Name properties:</p>
+                  <p>Example</p>
+                  <pre><code class="cpp">void MyClass::GetLocation()
+{
+    response = Playtomic::gPlaytomic->GeoIP()->Load();
+
+    if (response->ResponseSucceded())
+    {
+        FData geoIpInfo;
+        geoIpInfo = response->ResponseData();
+        
+        FData code,name;
+        code = geoIpInfo.get("Code",code);
+        name = geoIpInfo.get("Name", name);
+        
+        std::cout << "Code: " << code.asString() << std::endl;
+        std::cout << "Name: " << name.asString() << std::endl;
+     }
+}</code></pre>
+                  <h2>Asynchronous Version</h2>
+                  <pre><code class="cpp">void MyClass::GetLocation()
+{
+   Playtomic::gPlaytomic->GeoIP()->LoadAsync(fastdelegate::MakeDelegate(this,&amp;MyClass::LocationDelegate));
+}
+
+void MyClass:::LocationDelegate(CPlaytomicResponsePtr& response)
+{
+    if (response->ResponseSucceded())
+    {
+	    FData geoIpInfo;
+        
+        geoIpInfo = response->ResponseData();
+        
+        FData code,name;
+        code = geoIpInfo.get("Code",code);
+        name = geoIpInfo.get("Name", name);
+        
+        std::cout << "Code: " << code.asString() << std::endl;
+        std::cout << "Name: " << name.asString() << std::endl;
+    }
+}</code></pre>
+               </div>
+               <div id="Section6" style="display: none;">
+                  <h1>Data lookup</h1>
+                  <p>Note: You must enable this functionality in each game's settings.  By default it is disabled becaue it can expose your game data.</p>
+                  <p>The Data class in the API allows you to retrieve any of your game data to display in your game.</p>
+                  <p>Each function for retrieving data takes an optional parameters object for day, month and year, with default values of 0.</p>
+                  <ul class="list">
+                     <li>When day, month and year are specified you will receive data for that specific day.</li>
+                     <li>When month and year are specified you will receive data for that specific month.</li>
+                     <li>When day, month and year are unspecified or 0 then you will receive data for all time.</li>
+                  </ul>
+                  <h2>Views, Plays and Play Time</h2>
+                  <p>The Views, Plays and PlayTime functions returns this data to you for processing:</p>
+                  <table cellpadding="0" cellspacing="0">
+                     <tr>
+                        <th class="mode">Parameter</th>
+                        <th class="modewide">Type</th>
+                        <th>Description</th>
+                     </tr>
+                     <tr>
+                        <td>day</td>
+                        <td>int</td>
+                        <td> if 0 you will receive data for that specific month.</td>
+                     </tr>
+                     <tr>
+                        <td>month</td>
+                        <td>int</td>
+                        <td>if 0 you will receive data for that specific year</td>
+                     </tr>
+                     <tr>
+                        <td>year</td>
+                        <td>int</td>
+                        <td>if 0 you will receive data for all time.</td>
+                     </tr>
+                  </table>
+                  <h2>Synchronous Version</h2>
+                  <pre><code class="cpp">Data()->Views(int month = 0, int year= 0);
+Data()->Views(int day, int month, int year);
+
+Data()->Plays(int month = 0, int year= 0);
+Data()->Plays(int day, int month, int year);
+
+Data()->Playtime(int month = 0, int year= 0);
+Data()->Playtime(int day, int month, int year);</code></pre>
+                  <h2>Asynchronous Version</h2>
+                  <pre><code class="cpp">Data()->ViewsAsync(RequestDelegate targetDelegate);
+Data()->ViewsAsync(int day, int month, int year, RequestDelegate targetDelegate);
+Data()->ViewsAsync(int month, int year, RequestDelegate targetDelegate);
+
+Data()->PlaysAsync(RequestDelegate targetDelegate);
+Data()->PlaysAsync(int day, int month, int year, RequestDelegate targetDelegate);
+Data()->PlaysAsync(int month, int year, RequestDelegate targetDelegate);
+
+Data()->PlaytimeAsync(RequestDelegate targetDelegate);
+Data()->PlaytimeAsync(int day, int month, int year, RequestDelegate targetDelegate);
+Data()->PlaytimeAsync(int month, int year, RequestDelegate targetDelegate);</code></pre>
+                  <table cellpadding="0" cellspacing="0">
+                     <tr>
+                        <th class="mode">Parameter</th>
+                        <th class="modewide">Type</th>
+                        <th>Description</th>
+                     </tr>
+                     <tr>
+                        <td>day</td>
+                        <td>int</td>
+                        <td> if 0 you will receive data for that specific month.</td>
+                     </tr>
+                     <tr>
+                        <td>month</td>
+                        <td>int</td>
+                        <td>if 0 you will receive data for that specific year</td>
+                     </tr>
+                     <tr>
+                        <td>year</td>
+                        <td>int</td>
+                        <td>if 0 you will receive data for all time.</td>
+                     </tr>
+                     <tr>
+                        <td>targetDelegate</td>
+                        <td>RequestDelegate</td>
+                        <td>delegate method to call, you can create the delegate using fastdelegate::MakeDelegate(instance, method pointer) e.x fastdelegate::MakeDelegate(this,&amp;MyClass::MethodName) </td>
+                     </tr>
+                  </table>
+                  <pre><code class="cpp">gPlaytomic->Data()->ViewsAsync(fastdelegate::MakeDelegate(this,&amp;MyClass::ViewFinish));
+gPlaytomic->Data()->Plays(22,3, 2010,fastdelegate::MakeDelegate(this,&amp;MyClass::PlaysFinish)); // plays on March 22, 2010 
+gPlaytomic->Data()->PlaytimeAsync(3, 2010,fastdelegate::MakeDelegate(this,&amp;MyClass::PlayTimeFinish)); // play time on March, 2010
+
+void MyClass::ViewFinish(CPlaytomicResponsePtr& response)
+{
+    if (response->ResponseSucceded())
+    {
+       FData value;
+       value = response->ResponseData().get("Value",value);
+       std::cout << "views = " << value.asString() << std::endl;
+    }
+    else
+    {
+       std::cout << "response failed error code = " << response->ResponseError() << std::endl;
+    }
+}
+
+void MyClass::PlaysFinish(CPlaytomicResponsePtr& response)
+{
+    if (response->ResponseSucceded())
+    {
+       FData value;
+       value = response->ResponseData().get("Value",value);
+       std::cout << "Plays = " << value.asString() << std::endl;
+    }
+    else
+    {
+       std::cout << "response failed error code = " << response->ResponseError() << std::endl;
+    }
+}
+
+void MyClass::PlaytimeFinish(CPlaytomicResponsePtr& response)
+{
+    if (response->ResponseSucceded())
+    {
+       FData value;
+       value = response->ResponseData().get("Value",value);
+       std::cout << "play time = " << value.asString() << std::endl;
+    }
+    else
+    {
+       std::cout << "response failed error code = " << response->ResponseError() << std::endl;
+    }
+}</code></pre>
+                  <h2>Custom metrics</h2>
+                  <p>The CustomMetric function returns data about a custom metric to your function, which receives the same parameters as views/plays/play time above.</p>
+                  <h2>Synchronous Version</h2>
+                  <pre><code class="cpp">Data()->CustomMetric(const std::string& name, int day=0, int month=0, int year=0);</code></pre>
+                  <table cellpadding="0" cellspacing="0">
+                     <tr>
+                        <th class="mode">Parameter</th>
+                        <th class="modewide">Type</th>
+                        <th>Description</th>
+                     </tr>
+                     <tr>
+                        <td>name</td>
+                        <td>String</td>
+                        <td>The name of your custom metric</td>
+                     </tr>
+                     <tr>
+                        <td>day</td>
+                        <td>int</td>
+                        <td> if 0 you will receive data for that specific month.</td>
+                     </tr>
+                     <tr>
+                        <td>month</td>
+                        <td>int</td>
+                        <td>if 0 you will receive data for that specific year</td>
+                     </tr>
+                     <tr>
+                        <td>year</td>
+                        <td>int</td>
+                        <td>if 0 you will receive data for all time.</td>
+                     </tr>
+                  </table>
+                  <h2>Asynchronous Version</h2>
+                  <pre><code class="cpp">Data()->CustomMetric(const std::string& name, RequestDelegate targetDelegate);
+Data()->CustomMetric(const std::string& name, int day, int month, int year, RequestDelegate targetDelegate);</code></pre>
+                  <table cellpadding="0" cellspacing="0">
+                     <tr>
+                        <th class="mode">Parameter</th>
+                        <th class="modewide">Type</th>
+                        <th>Description</th>
+                     </tr>
+                     <tr>
+                        <td>name</td>
+                        <td>String</td>
+                        <td>The name of your custom metric</td>
+                     </tr>
+                     <tr>
+                        <td>day</td>
+                        <td>int</td>
+                        <td> if 0 you will receive data for that specific month.</td>
+                     </tr>
+                     <tr>
+                        <td>month</td>
+                        <td>int</td>
+                        <td>if 0 you will receive data for that specific year</td>
+                     </tr>
+                     <tr>
+                        <td>year</td>
+                        <td>int</td>
+                        <td>if 0 you will receive data for all time.</td>
+                     </tr>
+                     <tr>
+                        <td>targetDelegate</td>
+                        <td>RequestDelegate</td>
+                        <td>delegate method to call, you can create the delegate using fastdelegate::MakeDelegate(instance, method pointer) e.x fastdelegate::MakeDelegate(this,&amp;MyClass::MethodName) </td>
+                     </tr>
+                  </table>
+                  <pre><code class="cpp">gPlaytomic->Data()->CustomMetricAsync("Clicked sponsor link"e,fastdelegatee::MakeDelegate(thise,&amp;CMyClasse::CustomMetricFinish));
+
+voide CMyClasse::CustomMetricFinish( CPlaytomicResponsePtre& response )
+{
+
+   if (response->ResponseSucceded())
+   {
+       FDatae value;
+       value = response->ResponseData().get("Value"e,value);
+       std::coute << "custom metric = "e << value.asString() << std::endle;
+   }
+   else
+   {
+       std::coute << "response failed error code = " << response->ResponseError() << std::endle;
+   }
+}
+</code></pre>
+                  <h2>Level metrics</h2>
+                  <p>There are three methods for retrieving level metrics.  The functions that receive the data are different from the above examples.</p>
+                  <h2>Synchronous Version</h2>
+                  <pre><code class="cpp">Data()->LevelCounterMetric(const std::string& name, const std::string& level, int month=0, int year=0);
+Data()->LevelCounterMetric(const std::string& name, const std::string& level,int day,int month, int year);
+Data()->LevelCounterMetric(const std::string& name, int levelNumber, int month=0, int year=0);
+Data()->LevelCounterMetric(const std::string& name, int levelNumber, int day,int month, int year);
+
+Data()->LevelAverageMetric(const std::string& name, const std::string& level, int month=0, int year=0);
+Data()->LevelAverageMetric(const std::string& name, const std::string& level, int day, int month, int year);
+Data()->LevelAverageMetric(const std::string& name, int levelNumber, int month=0, int year=0);
+Data()->LevelAverageMetric(const std::string& name, int levelNumber, int day,int month, int year);
+
+Data()->LevelRangedMetric(const std::string& name, const std::string& level, int month=0, int year=0);
+Data()->LevelRangedMetric(const std::string& name, const std::string& level, int day, int month, int year);
+Data()->LevelRangedMetric(const std::string& name, int levelNumber, int month=0, int year=0);
+Data()->LevelRangedMetric(const std::string& name, int levelNumber, int day,int month, int year);
+</code></pre>
+                  <table cellpadding="0" cellspacing="0">
+                     <tr>
+                        <th class="mode">Parameter</th>
+                        <th class="modewide">Type</th>
+                        <th>Description</th>
+                     </tr>
+                     <tr>
+                        <td>name</td>
+                        <td>String</td>
+                        <td>The name of your custom metric</td>
+                     </tr>
+                     <tr>
+                        <td>level</td>
+                        <td>int or String</td>
+                        <td>The level number or name</td>
+                     </tr>
+                     <tr>
+                        <td>callback</td>
+                        <td>Function</td>
+                        <td>Your function that receives the data</td>
+                     </tr>
+                     <tr>
+                        <td>options</td>
+                        <td>Object</td>
+                        <td>Optional object which may contain day, month and year properties</td>
+                     </tr>
+                  </table>
+                  <pre><code class="cpp">gPlaytomic->Data()->LevelCounterMetricAsync("Started level","level 1",fastdelegate::MakeDelegate(this,&amp;MyClass::LevelCounterFinish));
+gPlaytomic->Data()->LevelRangedMetricAsync("Shots remaining","level 1",3,2010,fastdelegate::MakeDelegate(this,&amp;MyClass::LevelRangedFinish));
+gPlaytomic->Data()->LevelAverageMetricAsync("Retries","level 1",22,3,2010,fastdelegate::MakeDelegate(this,&amp;MyClass::LevelAverageFinish));
+
+
+void MyClass::LevelCounterFinish()
+{
+    if (response->ResponseSucceded())
+    {
+        FData value;
+        value = response->ResponseData().get("Value",value);
+        std::cout << "level counter = " << value.asString() << std::endl;
+    }
+    else
+    {
+        std::cout << "response failed error code = " << response->ResponseError() << std::endl;
+    }
+}
+
+void MyClass::LevelRangedFinish()
+{
+    if (response->ResponseSucceded())
+    {
+        FData value;
+        value = response->ResponseData().get("Value",value);
+        std::cout << "level ranged = " << value.asString() << std::endl;
+    }
+    else
+    {
+        std::cout << "response failed error code = " << response->ResponseError() << std::endl;
+    }
+}
+
+void MyClass::LevelAverageFinish()
+{
+    if (response->ResponseSucceded())
+    {
+        FData value;
+        value = response->ResponseData().get("Average",value);
+        if(value.isInt())
+            std::cout << "level Average = " << value.asInt() << std::endl;
+        value = response->ResponseData().get("Min",value);
+        if(value.isInt())
+            std::cout << "level Min = " << value.asInt() << std::endl;
+        value = response->ResponseData().get("Max",value);
+        if(value.isInt())
+            std::cout << "level Max = " << value.asInt() << std::endl;
+        value = response->ResponseData().get("Total",value);
+        if(value.isInt())
+           std::cout << "level Total = " << value.asInt() << std::endl; 
+     }
+}</code></pre>
+               </div>
+               <div id="Section7" style="display: none;">
+                  <h1>Error codes</h1>
+                  <p>When a Playtomic service is unreachable or has an error it will return a numeric error code.  This table describes those errors:</p>
+                  <h2>General errors</h2>
+                  <p>These errors may be returned from any service.</p>
+                  <table cellpadding="0" cellspacing="0">
+                     <tr>
+                        <th class="mode">Code</th>
+                        <th>Meaning</th>
+                     </tr>
+                     <tr>
+                        <td>0</td>
+                        <td>No error</td>
+                     </tr>
+                     <tr>
+                        <td>1</td>
+                        <td>General error, this typically means the player is unable to connect to the Playtomic servers</td>
+                     </tr>
+                     <tr>
+                        <td>2</td>
+                        <td>Invalid game credentials.  Make sure you use your SWFId and GUID from the "API" section in the dashboard.</td>
+                     </tr>
+                     <tr>
+                        <td>3</td>
+                        <td>Request timed out.</td>
+                     </tr>
+                     <tr>
+                        <td>4</td>
+                        <td>Invalid request.  This means the request wasn't formed right, probably because the API key wasn't provided or was incorrect.</td>
+                     </tr>
+                  </table>
+                  <h2>GeoIP errors</h2>
+                  <table cellpadding="0" cellspacing="0">
+                     <tr>
+                        <th class="mode">Code</th>
+                        <th>Meaning</th>
+                     </tr>
+                     <tr>
+                        <td>100</td>
+                        <td>GeoIP API has been disabled.  This may occur if your game is faulty or overwhelming the Playtomic servers.</td>
+                     </tr>
+                  </table>
+                  <h2>Leaderboard errors</h2>
+                  <table cellpadding="0" cellspacing="0">
+                     <tr>
+                        <th class="mode">Code</th>
+                        <th>Meaning</th>
+                     </tr>
+                     <tr>
+                        <td>200</td>
+                        <td>Leaderboard API has been disabled.  This may occur if your game is faulty or overwhelming the Playtomic servers.</td>
+                     </tr>
+                     <tr>
+                        <td>201</td>
+                        <td>The source URL or name weren't provided when saving a score.  Make sure the player specifies a name and the game is initialized before anything else using the code in the "Set your game up" section.</td>
+                     </tr>
+                     <tr>
+                        <td>202</td>
+                        <td>Invalid auth key.  You should not see this normally, players might if they tamper with your game.</td>
+                     </tr>
+                     <tr>
+                        <td>203</td>
+                        <td>No Facebook user id on a score specified as a Facebook submission.</td>
+                     </tr>
+                     <tr>
+                        <td>204</td>
+                        <td>Table name wasn't specified for creating a private leaderboard.</td>
+                     </tr>
+                     <tr>
+                        <td>205</td>
+                        <td>Permalink structure wasn't specified:  http://website.com/game/whatever?leaderboard=</td>
+                     </tr>
+                     <tr>
+                        <td>206</td>
+                        <td>Leaderboard id wasn't provided loading a private leaderboard.</td>
+                     </tr>
+                     <tr>
+                        <td>207</td>
+                        <td>Invalid leaderboard id was provided for a private leaderboard.</td>
+                     </tr>
+                     <tr>
+                        <td>208</td>
+                        <td>Player is banned from your leaderboard.</td>
+                     </tr>
+                     <tr>
+                        <td>209</td>
+                        <td>SaveAndList only.  The score was not the player's best score.  You can message the player, highlight their best via the SubmittedOrBest boolean property of scores, or override this by setting allowduplicates to true.</td>
+                     </tr>
+                  </table>
+                  <h2>GameVars errors</h2>
+                  <table cellpadding="0" cellspacing="0">
+                     <tr>
+                        <th class="mode">Code</th>
+                        <th>Meaning</th>
+                     </tr>
+                     <tr>
+                        <td>300</td>
+                        <td>GameVars API has been disabled.  This may occur if your game is faulty or overwhelming the Playtomic servers.</td>
+                     </tr>
+                  </table>
+                  <h2>Level sharing errors</h2>
+                  <table cellpadding="0" cellspacing="0">
+                     <tr>
+                        <th class="mode">Code</th>
+                        <th>Meaning</th>
+                     </tr>
+                     <tr>
+                        <td>400</td>
+                        <td>Level sharing API has been disabled.  This may occur if your game is faulty or overwhelming the Playtomic servers.</td>
+                     </tr>
+                     <tr>
+                        <td>401</td>
+                        <td>Invalid rating value (must be 1 - 10).</td>
+                     </tr>
+                     <tr>
+                        <td>402</td>
+                        <td>Player has already rated that level.</td>
+                     </tr>
+                     <tr>
+                        <td>403</td>
+                        <td>The level name wasn't provided when saving a level.</td>
+                     </tr>
+                     <tr>
+                        <td>404</td>
+                        <td>Invalid image auth.  You should not see this normally, players might if they tamper with your game.</td>
+                     </tr>
+                     <tr>
+                        <td>405</td>
+                        <td>Invalid image auth (again).  You should not see this normally, players might if they tamper with your game.</td>
+                     </tr>
+                     <tr>
+                        <td>406</td>
+                        <td>The level already exists.  This is determined via a hash of the game id, level name, player ip address and name, and source url.</td>
+                     </tr>
+                  </table>
+                  <h2>Data API errors</h2>
+                  <table cellpadding="0" cellspacing="0">
+                     <tr>
+                        <th class="mode">Code</th>
+                        <th>Meaning</th>
+                     </tr>
+                     <tr>
+                        <td>500</td>
+                        <td>Data API has been disabled.  This may occur if the Data API is not enabled for your game, or your game is faulty or overwhelming the Playtomic servers.</td>
+                     </tr>
+                  </table>
+                  <h2>Parse Custom Database errors</h2>
+                  <table cellpadding="0" cellspacing="0">
+                     <tr>
+                        <th class="mode">Code</th>
+                        <th>Meaning</th>
+                     </tr>
+                     <tr>
+                        <td>600</td>
+                        <td>You have not configured your Parse.com database.  Sign up at Parse and then enter your API credentials in your Playtomic dashboard.</td>
+                     </tr>
+                     <tr>
+                        <td>601</td>
+                        <td>No response was returned from Parse.  If you experience this a lot let us know exactly what you're doing so we can sort out a fix for it.</td>
+                     </tr>
+                     <tr>
+                        <td>6021</td>
+                        <td>Parse's servers had an error.</td>
+                     </tr>
+                     <tr>
+                        <td>602101</td>
+                        <td>Object not found.  Make sure you include the classname and objectid and that they are correct.</td>
+                     </tr>
+                     <tr>
+                        <td>602102</td>
+                        <td>Invalid query.  If you think you're doing it right let us know what you're doing and we'll look into it.</td>
+                     </tr>
+                     <tr>
+                        <td>602103</td>
+                        <td>Invalid classname.</td>
+                     </tr>
+                     <tr>
+                        <td>602104</td>
+                        <td>Missing objectid.</td>
+                     </tr>
+                     <tr>
+                        <td>602105</td>
+                        <td>Invalid key name.</td>
+                     </tr>
+                     <tr>
+                        <td>602106</td>
+                        <td>Invalid pointer.</td>
+                     </tr>
+                     <tr>
+                        <td>602107</td>
+                        <td>Invalid JSON.</td>
+                     </tr>
+                     <tr>
+                        <td>602108</td>
+                        <td>Command unavailable.</td>
+                     </tr>
+                  </table>
+               </div>
+            </div>
+            <script type="text/javascript">
+               /* <![CDATA[ */
+               
+               (function () {
+               
+                   function pageSet(n, oncomplete) {
+                       this.pages = [];
+                       this.handles = [];
+                       this.onComplete = oncomplete;
+               
+                       var i;
+               
+                       for (i = 0; i < n; i++) {
+                           this.pages[i] = document.getElementById("Section" + (i + 1));
+                           this.handles[i] = document.getElementById("Section" + (i + 1) + "Handle").getElementsByTagName("a")[0];
+                       }
+               
+                       this.setPage = function (page) {
+                           for (i = this.pages.length - 1; i > -1; i--) {
+                               this.pages[i].style.display = (i + 1 == page ? "" : "none");
+                               this.handles[i].className = (i + 1 == page ? "menulink on" : "menulink");
+                           }
+               
+                           if (this.onComplete != null) {
+                               this.onComplete(n);
+                           }
+                       };
+                   }
+               
+                   window.pages = new pageSet(10);
+               
+                   var loc = document.location.toString();
+               
+                   if (loc.indexOf("#") == -1) {
+                       pages.setPage(9);
+                       return;
+                   }
+               
+                   loc = loc.substring(loc.indexOf("#") + 1);
+               
+                   switch (loc) {
+                       case "Analytics":
+                           pages.setPage(1);
+                           break;
+                       case "LinkTracking":
+                           pages.setPage(7);
+                           break;
+                       case "LevelSharing":
+                           pages.setPage(2);
+                           break;
+                       case "Leaderboards":
+                           pages.setPage(3);
+                           break;
+                       case "GameVars":
+                           pages.setPage(4);
+                           break;
+                       case "Geolocation":
+                           pages.setPage(5);
+                           break;
+                       case "DataLookup":
+                           pages.setPage(8);
+                           break;
+                       case "ErrorCodes":
+                           pages.setPage(6);
+                           break;
+                       case "SettingUp":
+                           pages.setPage(9);
+                           break;
+                       case "Parse":
+                           pages.setPage(10);
+                           break;
+                   }
+               
+               }());
+               
+               // tabs
+               function setTab(tab) {
+                   var tabs = ["VisualStudio", "XcodeMacOSX", "XcodeiOS", "Android"];
+                   for (var t in tabs) {
+                       document.getElementById(tabs[t]).style.display = tabs[t] == tab ? "block" : " none";
+                   }
+               }
+               
+               setTab("VisualStudio");
+               
+               /* ]]> */
+            </script>
+         </div>
+      </div>
+      <div id="FooterContainer">
+         <div class="last">
+            <ul>
+               <li>&copy; 2009 - 2013 <a href="/">Playtomic Inc</a> all rights reserved</li>
+               <li><a href="terms.html">Terms of Service</a></li>
+               <li><a href="privacy.html">Privacy Policy</a></li>
+               <li><a href="#">Contact us</a></li>
+               <li><a href="http://twitter.com/playtomic">Twitter</a></li>
+            </ul>
+         </div>
+         <div id="Footer">
+            <div class="section">
+               <h5>API Documentation:</h5>
+               <ul>
+                  <li><a href="api/ios.html" title="iPhone Game Analytics">iPhone</a></li>
+                  <li><a href="api/unity.html" title="Unity3d Game Analytics">Unity3d</a></li>
+                  <li><a href="api/as3.html" title="Flash ActionScript 3 Game Analytics">AS3</a></li>
+                  <li><a href="api/as2.html" title="Flash ActionScript 2 Game Analytics">AS2</a></li>
+                  <li><a href="api/html5.html" title="HTML5 Game Analytics">HTML5</a></li>
+                  <li><a href="api/cpp.html" title="C++ Game Analytics">C++</a></li>
+                  <li><a href="api/android.html" title="Android Game Analytics">Android</a></li>
+                  <li><a href="api/monoandroid.html" title="Mono for Android Game Analytics">Mono/Android</a></li>
+                  <li><a href="api/java.html" title="Java Game Analytics">Java</a></li>
+                  <li><a href="api/dataexporting.html">Data Exporting</a></li>
+               </ul>
+            </div>
+            <div class="section">
+               <h5>Website:</h5>
+               <ul>
+                  <li><a href="/">Home</a></li>
+                  <!--<li><a href="/jobs">Jobs</a></li>-->
+                  <li><a href="/features.html">Features</a></li>
+                  <li><a href="/iphone-analytics.html">iPhone Analytics</a></li>
+                  <li><a href="/mobile-analytics.html">Mobile Analytics</a></li>
+                  <li><a href="#">Register</a></li>
+                  <li><a href="#">Contact</a></li>
+                  <li><a href="#">Block Playtomic</a></li>
+               </ul>
+            </div>
+            <div class="section">
+               <h5>Games:</h5>
+               <ul>
+                  <li><a href="#">Game Charts</a></li>
+                  <li><a href="#">Game Catalog</a></li>
+                  <li><a href="#">Flash Game Distribution</a></li>
+               </ul>
+            </div>
+            <!--<div class="section">
+               <h5>Community:</h5>
+               <ul>
+               	<li><a href="/community">Forums</a></li>
+                   <li><a href="/community/general">General</a></li>
+                   <li><a href="/community/suggestions">Suggestions</a></li>
+                   <li><a href="/issues">Issue Tracker</a></li>
+               </ul>
+               
+               </div>-->
+            <div class="section">
+               <h5>Blog:</h5>
+               <ul>
+                  <li><a href="#">Latest posts</a></li>
+                  <li><a href="#">Archive</a></li>
+                  <li>Recent post:  <a href="#">Four ways to keep players in love with your game using Playtomic</a></li>
+               </ul>
+            </div>
+            <div class="section">
+               <h5>Friends:</h5>
+               <ul>
+                  <li><a href="http://armorgames.com/">Armor Games</a></li>
+                  <li><a href="http://mochimedia.com/">Mochi Media</a></li>
+                  <li><a href="http://www.youdagames.com/">Youdagames</a></li>
+                  <li><a href="http://fgl.com/">FGL</a></li>
+                  <li><a href="http://mongohq.com/">MongoHQ</a></li>
+                  <li><a href="http://parse.com/">Parse</a></li>
+                  <li><a href="http://newrelic.com/">New Relic</a></li>
+                  <li><a href="http://www.softlayer.com/">Softlayer</a></li>
+                  <li><a href="http://www.minimonstermedia.com">Mini Monster Media</a></li>
+               </ul>
+            </div>
+            <div class="section secondlast">
+               <h5>Attribution:</h5>
+               <ul>
+                  <li>
+                     Background by 
+                     <div class="subtle" xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/" about="http://subtlepatterns.com/">
+                        <span property="dct:title">Subtle Patterns</span>
+                        (<a rel="cc:attributionURL" property="cc:attributionName" href="http://subtlepatterns.com">Subtle Patterns</a>) /
+                        <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a>
+                     </div>
+                  </li>
+                  <li>Icons include works from <a href="http://famfamfam.com/">FamFamFam</a></li>
+               </ul>
+            </div>
+         </div>
+      </div>
+      <div id="Overlay"></div>
+      <div id="LightBox" style="height: 300px;">
+         <div class="goodbye">
+            <h2>Goodbye</h2>
+            <p>Friends, Playtomic has come to an end.  Part of this service will live on at <a href="http://playtomic.org/">Playtomic.org</a> as a 
+               self-hosted, open source platform I am continuing to develop in my spare time.  The rest is unfortunately finished.
+            </p>
+            <p><a href="http://cr.linkedin.com/pub/ben-lowry/2a/537/a8">Ben</a></p>
+         </div>
+      </div>
+      <link rel="stylesheet" href="/api/styles/default.css" />
+      <script src="/api/highlight.pack.js"></script>
+      <script type="text/javascript">
+         /* <![CDATA[ */
+             
+         (function () {
+                 
+             // altenating table rows
+             var tables = document.getElementsByTagName("table");
+             var i;
+         
+             for (i = 0; i < tables.length; i++) {
+                 var rows = tables[i].getElementsByTagName("tr");
+         
+                 for (var j = 0; j < rows.length; j++) {
+                     rows[j].className = j % 2 == 0 ? "alt" : "";
+                 }
+             }
+         
+             // sign in or up
+             if (document.getElementById("ctl00_UserMenu")) {
+                 document.getElementById("SiteMenu").style.display = "none";
+             }
+             
+             if (document.getElementById("TopBarGuestMenu")) {
+                 document.getElementById("TopBarGuestMenu").style.display = "none";
+             }
+             
+             // api menu
+             var menulinks = document.getElementById("APIMenu").getElementsByTagName("a");
+             var ploc = document.location.toString();
+                 
+             for (i = menulinks.length - 1; i > -1; i--) {
+                     
+                 if(ploc.indexOf(menulinks[i].href) > -1) {
+                     menulinks[i].className += " on";
+                     break;
+                 }
+             }
+             
+             // site menu
+             menulinks = document.getElementById("TopBar").getElementsByTagName("a");
+         
+             for (i = menulinks.length - 1; i > -1; i--) {
+         
+                 if (ploc.indexOf(menulinks[i].href) > -1) {
+                     menulinks[i].className += " on";
+                     break;
+                 }
+             }
+             
+             // pretty code
+            hljs.initHighlightingOnLoad();
+         
+         }());
+         
+         /* ]]> */
+      </script>
+      <script type="text/javascript">
+         // LIGHTBOX
+         function d(o) {
+             return document.getElementById(o);
+         }
+         function LightBox() {
+             var pageSize = getPageSize();
+             var overlay = d("Overlay");
+             overlay.style.height = pageSize[1] + "px";
+             overlay.style.display = "block";
+             overlay.style.zIndex = "5";
+         
+             var lightbox = d("LightBox");
+             lightbox.style.display = "block";
+             lightbox.style.left = "-10000px";;
+         
+             var pageSize = getPageSize();
+             var top = getPageScroll() + ((pageSize[3] - 300) / 2);
+             var left = ((pageSize[0] - 536) / 2);
+         
+             var lightbox = d("LightBox");
+             lightbox.style.top = (top < 0) ? "0px" : top + "px";
+             lightbox.style.left = (left < 0) ? "0px" : left + "px";
+             lightbox.style.zIndex = "6";
+         }
+         
+         
+         function getPageScroll() {
+             var yScroll;
+         
+             if (self.pageYOffset)
+                 yScroll = self.pageYOffset;
+             else if (document.documentElement && document.documentElement.scrollTop)
+                 yScroll = document.documentElement.scrollTop;
+             else if (document.body)
+                 yScroll = document.body.scrollTop;
+         
+             return yScroll;
+         }
+         
+         function getPageSize() {
+             var xScroll, yScroll;
+         
+             if (window.innerHeight && window.scrollMaxY) {
+                 xScroll = document.body.scrollWidth;
+                 yScroll = window.innerHeight + window.scrollMaxY;
+             }
+             else if (document.body.scrollHeight > document.body.offsetHeight) {
+                 xScroll = document.body.scrollWidth;
+                 yScroll = document.body.scrollHeight;
+             }
+             else {
+                 xScroll = document.body.offsetWidth;
+                 yScroll = document.body.offsetHeight;
+             }
+         
+             var windowWidth, windowHeight;
+             if (self.innerHeight) {
+                 windowWidth = self.innerWidth;
+                 windowHeight = self.innerHeight;
+             }
+             else if (document.documentElement && document.documentElement.clientHeight) {
+                 windowWidth = document.documentElement.clientWidth;
+                 windowHeight = document.documentElement.clientHeight;
+             }
+             else if (document.body) {
+                 windowWidth = document.body.clientWidth;
+                 windowHeight = document.body.clientHeight;
+             }
+         
+             var pageHeight = (yScroll < windowHeight ? windowHeight : yScroll);
+             var pageWidth = (xScroll < windowWidth ? windowWidth : xScroll);
+             return new Array(pageWidth, pageHeight, windowWidth, windowHeight);
+         }
+         
+         LightBox();
+      </script>
+   </body>
+</html>

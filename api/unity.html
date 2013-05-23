@@ -1,0 +1,1875 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,medium,bold" title="roboto" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <title>Unity3d Analytics | Playtomic analytics and services for Unity3d games</title>
+      <meta name="keywords" content="unity3d, unity3d api, unity3d sdk, playtomic unity3d, unity3d playtomic, unity3d analytics, unity3d game analytics, game analytics" />
+      <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+      <link rel="icon" href="../favicon.ico" type="image/icon" />
+      <link rel="stylesheet" href="api.css" />
+      <style>
+         .goodbye {margin: 10px 0; padding: 10px;background-color: #222;border: 4px solid #333;}
+         .goodbye p { color: #EEE;margin-bottom: 12px;font-size: 15px;line-height: 24px !important; }
+         .goodbye a { font-size: 15px !important;color: #FFF; }
+         .goodbye h2 { font-size: 18px;color: #FFF; margin: 0px 0px 4px 0px}
+         .goodbye a.btn { text-decoration: none !important;padding: 4px; }
+         .goodbye input { padding: 4px; }
+         .goodbye form { margin-bottom: 12px;}
+         .goodbye hr { margin: 12px !important; }
+         #LightBox { background-color: #333; width: 808px; height: 604px; display: none; position: absolute; z-index: 1001; top: 0px; left: 0px; }
+         #Overlay { background-image: url(../images/overlay.png); display: none; position: absolute; z-index: 1000; top: 0px; left: 0px; width: 100%; height: 100%; }
+      </style>
+   </head>
+   <body>
+      <div id="TopBarContainer">
+         <div id="TopBar">
+            <div id="SiteBar">
+               <ul>
+                  <li><a title="Playtomic" href="http://playtomic.com/">Website</a></li>
+                  <li><a title="API Documentation" href="../api.html">API Docs</a></li>
+                  <li><a title="Issue Center" href="#">Issues</a></li>
+                  <li><a title="Feature Wish List" href="#">Wish List</a></li>
+                  <li><a title="Blog" href="#">Blog</a></li>
+                  <!--<li><a href="#">Community</a></li>
+                     <li><a href="/jobs">Jobs</a></li>-->
+                  <li><a title="Game distribution" href="#">Games</a></li>
+                  <li class="last"><a href="http://twitter.com/playtomic">Twitter</a></li>
+               </ul>
+            </div>
+         </div>
+      </div>
+      <div id="Container">
+         <div id="Header">
+            <a id="Logo" href="/"><span title="Playtomic - Game analytics and tools for iPhone, iPod, iPad, Flash, HTML5 and Unity games"></span></a>
+         </div>
+         <div id="APIMenu">
+            <div>
+               <ul>
+                  <li><a class="menulink" href="../api.html">API Home</a></li>
+                  <li><a class="menulink" href="api/dataexporting.html">Data Exporting</a></li>
+                  <li><a class="menulink" href="http://playtomic.org/api/unity3d.html">Unity3d</a></li>
+                  <li><a class="menulink" href="http://playtomic.org/api/html5.html">HTML5</a></li>
+                  <li><a class="menulink" href="http://playtomic.org/api/ios.html">iOS / Objective C</a></li>
+                  <li><a class="menulink" href="http://playtomic.org/api/as3.html">Flash / AS3</a></li>
+                  <li><a class="menulink" href="api/as2.html">Flash / AS2</a></li>
+                  <li><a class="menulink" href="api/cpp.html">C++</a></li>
+                  <li><a class="menulink" href="http://playtomic.org/api/android.html">Android / Java</a></li>
+                  <li><a class="menulink" href="http://playtomic.org/api/csharp.html">Android / Mono</a></li>
+                  <li><a class="menulink" href="api/java.html">Java</a></li>
+               </ul>
+            </div>
+         </div>
+         <div id="APIHeading">
+            <h1>Unity3d API Documentation</h1>
+         </div>
+         <div id="Content">
+            <div id="APILeft">
+               <ul>
+                  <li id="Section9Handle"><a class="menulink" href="#SettingUp" onclick="javascript:pages.setPage(9);">Setting up</a></li>
+                  <li id="Section1Handle"><a class="menulink" href="http://lvlboost.com/">Analytics</a></li>
+                  <li id="Section8Handle"><a class="menulink" href="#LinkTracking" onclick="javascript:pages.setPage(8);">Link tracking</a></li>
+                  <li id="Section2Handle"><a class="menulink" href="http://playtomic.org/api/unity3d.html#playerlevels">Level sharing</a></li>
+                  <li id="Section3Handle"><a class="menulink" href="http://playtomic.org/api/unity3d.html#leaderboards">Leaderboards</a></li>
+                  <li id="Section4Handle"><a class="menulink" href="http://playtomic.org/api/unity3d.html#gamevars">GameVars</a></li>
+                  <li id="Section5Handle"><a class="menulink" href="http://playtomic.org/api/unity3d.html#geoip">Geolocation</a></li>
+                  <li id="Section6Handle"><a class="menulink" href="#DataLookup" onclick="javascript:pages.setPage(6);">Data lookup</a></li>
+                  <li id="Section10Handle"><a class="menulink" href="#Parse" onclick="javascript:pages.setPage(10);">Parse Database</a></li>
+                  <li id="Section7Handle"><a class="menulink" href="#ErrorCodes" onclick="javascript:pages.setPage(7);">Error codes</a></li>
+               </ul>
+            </div>
+            <div id="APIRight">
+               <div id="Section9">
+                  <h1>Setting up the Unity API</h1>
+                  <p><a class="btn primary" href="http://github.com/playtomic/gameapi-unity3d/zipball/master">Download</a>
+                     <a class="btn primary" href="http://github.com/playtomic/gameapi-unity3d">Browse on Github</a>
+                  </p>
+                  <h2>Import the plugin to your project</h2>
+                  <p>Select Assets -&gt; Import Package -&gt; Custom Package, then browse to where the Playtomic.unitypackage is where you unzipped the file.</p>
+                  <h2>Initialize the API and log the view</h2>
+                  <p>The first thing you must do is initialize the API.  Without doing this none of the services will work:</p>
+                  <pre><code class="cs">Playtomic.Initialize(gameid, "guid", "apikey");</code></pre>
+                  <p>After doing that log the view.  If your game is mobile then do this when the application opens or resumes:</p>
+                  <pre><code class="cs">Playtomic.Log.View();</code></pre>
+                  <h2>SSL (https)</h2>
+                  <p>Premium users can use SSL for all API communication by calling this method <em>after</em> initializing the API but before logging the view:</p>
+                  <pre><code class="cs">Playtomic.SetSSL();</code></pre>
+               </div>
+               <div id="Section1" style="display: none;">
+                  <h1>Analytics</h1>
+                  <h2>Views / Sessions</h2>
+                  <p>A view occurs whenever somebody views your game.  This should go somewhere very early in your code like before the preloader.  If you are making mobile/tablet games then you will want to do this when the application resumes as well.</p>
+                  <pre><code class="cs">Playtomic.Log.View();</code></pre>
+                  <span style="color: #666; font-size: 10px;">Note: We are currently changing the naming to Sessions as it is more appropriate today.  Changes will be applied in next API version.</span>
+                  <h2>Plays / Engages</h2>
+                  <p>This occurs wherever you feel a player has become engaged in your game.  It's subjective, previously we recommended putting it on the play button but that is less suitable in a mobile environment so you should use this at some point early in your game where you feel a player has decided to really play your game rather than open it.</p>
+                  <span style="color: #666; font-size: 10px;">Note: We are currently changing the naming to Engages.  Changes will be applied in next API version.</span>
+                  <h2>Play time, countries and sources</h2>
+                  <p>This data is logged automatically when you send other events.</p>
+                  <pre><code class="cs">Playtomic.Log.Play();</code></pre>
+                  <h2>Freezing, unfreezing and force-sending events</h2>
+                  <p>Note:  This is inherited from the Flash version which runs on a single thread, and is unlikely to be necessary in Unity games.</p>
+                  <p>Events are sent in batches each time the play timer updates (every 30 seconds after the first minute).  If you want to ensure an event gets sent:</p>
+                  <pre><code class="cs">Playtomic.Log.ForceSend();</code></pre>
+                  <p>Some games are very resource-intensive and the API might send off a batch of events at exactly the wrong time.  You can freeze and unfreeze the logging at any time by:</p>
+                  <pre><code class="cs">Playtomic.Log.Freeze();
+Playtomic.Log.UnFreeze();</code></pre>
+                  <p>When logging is frozen all events are queued but not sent until you unfreeze the API.</p>
+                  <h2>Custom metrics</h2>
+                  <p>Custom metrics allow you to track how many people do something in your game, for instance how many play on easy, medium or hard, or how many play in English vs. Spanish, or how many view the tutorial or skip it.  Anything you think can help you improve your game.</p>
+                  <p>You can define custom metrics directly in your game and they will be added to Playtomic automatically.  Groups can be automatically assigned via an optional second parameter or set up later in the dashboard.</p>
+                  <p>You can also limit custom metrics to unique-per-view occurances with a third parameter.</p>
+                  <pre><code class="cs">Playtomic.Log.CustomMetric("ViewedCredits"); // metric, names must be alphanumeric
+Playtomic.Log.CustomMetric("Credits", "Screens"); // metric with group, groups must be alphanumeric
+Playtomic.Log.CustomMetric("ClickedSponsorsLink", "Links", true); // unique metric with group</code></pre>
+                  <h2>Level metrics</h2>
+                  <p>Level metrics track events on a per-level basis so you can drill down into your difficulty and retention by identifying which levels have problems and what those problems are.</p>
+                  <p>There are three types of level metrics - counters (like custom metrics), ranged-value and average-value.</p>
+                  <p>Note that you can pass either an integer level number or a string name of the level.  If your game is not using numeric levels (eg an escape game) then you would pass the name of each screen / area as a level.</p>
+                  <p>You can define level metrics directly in your game and they will be added to Playtomic automatically.</p>
+                  <p>Level metrics support unique-per-play occurrances via an optional second parameter.  If the player starts a new game they will be tracked again.</p>
+                  <h2>Counter metrics</h2>
+                  <p>These metrics track how many times something occurs in your levels, for instance deaths and restarts.</p>
+                  <p>One of the most valuable pieces of data you can track is how many people begin each level, this allows you to see where you lose players.</p>
+                  <pre><code class="cs">Playtomic.Log.LevelCounterMetric("Deaths", level_number); // names must be alphanumeric
+Playtomic.Log.LevelCounterMetric("Restarts", "LevelName"); // level names must be alphanumeric
+Playtomic.Log.LevelCounterMetric("Restarts", "LevelName", true); // unique only</code></pre>
+                  <h2>Average metrics</h2>
+                  <p>These metrics track the average of something in your levels, for instance the average time to finish a level or the average number of retries.  It also tracks the minimum and maximums.</p>
+                  <pre><code class="cs">Playtomic.Log.LevelAverageMetric("Time", level_number, seconds);
+Playtomic.Log.LevelAverageMetric("Retries", level_number, retries);
+Playtomic.Log.LevelAverageMetric("Retries", level_number, retries, true); // unique only</code></pre>
+                  <h2>Ranged-value metrics</h2>
+                  <p>These metrics track metrics with values, for instance in a golf game you might track how many shots it takes to complete each level, or you might track the % of coins collected on each level.</p>
+                  <pre><code class="cs">Playtomic.Log.LevelRangedMetric("Shots", level_number, shots);
+Playtomic.Log.LevelRangedMetric("PercentCoinsCollected", level_number, int(coins / coinstotal * 100));
+Playtomic.Log.LevelRangedMetric("Shots", level_number, shots, true); // unique only</code></pre>
+                  <h2>Heatmaps</h2>
+                  <p>Heatmaps allow you to map activity (clicks, deaths, first deaths, or anything else you want) against an image you upload in the dashboard.</p>
+                  <pre><code class="cs">Playtomic.Log.Heatmap("Metric", "Heatmap", x, y);</code></pre>
+                  <p>In the dashboard you upload a background image for the heatmap, and then it is shared by any metrics using it.</p>
+                  <h2>Referrers</h2>
+                  <p>Referrers allow you to track who has referrered your game.</p>
+                  <pre><code class="cs">Playtomic.Log.SetReferrer("Referrer");</code></pre>
+               </div>
+               <div id="Section8" style="display: none;">
+                  <h1>Link tracking</h1>
+                  <p>Link tracking allows you to keep track of how many people open URLs in your game, providing you information on unique, total and failed clicks that can fully audited to allow you to identify good sources of traffic.</p>
+                  <p>Link tracking does not change your URL or redirect traffic through a different url!</p>
+                  <h2>How to track a link</h2>
+                  <p>You track a link by passing a URL and some other information to the API.  The API will return true or false (not implemented yet) if the link opens, everything else is automatic.</p>
+                  <pre><code class="cs">Playtomic.Link.Open(url, name, group);</code></pre>
+                  <pre><code class="cs">Playtomic.Link.Open("http://website.com/", "Website", "MyLinks");</code></pre>
+                  <h2>Domain Totals</h2>
+                  <p>When you track a link it automatically also tracks the totals for the domain in a group it creates called DomainTotals.  The DomainTotals allows you to see how many unique, total and failed clicks occurred for a single domain even if you have multiple, different links to it (eg walkthrough or differently-structured sponsor links).</p>
+               </div>
+               <div id="Section10" style="display: none;">
+                  <a style="display: block; margin-bottom: 10px;" href="https://www.parse.com/users/new?code=playtomic"><img src="/images/parse.png" alt="Parse" width="168" height="51" /></a>
+                  <h2>Parse custom databases</h2>
+                  <p>This feature is provided in conjunction with <a href="https://www.parse.com/users/new?code=playtomic">Parse</a> so you will need to create your account with them before you can use it.</p>
+                  <p>Custom databases allow you to store and manipulate any data you want in any way you want, like:</p>
+                  <ul class="list">
+                     <li>User registration</li>
+                     <li>Mailing list (and send through <a href="http://mailchimp.com/">MailChimp</a>)</li>
+                     <li>Saved games</li>
+                     <li>Surveys &amp; feedback</li>
+                     <li>Messaging</li>
+                     <li>etc</li>
+                  </ul>
+                  <h2>The PFObject</h2>
+                  <p>This object represents a piece of data in your database.  It has the following properties:</p>
+                  <table cellpadding="0" cellspacing="0">
+                     <tr>
+                        <th class="mode">Property</th>
+                        <th class="modewide">Type</th>
+                        <th>Description</th>
+                     </tr>
+                     <tr>
+                        <td>ObjectId</td>
+                        <td>String</td>
+                        <td>If your object already exists in your database it will have this unique identifier.</td>
+                     </tr>
+                     <tr>
+                        <td>ClassName</td>
+                        <td>String</td>
+                        <td>The 'type' of data this is - user, score, etc</td>
+                     </tr>
+                     <tr>
+                        <td>Data</td>
+                        <td>Dictionary&lt;String, String&gt;</td>
+                        <td>Your actual data to save, eg po.Data.FirstName.  The 'fields' in your data must be valid variable names / object properties.</td>
+                     </tr>
+                     <tr>
+                        <td>UpdatedAt</td>
+                        <td>DateTime</td>
+                        <td>When the object was last updated in the database</td>
+                     </tr>
+                     <tr>
+                        <td>CreatedAt</td>
+                        <td>DateTime</td>
+                        <td>When the object was created in the database</td>
+                     </tr>
+                     <tr>
+                        <td>Password</td>
+                        <td>String</td>
+                        <td>If an object has a password when it is saved the password must be included to update it.</td>
+                     </tr>
+                  </table>
+                  <h2>The PFQuery</h2>
+                  <p>This object allows you to construct a query to run against your database to find objects you've saved.</p>
+                  <table cellpadding="0" cellspacing="0">
+                     <tr>
+                        <th class="mode">Property</th>
+                        <th class="modewide">Type</th>
+                        <th>Description</th>
+                     </tr>
+                     <tr>
+                        <td>ClassName</td>
+                        <td>String</td>
+                        <td>The 'type' of data to return - user, score, etc</td>
+                     </tr>
+                     <tr>
+                        <td>WhereData</td>
+                        <td>Dictionary&lt;String, String&gt;</td>
+                        <td>Data to filter by, eg pq.WhereData.FirstName = 'ben'</td>
+                     </tr>
+                     <tr>
+                        <td>Order</td>
+                        <td>String</td>
+                        <td>What field (from Data) to sort by</td>
+                     </tr>
+                     <tr>
+                        <td>Limit</td>
+                        <td>int</td>
+                        <td>Numner of results to return</td>
+                     </tr>
+                  </table>
+                  <h2>Saving / updating an object</h2>
+                  <p>You can save any object you want by creating a PFObject and sending it to Parse.Save.  An object will save if it does not have an ObjectId, if it does then it will update.</p>
+                  <pre><code class="cs">StartCoroutine(SaveParseObject());
+
+IEnumerator SaveParseObject()
+{            
+    var po = new PFObject();
+    po.ClassName = "savedgames";
+    po.Data.Add("Name", "Ben");
+    po.Data.Add("Level", "1");
+    po.Data.Add("Stage", "7");
+
+    yield return StartCoroutine(Playtomic.Parse.Save(po));
+    var response = Playtomic.Parse.GetResponse("Save");
+		
+    if(response.Success)
+    {
+        Debug.Log("Object saved: " + response.PObject.ObjectId);
+    }
+    else
+    {
+        Debug.Log("Object failed to save because of " + response.ErrorCode + ": " + response.ErrorDescription);
+    }
+}
+
+// js
+function SaveParseObject()
+{
+    var po = new PFObject();
+    po.ClassName = "savedgames";
+    po.Data.Add("Name", "Ben");
+    po.Data.Add("Level", "1");
+    po.Data.Add("Stage", "7");
+	
+    yield StartCoroutine(Playtomic.Parse.Save(po));
+    var response = Playtomic.Parse.GetResponse("Save");
+	
+    if(response.Success)
+    {
+        Debug.Log("Object saved: " + response.PObject.ObjectId);
+    }
+    else
+    {
+        Debug.Log("Object failed to save because of " + response.ErrorCode + ": " + response.ErrorDescription);
+    }
+}</code></pre>
+                  <h2>Loading an object</h2>
+                  <p>You can load any object as long as you know it's ClassName and ObjectId (which you might obtain from a PFPointer).</p>
+                  <pre><code class="cs">StartCoroutine(LoadParseObject());
+            
+IEnumerator LoadParseObject()
+{	
+    yield return StartCoroutine(Playtomic.Parse.Load("classname", "objectid"));
+    var response = Playtomic.Parse.GetResponse("Load");
+		
+    if(response.Success)
+    {
+        var po = response.PObject;
+        // do whatever
+            Debug.Log("Object loaded: " + response.PObject.ObjectId);
+    }
+    else
+    {
+        Debug.Log("Object failed to load because of " + response.ErrorCode + ": " + response.ErrorDescription);
+    }
+}
+
+// js
+function LoadParseObject()
+{	
+    yield StartCoroutine(Playtomic.Parse.Load("classname", "objectid"));
+    var response = Playtomic.Parse.GetResponse("Load");
+		
+    if(response.Success)
+    {
+        var po = response.PObject;
+        // do whatever
+        Debug.Log("Object loaded: " + response.PObject.ObjectId);
+    }
+    else
+    {
+        Debug.Log("Object failed to load because of " + response.ErrorCode + ": " + response.ErrorDescription);
+    }
+}</code></pre>
+                  <h2>Finding objects / querying your database</h2>
+                  <p>Using the PFQuery object you can locate data in your database:</p>
+                  <pre><code class="cs">StartCoroutine(FindParseObject());
+            
+IEnumerator FindParseObject()
+{
+    var pq = new PFQuery();
+    pq.ClassName = "savedgames";
+		
+    yield return StartCoroutine(Playtomic.Parse.Find(pq));
+    var response = Playtomic.Parse.GetResponse("Find");
+		
+    if(response.Success)
+    {
+        Debug.Log("Objects found: " + response.PObjects.Count);
+			
+        for(var i=0; i&lt;response.PObjects.Count; i++)
+        Debug.Log(response.PObjects[i].ObjectId);
+    }
+    else
+    {
+        Debug.Log("Object failed to find because of " + response.ErrorCode + ": " + response.ErrorDescription);
+    }
+}
+
+// js
+function FindParseObject()
+{
+    var pq = new PFQuery();
+    pq.ClassName = "savedgames";
+		
+    yield StartCoroutine(Playtomic.Parse.Find(pq));
+    var response = Playtomic.Parse.GetResponse("Find");
+		
+    if(response.Success)
+    {
+        Debug.Log("Objects found: " + response.PObjects.length);
+			
+        for(var i=0; i&lt;response.PObjects.length; i++)
+        Debug.Log(response.PObjects[i].ObjectId);
+    }
+    else
+    {
+        Debug.Log("Object failed to find because of " + response.ErrorCode + ": " + response.ErrorDescription);
+    }   
+}</code></pre>
+                  <h2>Deleting objects</h2>
+                  <p>You can delete an object as long as you know the ClassName and ObjectId.</p>
+                  <pre><code class="cs">StartCoroutine(DeleteParseObject(po));
+            
+IEnumerator DeleteParseObject(PFObject po)
+{
+    yield return StartCoroutine(Playtomic.Parse.Delete(po));
+    var response = Playtomic.Parse.GetResponse("Delete");
+            
+    if(response.Success)
+    {
+        Debug.Log("Deleted object");
+    }
+    else
+    {
+        Debug.Log("Failed to delete: " + response.ErrorMessage);
+    }
+}
+
+// js
+function DeleteParseObject(PFObject po)
+{
+    yield StartCoroutine(Playtomic.Parse.Delete(po));
+    var response = Playtomic.Parse.GetResponse("Delete");
+            
+    if(response.Success)
+    {
+        Debug.Log("Deleted object");
+    }
+    else
+    {
+        Debug.Log("Failed to delete: " + response.ErrorMessage);
+    }
+}</code></pre>
+               </div>
+               <div id="Section2" style="display: none;">
+                  <h1>Level sharing</h1>
+                  <p>The level sharing API provides a way to store and retrieve user-generated content for your game.  It can operate anonymously or authenticated via any 3rd party service you're already using.</p>
+                  <h2>The Response</h2>
+                  <p>All parts of the API that return data to you do it via a response object.  The response object tells you if the request succeeded, why it failed, and contains any data you requested.</p>
+                  <p>For all requests that return data you receive the respones via:</p>
+                  <pre><code class="cs">var response = Playtomic.API_PART.GetResponse("METHOD");</code></pre>
+                  <p>The relevant parts of the Response object for level sharing are:</p>
+                  <table cellpadding="0" cellspacing="0">
+                     <tr>
+                        <th class="mode">Property</th>
+                        <th class="modewide">Type</th>
+                        <th>Description</th>
+                     </tr>
+                     <tr>
+                        <td>Success</td>
+                        <td>Boolean</td>
+                        <td>Tells you whether the request succeeded.</td>
+                     </tr>
+                     <tr>
+                        <td>ErrorCode</td>
+                        <td>int</td>
+                        <td>The numeric reason the error failed (see errorcode tables here in the documentation)</td>
+                     </tr>
+                     <tr>
+                        <td>ErrorDescription</td>
+                        <td>String</td>
+                        <td>The reason the error failed</td>
+                     </tr>
+                     <tr>
+                        <td>Name</td>
+                        <td>String</td>
+                        <td>The name of the level</td>
+                     </tr>
+                     <tr>
+                        <td>NumItems</td>
+                        <td>int</td>
+                        <td>The number of levels if you requested a list</td>
+                     </tr>
+                     <tr>
+                        <td>Levels</td>
+                        <td>Array</td>
+                        <td>Collection of levels if you requested a list</td>
+                     </tr>
+                  </table>
+                  <h2>The PlayerLevel object</h2>
+                  <p>Saving and listing levels uses this class to represent a level.</p>
+                  <table cellpadding="0" cellspacing="0">
+                     <tr>
+                        <th class="mode">Property</th>
+                        <th class="modewide">Type</th>
+                        <th>Description</th>
+                     </tr>
+                     <tr>
+                        <td>PlayerName</td>
+                        <td>String</td>
+                        <td>The name of the player (or "anonymous", "guest", etc), or the name provided by any 3rd party API.</td>
+                     </tr>
+                     <tr>
+                        <td>PlayerId</td>
+                        <td>String</td>
+                        <td>If you're working under a 3rd party API you can include the player's user id</td>
+                     </tr>
+                     <tr>
+                        <td>PlayerSource</td>
+                        <td>String</td>
+                        <td>If you're working under a 3rd party API you can specify which, eg "gamersafe" or "mochicoins"</td>
+                     </tr>
+                     <tr>
+                        <td>Name</td>
+                        <td>String</td>
+                        <td>The name of the level</td>
+                     </tr>
+                     <tr>
+                        <td>Data</td>
+                        <td>String</td>
+                        <td>The data for the level.  You can Base 64 encode a ByteArray to a string if necessary.</td>
+                     </tr>
+                     <tr>
+                        <td>Votes</td>
+                        <td>int</td>
+                        <td>The number of votes the level has</td>
+                     </tr>
+                     <tr>
+                        <td>Score</td>
+                        <td>int</td>
+                        <td>The sum of all votes the level has</td>
+                     </tr>
+                     <tr>
+                        <td>Rating</td>
+                        <td>double</td>
+                        <td>The rating the level has (score / votes)</td>
+                     </tr>
+                     <tr>
+                        <td>SDate</td>
+                        <td>Date</td>
+                        <td>The date of the level, determined automatically by Playtomic</td>
+                     </tr>
+                     <tr>
+                        <td>RDate</td>
+                        <td>String</td>
+                        <td>The relative date of the level eg "7 minutes ago", determined automatically by Playtomic</td>
+                     </tr>
+                     <tr>
+                        <td>CustomData</td>
+                        <td>Dictionary</td>
+                        <td>Any additional data you want to (or have) attached to a level.</td>
+                     </tr>
+                     <tr>
+                        <td>Thumbnail</td>
+                        <td>Func, ret. string</td>
+                        <td>The URL of the thumbnail, unless you generate them from data (recommended)</td>
+                     </tr>
+                     <tr>
+                        <td>Starts</td>
+                        <td>int</td>
+                        <td>The number of times the level has been started</td>
+                     </tr>
+                     <tr>
+                        <td>Wins</td>
+                        <td>int</td>
+                        <td>The number of times the level has been won</td>
+                     </tr>
+                     <tr>
+                        <td>Quits</td>
+                        <td>int</td>
+                        <td>The number of times the level has been quitted</td>
+                     </tr>
+                     <tr>
+                        <td>Retries</td>
+                        <td>int</td>
+                        <td>The number of times the level has been retried</td>
+                     </tr>
+                     <tr>
+                        <td>Flags</td>
+                        <td>int</td>
+                        <td>The number of times the level has been flagged</td>
+                     </tr>
+                  </table>
+                  <h2>Saving levels</h2>
+                  <pre><code class="cs">yield return StartCoroutine(Playtomic.PlayerLevels.Save(level));
+var response = Playtomic.PlayerLevels.GetResponse("Save");</code></pre>
+                  <p>Example saving level:</p>
+                  <pre><code class="cs">// C#
+IEnumerator MySaveFunction()
+{
+	var level = new Playtomic_PlayerLevel();
+	level.Name = this is a level";
+	level.PlayerName = "Ben";
+	level.Data = "Asdfasdfasdfasdf";
+	
+	yield return StartCoroutine(Playtomic.PlayerLevels.Save(level));
+	var response = Playtomic.PlayerLevels.GetResponse("Save");
+	
+	if(response.Success)
+	{
+		Debug.Log("Level saved!");
+	}
+	else
+	{
+		Debug.Log("Level failed to save because of " + response.ErrorCode + ": " + response.ErrorDescription);
+	}
+}
+
+// JS
+function MySaveFunction()
+{
+	var level = new Playtomic_PlayerLevel();
+	level.Name = "this is a level";
+	level.PlayerName = "Ben";
+	level.Data = "Asdfasdfasdfasdf";
+	
+	yield StartCoroutine(Playtomic.PlayerLevels.Save(level));
+	var response = Playtomic.PlayerLevels.GetResponse("Save");
+	
+	if(response.Success)
+	{
+		Debug.Log("Level saved!");
+	}
+	else
+	{
+		Debug.Log("Level failed to save because of " + response.ErrorCode + ": " + response.ErrorDescription);
+	}
+}</code></pre>
+                  <h2>Rating levels</h2>
+                  <p>Levels can be rated 1 - 10 by players.  Rating can be done anonymously with some protection against repeat voting, or bound to PlayerIds if you specify them.</p>
+                  <pre><code class="cs">Playtomic.PlayerLevels.Rate(levelid, rating)</code></pre>
+                  <p>Example rating level:</p>
+                  <pre><code class="cs">// C#
+IEnumerator RateLevel()
+{
+	yield return StartCoroutine(Playtomic.PlayerLevels.Rate("4d8930441ea37f0a34002993", 8));
+	var response = Playtomic.PlayerLevels.GetResponse("Rate");
+	
+	if(response.Success)
+	{
+		Debug.Log("Level rated successfully");
+	}
+	else
+	{
+		Debug.Log("Level rating failed because of " + response.ErrorCode + ": " + response.ErrorDescription);
+	}
+}
+
+// JS
+function RateLevel()
+{
+	yield StartCoroutine(Playtomic.PlayerLevels.Rate("4d8930441ea37f0a34002993", 8));
+	var response = Playtomic.PlayerLevels.GetResponse("Rate");
+	
+	ifresponse.Success)
+	{
+		Debug.Log("Level rated successfully");
+	}
+	else
+	{
+		Debug.Log("Level rating failed because of " + response.ErrorCode + ": " + response.ErrorDescription);
+	}
+}</code></pre>
+                  <h2>Listing levels</h2>
+                  <p>Listing levels can be done by popular or newest,  with optional filtering by date ranges and (not yet implemented: custom data).</p>
+                  <pre><code class="cs">Playtomic.PlayerLevels.List(mode, page, perpage);
+Playtomic.PlayerLevels.List(mode, page, perpage, includedata, includethumbs);
+Playtomic.PlayerLevels.List(mode, page, perpage, includedata, includethumbs, datemin, datemax);</code></pre>
+                  <table cellpadding="0" cellspacing="0">
+                     <tr>
+                        <th class="mode">Parameter</th>
+                        <th class="modewide">Type</th>
+                        <th>Description</th>
+                     </tr>
+                     <tr>
+                        <td>mode</td>
+                        <td>String</td>
+                        <td>popular or newest</td>
+                     </tr>
+                     <tr>
+                        <td>page</td>
+                        <td>int</td>
+                        <td>1, or calculate it with your own pagination</td>
+                     </tr>
+                     <tr>
+                        <td>perpage</td>
+                        <td>int</td>
+                        <td>Number of levels to return per request</td>
+                     </tr>
+                     <tr>
+                        <td>includedata</td>
+                        <td>bool</td>
+                        <td>Return level data with the request, alternatively load level data seperately</td>
+                     </tr>
+                     <tr>
+                        <td>includethumbs</td>
+                        <td>bool</td>
+                        <td>Return thumbnails with the request (not implemented), alternatively load from url</td>
+                     </tr>
+                     <tr>
+                        <td>datemin</td>
+                        <td>DateTime</td>
+                        <td>Minimum date the level was created</td>
+                     </tr>
+                     <tr>
+                        <td>datemax</td>
+                        <td>DateTime</td>
+                        <td>Maximum date the level was created</td>
+                     </tr>
+                  </table>
+                  <p>An example listing levels:</p>
+                  <pre><code class="cs">// C#
+IEnumerator ListLevels()
+{
+	yield return StartCoroutine(Playtomic.PlayerLevels.List("popular", 1, 10));
+	var response = Playtomic.PlayerLevels.GetResponse("List");
+	
+	ifresponse.Success)
+	{
+		Debug.Log("Levels listed successfully: " + response.NumItems + " in total, " + response.Levels.Count + " returned");
+		
+		foreach(var level in response.Levels)
+		{
+			Debug.Log(" - " + level.LevelId + ": " + level.Name);
+		}
+	}
+	else
+	{
+		Debug.Log("Level list failed to load because of " + response.ErrorCode + ": " + response.ErrorDescription);
+	}
+}
+
+// JS
+function ListLevels()
+{
+	yield StartCoroutine(Playtomic.PlayerLevels.List("popular", 1, 10));
+	var response = Playtomic.PlayerLevels.GetResponse("List");
+	
+	if(response.Success)
+	{
+		Debug.Log("Levels listed successfully: " + response.NumItems + " in total, " + response.Levels.Count + " returned");
+		
+		for(var i=0; i&lt;response.Levels.Count; i++)
+		{
+			var level = response.Levels[i];
+			Debug.Log(" - " + level.LevelId + ": " + level.Name);
+		}
+	}
+	else
+	{
+		Debug.Log("Level list failed to load because of " + response.ErrorCode + ": " + response.ErrorDescription);
+	}
+}</code></pre>
+                  <h2>Loading levels</h2>
+                  <p>If you do not include the data when you load lists of levels then you can request it seperately:</p>
+                  <pre><code class="cs">Playtomic.PlayerLevels.Load(levelid);</code></pre>
+                  <p>An example loading a single level</p>
+                  <pre><code class="cs">// C#
+IEnumerator LoadLevel()
+{
+	yield return StartCoroutine(Playtomic.PlayerLevels.Load("xxxxxxxx"));
+	var response = Playtomic.PlayerLevels.GetResponse("Load");
+	
+	if(response.Success)
+	{
+		Debug.Log("Level loaded successfully: ");
+		
+		var level = response.Levels[0];
+		Debug.Log(" - " + level.LevelId + ": " + level.Name + ""\n" + level.Data);
+	}
+	else
+	{
+		Debug.Log("Level failed to load because of " + response.ErrorCode + ": " + response.ErrorDescription);
+	}
+}
+
+// JS
+function LoadLevel()
+{
+	yield StartCoroutine(Playtomic.PlayerLevels.Load("xxxxxxxxxxx"));
+	var response = Playtomic.PlayerLevels.GetResponse("Load");
+	
+	if(response.Success)
+	{
+		Debug.Log("Level loaded successfully: ");
+		
+		var level = response.Levels[0];
+		Debug.Log(" - " + level.LevelId + ": " + level.Name + "\n" + level.Data);
+	}
+	else
+	{
+		Debug.Log("Level failed to load because of " + response.ErrorCode + ": " + response.ErrorDescription);
+	}
+}</code></pre>
+               </div>
+               <div id="Section3" style="display: none;">
+                  <h1>Leaderboards</h1>
+                  <p>The leaderboards API gives you very flexible high and low score leaderboards.  They can be created in your game dynamically or set up in the edit leaderboards page.</p>
+                  <h2>The Response</h2>
+                  <p>All parts of the API that return data to you do it via a response object.  The response object tells you if the request succeeded, why it failed, and contains any data you requested.</p>
+                  <p>For all requests that return data you receive the respones via:</p>
+                  <pre><code class="cs">var response = Playtomic.API_PART.GetResponse("METHOD");</code></pre>
+                  <p>The relevant parts of the Response object for leaderboards are:</p>
+                  <table cellpadding="0" cellspacing="0">
+                     <tr>
+                        <th class="mode">Property</th>
+                        <th class="modewide">Type</th>
+                        <th>Description</th>
+                     </tr>
+                     <tr>
+                        <td>Success</td>
+                        <td>Boolean</td>
+                        <td>Tells you whether the request succeeded.</td>
+                     </tr>
+                     <tr>
+                        <td>ErrorCode</td>
+                        <td>int</td>
+                        <td>The numeric reason the error failed (see errorcode tables here in the documentation)</td>
+                     </tr>
+                     <tr>
+                        <td>ErrorDescription</td>
+                        <td>String</td>
+                        <td>The reason the error failed</td>
+                     </tr>
+                     <tr>
+                        <td>Name</td>
+                        <td>String</td>
+                        <td>The name of the level</td>
+                     </tr>
+                     <tr>
+                        <td>NumItems</td>
+                        <td>int</td>
+                        <td>The number of levels if you requested a list</td>
+                     </tr>
+                     <tr>
+                        <td>Scores</td>
+                        <td>Array</td>
+                        <td>Collection of scores if you requested a list</td>
+                     </tr>
+                  </table>
+                  <h2>The PlayerScore object</h2>
+                  <p>The leaderboards use the PlayerScore object for representing the players' scores.</p>
+                  <table cellpadding="0" cellspacing="0">
+                     <tr>
+                        <th class="mode">Property</th>
+                        <th class="modewide">Type</th>
+                        <th>Description</th>
+                     </tr>
+                     <tr>
+                        <td>Name</td>
+                        <td>String</td>
+                        <td>The player name.  This can be by the player or provided by any 3rd party</td>
+                     </tr>
+                     <tr>
+                        <td>FBUserId</td>
+                        <td>String</td>
+                        <td>If you're working with Facebook scores specify the player's user id</td>
+                     </tr>
+                     <tr>
+                        <td>Points</td>
+                        <td>Number</td>
+                        <td>The player's score</td>
+                     </tr>
+                     <tr>
+                        <td>Rank</td>
+                        <th>int</th>
+                        <td>The player's rank on the leaderboards, determined by the listing options you send</td>
+                     </tr>
+                     <tr>
+                        <td>Website</td>
+                        <td>String</td>
+                        <td>The website the score occurred on, determined automatically by Playtomic</td>
+                     </tr>
+                     <tr>
+                        <td>SDate</td>
+                        <td>Date</td>
+                        <td>The date of the score, determined automatically by Playtomic</td>
+                     </tr>
+                     <tr>
+                        <td>RDate</td>
+                        <td>String</td>
+                        <td>The relative date of the score eg "7 minutes ago", determined automatically by Playtomic</td>
+                     </tr>
+                     <tr>
+                        <td>CustomData</td>
+                        <td>Dictionary</td>
+                        <td>Any additional data you want to (or have) attached to a score, like the level the player reached or what character they used</td>
+                     </tr>
+                  </table>
+                  <h2>Submitting scores</h2>
+                  <p>Score submission is handled by:</p>
+                  <pre><code class="cs">Playtomic.Leaderboards.Save(table, score, highest);
+Playtomic.Leaderboards.Save(table, score, highest, allowduplicates);
+Playtomic.Leaderboards.Save(table, score, highest, allowduplicates, facebook);</code></pre>
+                  <table cellpadding="0" cellspacing="0">
+                     <tr>
+                        <th class="mode">Parameter</th>
+                        <th class="modewide">Type</th>
+                        <th>Description</th>
+                     </tr>
+                     <tr>
+                        <td>score</td>
+                        <td>PlayerScore</td>
+                        <td>An instance of PlayerScore which contains score information</td>
+                     </tr>
+                     <tr>
+                        <td>table</td>
+                        <td>String</td>
+                        <td>The score table to submit to, alphanumeric</td>
+                     </tr>
+                     <tr>
+                        <td>highest</td>
+                        <td>bool</td>
+                        <td>Set the leaderboard mode in case it's the first request and has to be created</td>
+                     </tr>
+                     <tr>
+                        <td>allowduplicates</td>
+                        <td>bool</td>
+                        <td>Allow the same player to submit multiple scores</td>
+                     </tr>
+                     <tr>
+                        <td>facebook</td>
+                        <td>bool</td>
+                        <td>Make this a Facebook score (remember to set the score's FBUserId)</td>
+                     </tr>
+                  </table>
+                  <pre><code class="cs">// C#
+IEnumerator SaveScore()
+{
+	var score = new Playtomic_PlayerScore();
+	score.Name = "Ben";
+	score.Points = 1000000;
+	
+	yield return StartCoroutine(Playtomic.Leaderboards.Save("highscores", score, true));
+	var response = Playtomic.PlayerLevels.GetResponse("Save");
+	
+	if(response.Success)
+	{
+		Debug.Log("Score saved!");
+	}
+	else
+	{
+		Debug.Log("Score failed to save because of " + response.ErrorCode + ": " + response.ErrorDescription);
+	}
+}
+
+// JS
+function SaveScore()
+{
+	var score = new Playtomic_PlayerScore();
+	score.Name = "Ben";
+	score.Points = 1000000;
+	
+	yield StartCoroutine(Playtomic.Leaderboards.Save("highscores", score, true));
+	var response = Playtomic.PlayerLevels.GetResponse("Save");
+	
+	if(response.Success)
+	{
+		Debug.Log("Score saved!");
+	}
+	else
+	{
+		Debug.Log("Score failed to save because of " + response.ErrorCode + ": " + response.ErrorDescription);
+	}
+}</code></pre>
+                  <h2>Showing scores</h2>
+                  <p>Scores are loaded via a simple method that returns an array of PlayerScore objects to your function where you can display the data in your leaderboard.</p>
+                  <pre><code class="cs">Playtomic.Leaderboards.List(table, highest, mode, page, perpage);
+Playtomic.Leaderboards.List(table, highest, mode, page, perpage, customfilters);
+Playtomic.Leaderboards.List(table, highest, mode, page, perpage, customfilters, facebook, friendslist);</code></pre>
+                  <table cellpadding="0" cellspacing="0">
+                     <tr>
+                        <th class="mode">Parameter</th>
+                        <th class="modewide">Type</th>
+                        <th>Description</th>
+                     </tr>
+                     <tr>
+                        <td>table</td>
+                        <td>String</td>
+                        <td>Your leaderboard table name</td>
+                     </tr>
+                     <tr>
+                        <td>highest</td>
+                        <td>bool</td>
+                        <td>If this is the leaderboard needs to be created this will set the mode</td>
+                     </tr>
+                     <tr>
+                        <td>mode</td>
+                        <td>string</td>
+                        <td>
+                           <ul class="list">
+                              <li>last7days</li>
+                              <li>last30days</li>
+                              <li>alltime</li>
+                              <li>today</li>
+                              <li>newest (unranked stream)</li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>page</td>
+                        <td>int</td>
+                        <td>1 or calculate it with your pagination</td>
+                     </tr>
+                     <tr>
+                        <td>perpage</td>
+                        <td>int</td>
+                        <td>Number of scores to return</td>
+                     </tr>
+                     <tr>
+                        <td>customfilters</td>
+                        <td>Dictionary</td>
+                        <td>If you attach custom data to your scores you can filter by it</td>
+                     </tr>
+                     <tr>
+                        <td>facebook</td>
+                        <td>Boolean</td>
+                        <td>Set to true if your game is on Facebook</td>
+                     </tr>
+                     <tr>
+                        <td>friendslist</td>
+                        <td>string[]</td>
+                        <td>Array of friends user ids for Facebook leaderboards, to show scores from you and your friends.</td>
+                     </tr>
+                  </table>
+                  <pre><code class="cs">// C#
+IEnumerator ListScores()
+{
+	yield return StartCoroutine(Playtomic.Leaderboards.List("highscores", true, "alltime", 1, 20));
+	var response = Playtomic.Leaderboards.GetResponse("List");
+	
+	if(response.Success)
+	{
+		Debug.Log("Scores listed successfully: " + response.NumItems + " in total, " + response.Scores.Count + " returned");
+		
+		for(var i=0; i&lt;response.Scores.Count; i++)
+			Debug.Log(response.Scores[i].Name + ": " + response.Scores[i].Points);
+	}
+	else
+	{
+		Debug.Log("Score list failed to load because of " + response.ErrorCode + ": " + response.ErrorDescription);
+	}
+}
+
+// JS
+function ListScores()
+{
+	yield StartCoroutine(Playtomic.Leaderboards.List("highscores", true, "alltime", 1, 20));
+	var response = Playtomic.Leaderboards.GetResponse("List");
+	
+	if(response.Success)
+	{
+		Debug.Log("Scores listed successfully: " + response.NumItems + " in total, " + response.Scores.Count + " returned");
+		
+		for(var i=0; i&lt;response.Scores.Count; i++)
+			Debug.Log(response.Scores[i].Name + ": " + response.Scores[i].Points);
+	}
+	else
+	{
+		Debug.Log("Score list failed to load because of " + response.ErrorCode + ": " + response.ErrorDescription);
+	}
+}</code></pre>
+                  <h2>Save and list</h2>
+                  <p>You can now submit scores and at the same time return the leaderboard page that that score is on.</p>
+                  <p>This combines the Save and List approaches from above:</p>
+                  <pre><code class="cs">Playtomic.Leaderboards.SaveAndList(string table, Playtomic_PlayerScore score, bool highest, string mode, int perpage, bool isglobal)
+    Playtomic.Leaderboards.SaveAndList(string table, Playtomic_PlayerScore score, bool highest, string mode, int perpage, bool isglobal, bool allowduplicates)
+    Playtomic.Leaderboards.SaveAndList(string table, Playtomic_PlayerScore score, bool highest, string mode, int perpage, bool isglobal, bool allowduplicates, bool facebook, Dictionary&lt;String, String&gt; customfilters)</code></pre>
+                  <p>Some important notes:</p>
+                  <ul class="list">
+                     <li>You don't specify a page, you specify the PerPage (default 20) and it will automatically decide hich page to return based on the submitted score's rank.  If you submit the 1187th best score at 30 per page then it will show you page 39, scores #1170 - #1200.</li>
+                     <li>Ranks are returned, so you are not viewing the top N scores you are viewing the top N scores from rank X onwards.</li>
+                  </ul>
+                  <pre><code class="cs">// C#
+var score = new Playtomic_PlayerScore();
+score.Name = "Ben";
+score.Points = 1000000;
+
+IEnumerator SaveAndListScores()
+{
+	yield return StartCoroutine(Playtomic.Leaderboards.SaveAndList(score, "highscores", true, "alltime", 1, 20));
+	var response = Playtomic.Leaderboards.GetResponse("SaveAndList");
+	
+	if(response.Success)
+	{
+		Debug.Log("Scores listed successfully: " + response.NumItems + " in total, " + response.Scores.Count + " returned");
+		
+		for(var i=0; i&lt;response.Scores.Count; i++)
+			Debug.Log(response.Scores[i].Name + ": " + response.Scores[i].Points);
+	}
+	else
+	{
+		Debug.Log("Score failed to save or failed to list because of " + response.ErrorCode + ": " + response.ErrorDescription);
+	}
+}
+
+// JS
+var score = new Playtomic_PlayerScore();
+score.Name = "Ben";
+score.Points = 1000000;
+
+function ListScores()
+{
+	yield StartCoroutine(Playtomic.Leaderboards.SaveAndList(score, "highscores", true, "alltime", 1, 20));
+	var response = Playtomic.Leaderboards.GetResponse("SaveAndList");
+	
+	if(response.Success)
+	{
+		Debug.Log("Scores listed successfully: " + response.NumItems + " in total, " + response.Scores.Count + " returned");
+		
+		for(var i=0; i&lt;response.Scores.Count; i++)
+			Debug.Log(response.Scores[i].Name + ": " + response.Scores[i].Points);
+	}
+	else
+	{
+		Debug.Log("Score failed to save or failed to list because of " + response.ErrorCode + ": " + response.ErrorDescription);
+	}
+}</code></pre>
+                  <h2>Private leaderboards (EXPERIMENTAL NEW FEATURE!)</h2>
+                  <p>You can now provide your players the ability to create their own leaderboard complete with a permalink and shortened URL they can give their friends to compete against each other.</p>
+                  <p>Note:  The permalink is going to append the leaderboard table's id, it should be like "http://site.com/game/?leaderboard=" or http://site.com/game?something=whatever&amp;leaderboard=</p>
+                  <p>Creating a leaderboard is simply:</p>
+                  <pre><code class="cs">Playtomic.Leaderboards.CreatePrivateLeaderboard(name, highest, permalink, callback);</code></pre>
+                  <pre><code class="cs">// C#
+IEnumerator CreateMyLeaderboard()
+{
+	yield return StartCoroutine(Playtomic.Leaderboards.CreatePrivateLeaderboard("leaderboardname", "http://mysponsorsite.com/mygame?leaderboard=", highest));
+	var response = Playtomic.Leaderboards.GetResponse("CreatePrivateLeaderboard");
+	
+	if(response.Success)
+	{
+		Debug.Log("Leaderboard created correctly: ");
+        Debug.Log(response.GetData("Name"));
+        Debug.Log(response.GetData("RealName"));
+        Debug.Log(response.GetData("Permalink"));
+        Debug.Log(response.GetData("Bitly"));
+	}
+	else
+	{
+		Debug.Log("Failed to create leaderboard because of " + response.ErrorCode + ": " + response.ErrorDescription);
+	}
+}
+
+// JS
+
+function CreateMyLeaderboard()
+{
+	yield StartCoroutine(Playtomic.Leaderboards.CreatePrivateLeaderboard("leaderboardname", "http://mysponsorsite.com/mygame?leaderboard=", highest));
+	var response = Playtomic.Leaderboards.GetResponse("CreatePrivateLeaderboard");
+	
+	if(response.Success)
+	{
+		Debug.Log("Leaderboard created correctly: ");
+        Debug.Log(response.GetData("Name"));
+        Debug.Log(response.GetData("RealName"));
+        Debug.Log(response.GetData("Permalink"));
+        Debug.Log(response.GetData("Bitly"));
+	}
+	else
+	{
+		Debug.Log("Score failed to save or failed to list because of " + response.ErrorCode + ": " + response.ErrorDescription);
+	}
+}
+
+function CreateComplete(response)
+{
+    if(response.Success)
+    {
+        Debug.Log(response.Name);
+        Debug.Log(response.Permalink); // full link, eg sponsorwebsite.com/play/my/game?leaderboard=asdfasfasdfasdf
+        Debug.Log(response.Bitly); // bitly link to their leaderboard, eg bitly.com/blabla
+        Debug.Log(response.Highest);
+        Debug.Log(response.RealName); // internally used guaranteed unique name: user_RANDOMSTUFF_the name they provided
+    }
+    else
+    {
+        // leaderboard failed to save because of response.ErrorCode
+    }
+}</code></pre>
+                  <p>When a person visits either the Permalink or the shortened Bitly link you can make them use that leaderboard by:</p>
+                  <pre><code class="cs">var leaderboardid = Leaderboards.GetLeaderboardFromUrl();
+            
+if(leaderboardid != null)
+{
+    Leaderboards.Load(leaderboardid, this.PrivateLeaderboardLoaded);
+}
+
+function PrivateLeaderboardLoaded(response)
+{
+    Debug.Log(response.Name);
+    Debug.Log(response.Permalink);
+    Debug.Log(response.Bitly);
+    Debug.Log(response.Highest);
+    Debug.Log(response.RealName);
+}</code></pre>
+                  <p>When you save scores on a private leaderboard you must use the RealName, not the Name.</p>
+                  <h2>Showing Facebook scores</h2>
+                  <p>This has now been integrated directly with the regular Listing.  Check the facebook and friendslist parameters on the Leaderboards.List above.</p>
+                  <h2>Embedding scores on your website</h2>
+                  <p>Scores are no longer available directly via URL as they expect POST data now.  You will need to use the HTML5 / JavaScript API for showing scores on your web page, or the Flash or other APIs for embedding them in a SWF or other container.</p>
+               </div>
+               <div id="Section4" style="display: none;">
+                  <h1>GameVars</h1>
+                  <p>GameVars let you change the value of key variables in your game any time you want.  They must be configured on the edit GameVars page in advance.</p>
+                  <p>It is called via:</p>
+                  <pre><code class="cs">Playtomic.GameVars.Load();</code></pre>
+                  <h2>Load individually < class="labelt important">premium</></h2>
+                  <p>You can load variables individually, for instance if you are caching the GameVars you can check a 'version' GameVar to decide whether to reload the full collection.</p>
+                  <pre><code class="cs">Playtomic.GameVars.LoadSingle("name");</code></pre>
+                  <pre><code class="cs">// C#
+IEnumerator LoadGameVars()
+{
+	yield return StartCoroutine(Playtomic.GameVars.Load());
+	var response = Playtomic.GameVars.GetResponse("Load");
+
+    // or
+    	yield return StartCoroutine(Playtomic.GameVars.LoadSingle("version"));
+	var response = Playtomic.GameVars.GetResponse("LoadSingle");
+	
+	if(response.Success)
+	{
+		Debug.Log("GameVars are loaded!");
+		
+		foreach(var key in response.Data.Keys)
+		{
+			Debug.Log("GameVar '" + key + "' = '" + response.Data[key]);
+		}
+		
+		// alternatively
+		// response.GetValue("version");
+	}
+	else
+	{
+		Debug.Log("GameVars failed because of " + response.ErrorCode + ": " + response.ErrorDescription);
+	}
+}
+
+// JS
+function LoadGameVars()
+{
+	yield StartCoroutine(Playtomic.GameVars.Load());
+	var response = Playtomic.GameVars.GetResponse("Load");
+	
+	if(response.Success)
+	{
+		Debug.Log("GameVars are loaded!");
+		
+		for(var key in response.Data)
+		{
+			Debug.Log("GameVar " + key + " = " + response.Data[key]);
+		}
+		
+		// alternatively
+		// response.GetValue("varname");
+	}
+	else
+	{
+		Debug.Log("GameVars failed because of " + response.ErrorCode + ": " + response.ErrorDescription);
+	}
+}</code></pre>
+               </div>
+               <div id="Section5" style="display: none;">
+                  <h1>Geolocation</h1>
+                  <p>The GeoIP service identifies which country the player is from, returning their country code and name.</p>
+                  <p>It is called via:</p>
+                  <pre><code class="cs">Playtomic.GeoIP.Lookup();</code></pre>
+                  <pre><code class="cs">// C#
+IEnumerator LoadGeoIP()
+{
+	Debug.Log("Loading GeoIP lookup");
+	yield return StartCoroutine(Playtomic.GeoIP.Lookup());
+	var response = Playtomic.GeoIP.GetResponse("Lookup");
+	
+	if(response.Success)
+	{
+		Debug.Log("Country is: " + response.GetValue("Code") + " - " + response.GetValue("Name"));
+	}
+	else
+	{
+		Debug.Log("Lookup failed because of " + response.ErrorCode + ": " + response.ErrorDescription);
+	}
+}
+
+// JS
+function LoadGeoIP()
+{
+	Debug.Log("Loading GeoIP lookup");
+	yield StartCoroutine(Playtomic.GeoIP.Lookup());
+	var response = Playtomic.GeoIP.GetResponse("Lookup");
+	
+	if(response.Success)
+	{
+		Debug.Log("Country is: " + response.GetValue("Code") + " - " + response.GetValue("Name"));
+	}
+	else
+	{
+		Debug.Log("Lookup failed because of " + response.ErrorCode + ": " + response.ErrorDescription);
+	}
+}</code></pre>
+               </div>
+               <div id="Section6" style="display: none;">
+                  <h1>Data lookup</h1>
+                  <p>Note: You must enable this functionality in each game's settings.  By default it is disabled becaue it can expose your game Playtomic.Data.</p>
+                  <p>The Data class in the API allows you to retrieve any of your game data to display in your game.</p>
+                  <p>Each function for retrieving data takes an optional parameters object for day, month and year, with default values of 0.</p>
+                  <ul class="list">
+                     <li>When day, month and year are specified you will receive data for that specific day.</li>
+                     <li>When month and year are specified you will receive data for that specific month.</li>
+                     <li>When day, month and year are unspecified or 0 then you will receive data for all time.</li>
+                  </ul>
+                  <h2>Views, Plays and Play Time</h2>
+                  <p>The Views, Plays and PlayTime functions returns this data to you for processing:</p>
+                  <pre><code class="cs">Playtomic.Data.Views(); // total
+Playtomic.Data.Views(month, year); // value for month
+Playtomic.Data.Views(day, month, year); // value on day
+Playtomic.Data.Plays();
+Playtomic.Data.Plays(month, year);
+Playtomic.Data.Plays(day, month, year);
+Playtomic.Data.PlayTime();
+Playtomic.Data.PlayTime(month, year);
+Playtomic.Data.PlayTime(day, month, year);</code></pre>
+                  <p>When you perform a Data lookup the values are returned in a dictionary.  These methods have:</p>
+                  <ul class="list">
+                     <li>Value</li>
+                     <li>Day</li>
+                     <li>Month</li>
+                     <li>Year</li>
+                  </ul>
+                  <pre><code class="cs">// C#
+IEnumerator LoadData()
+{
+    yield return StartCoroutine(Playtomic.Data.Views());
+    var response = Playtomic.Data.GetResponse("Views");
+	
+    if(response.Success)
+    {
+        Debug.Log("Data API returned " + response.GetValue("Value"));
+    }
+    else
+    {
+        Debug.Log("Lookup failed because of " + response.ErrorCode + ": " + response.ErrorDescription);
+    }
+}
+
+// JS
+function LoadData()
+{
+    yield StartCoroutine(Playtomic.Data.Views());
+    var response = Playtomic.Data.GetResponse("Views");
+	
+    if(response.Success)
+    {
+        Debug.Log("Data API returned " + response.GetValue("Value"));
+    }
+    else
+    {
+        Debug.Log("Lookup failed because of " + response.ErrorCode + ": " + response.ErrorDescription);
+    }
+}
+</code></pre>
+                  <h2>Custom metrics</h2>
+                  <p>The CustomMetric function returns data about a custom metric to your function, which receives the same parameters as views/plays/play time above.</p>
+                  <pre><code class="cs">Playtomic.Data.CustomMetric(name);
+Playtomic.Data.CustomMetric(name, month, year);
+Playtomic.Data.CustomMetric(name, day, month, year);</code></pre>
+                  <p>Available keys are:</p>
+                  <ul class="list">
+                     <li>Name</li>
+                     <li>Value</li>
+                     <li>Day</li>
+                     <li>Month</li>
+                     <li>Year</li>
+                  </ul>
+                  <h2>Level metrics</h2>
+                  <p>There are three methods for retrieving level metrics.  The functions that receive the data are different from the above examples.</p>
+                  <pre><code class="cs">Playtomic.Data.LevelCounterMetric(name, level);
+Playtomic.Data.LevelRangedmetric(name, level, month, year);
+Playtomic.Data.LevelAverageMetric(name, level, day, month, year);</code></pre>
+                  <p>Available keys are:</p>
+                  <ul class="list">
+                     <li>Name</li>
+                     <li>Level</li>
+                     <li>Value</li>
+                     <li>Day</li>
+                     <li>Month</li>
+                     <li>Year</li>
+                  </ul>
+               </div>
+               <div id="Section7" style="display: none;">
+                  <h1>Error codes</h1>
+                  <p>When a Playtomic service is unreachable or has an error it will return a numeric error code.  This table describes those errors:</p>
+                  <h2>General errors</h2>
+                  <p>These errors may be returned from any service.</p>
+                  <table cellpadding="0" cellspacing="0">
+                     <tr>
+                        <th class="mode">Code</th>
+                        <th>Meaning</th>
+                     </tr>
+                     <tr>
+                        <td>0</td>
+                        <td>No error</td>
+                     </tr>
+                     <tr>
+                        <td>1</td>
+                        <td>General error, this typically means the player is unable to connect to the Playtomic servers</td>
+                     </tr>
+                     <tr>
+                        <td>2</td>
+                        <td>Invalid game credentials.  Make sure you use your SWFId and GUID from the "API" section in the dashboard.</td>
+                     </tr>
+                     <tr>
+                        <td>3</td>
+                        <td>Request timed out.</td>
+                     </tr>
+                     <tr>
+                        <td>4</td>
+                        <td>Invalid request.  This means the request wasn't formed right, probably because the API key wasn't provided or was incorrect.</td>
+                     </tr>
+                  </table>
+                  <h2>GeoIP errors</h2>
+                  <table cellpadding="0" cellspacing="0">
+                     <tr>
+                        <th class="mode">Code</th>
+                        <th>Meaning</th>
+                     </tr>
+                     <tr>
+                        <td>100</td>
+                        <td>GeoIP API has been disabled.  This may occur if your game is faulty or overwhelming the Playtomic servers.</td>
+                     </tr>
+                  </table>
+                  <h2>Leaderboard errors</h2>
+                  <table cellpadding="0" cellspacing="0">
+                     <tr>
+                        <th class="mode">Code</th>
+                        <th>Meaning</th>
+                     </tr>
+                     <tr>
+                        <td>200</td>
+                        <td>Leaderboard API has been disabled.  This may occur if your game is faulty or overwhelming the Playtomic servers.</td>
+                     </tr>
+                     <tr>
+                        <td>201</td>
+                        <td>The source URL or name weren't provided when saving a score.  Make sure the player specifies a name and the game is initialized before anything else using the code in the "Set your game up" section.</td>
+                     </tr>
+                     <tr>
+                        <td>202</td>
+                        <td>Invalid auth key.  You should not see this normally, players might if they tamper with your game.</td>
+                     </tr>
+                     <tr>
+                        <td>203</td>
+                        <td>No Facebook user id on a score specified as a Facebook submission.</td>
+                     </tr>
+                     <tr>
+                        <td>204</td>
+                        <td>Table name wasn't specified for creating a private leaderboard.</td>
+                     </tr>
+                     <tr>
+                        <td>205</td>
+                        <td>Permalink structure wasn't specified:  http://website.com/game/whatever?leaderboard=</td>
+                     </tr>
+                     <tr>
+                        <td>206</td>
+                        <td>Leaderboard id wasn't provided loading a private leaderboard.</td>
+                     </tr>
+                     <tr>
+                        <td>207</td>
+                        <td>Invalid leaderboard id was provided for a private leaderboard.</td>
+                     </tr>
+                     <tr>
+                        <td>208</td>
+                        <td>Player is banned from your leaderboard.</td>
+                     </tr>
+                     <tr>
+                        <td>209</td>
+                        <td>SaveAndList only.  The score was not the player's best score.  You can message the player, highlight their best via the SubmittedOrBest boolean property of scores, or override this by setting allowduplicates to true.</td>
+                     </tr>
+                  </table>
+                  <h2>GameVars errors</h2>
+                  <table cellpadding="0" cellspacing="0">
+                     <tr>
+                        <th class="mode">Code</th>
+                        <th>Meaning</th>
+                     </tr>
+                     <tr>
+                        <td>300</td>
+                        <td>GameVars API has been disabled.  This may occur if your game is faulty or overwhelming the Playtomic servers.</td>
+                     </tr>
+                  </table>
+                  <h2>Level sharing errors</h2>
+                  <table cellpadding="0" cellspacing="0">
+                     <tr>
+                        <th class="mode">Code</th>
+                        <th>Meaning</th>
+                     </tr>
+                     <tr>
+                        <td>400</td>
+                        <td>Level sharing API has been disabled.  This may occur if your game is faulty or overwhelming the Playtomic servers.</td>
+                     </tr>
+                     <tr>
+                        <td>401</td>
+                        <td>Invalid rating value (must be 1 - 10).</td>
+                     </tr>
+                     <tr>
+                        <td>402</td>
+                        <td>Player has already rated that level.</td>
+                     </tr>
+                     <tr>
+                        <td>403</td>
+                        <td>The level name wasn't provided when saving a level.</td>
+                     </tr>
+                     <tr>
+                        <td>404</td>
+                        <td>Invalid image auth.  You should not see this normally, players might if they tamper with your game.</td>
+                     </tr>
+                     <tr>
+                        <td>405</td>
+                        <td>Invalid image auth (again).  You should not see this normally, players might if they tamper with your game.</td>
+                     </tr>
+                     <tr>
+                        <td>406</td>
+                        <td>The level already exists.  This is determined via a hash of the game id, level name, player ip address and name, and source url.</td>
+                     </tr>
+                  </table>
+                  <h2>Data API errors</h2>
+                  <table cellpadding="0" cellspacing="0">
+                     <tr>
+                        <th class="mode">Code</th>
+                        <th>Meaning</th>
+                     </tr>
+                     <tr>
+                        <td>500</td>
+                        <td>Data API has been disabled.  This may occur if the Data API is not enabled for your game, or your game is faulty or overwhelming the Playtomic servers.</td>
+                     </tr>
+                  </table>
+                  <h2>Parse Custom Database errors</h2>
+                  <table cellpadding="0" cellspacing="0">
+                     <tr>
+                        <th class="mode">Code</th>
+                        <th>Meaning</th>
+                     </tr>
+                     <tr>
+                        <td>600</td>
+                        <td>You have not configured your Parse.com database.  Sign up at Parse and then enter your API credentials in your Playtomic dashboard.</td>
+                     </tr>
+                     <tr>
+                        <td>601</td>
+                        <td>No response was returned from Parse.  If you experience this a lot let us know exactly what you're doing so we can sort out a fix for it.</td>
+                     </tr>
+                     <tr>
+                        <td>6021</td>
+                        <td>Parse's servers had an error.</td>
+                     </tr>
+                     <tr>
+                        <td>602101</td>
+                        <td>Object not found.  Make sure you include the classname and objectid and that they are correct.</td>
+                     </tr>
+                     <tr>
+                        <td>602102</td>
+                        <td>Invalid query.  If you think you're doing it right let us know what you're doing and we'll look into it.</td>
+                     </tr>
+                     <tr>
+                        <td>602103</td>
+                        <td>Invalid classname.</td>
+                     </tr>
+                     <tr>
+                        <td>602104</td>
+                        <td>Missing objectid.</td>
+                     </tr>
+                     <tr>
+                        <td>602105</td>
+                        <td>Invalid key name.</td>
+                     </tr>
+                     <tr>
+                        <td>602106</td>
+                        <td>Invalid pointer.</td>
+                     </tr>
+                     <tr>
+                        <td>602107</td>
+                        <td>Invalid JSON.</td>
+                     </tr>
+                     <tr>
+                        <td>602108</td>
+                        <td>Command unavailable.</td>
+                     </tr>
+                  </table>
+               </div>
+            </div>
+            <script type="text/javascript">
+               /* <![CDATA[ */
+               
+               (function () {
+               
+                   function pageSet(n, oncomplete) {
+                       this.pages = [];
+                       this.handles = [];
+                       this.onComplete = oncomplete;
+               
+                       var i;
+               
+                       for (i = 0; i < n; i++) {
+                           this.pages[i] = document.getElementById("Section" + (i + 1));
+                           this.handles[i] = document.getElementById("Section" + (i + 1) + "Handle").getElementsByTagName("a")[0];
+                       }
+               
+                       this.setPage = function (page) {
+                           for (i = this.pages.length - 1; i > -1; i--) {
+                               this.pages[i].style.display = (i + 1 == page ? "" : "none");
+                               this.handles[i].className = (i + 1 == page ? "menulink on" : "menulink");
+                           }
+               
+                           if (this.onComplete != null) {
+                               this.onComplete(n);
+                           }
+                       };
+                   }
+               
+                   window.pages = new pageSet(10);
+               
+                   var loc = document.location.toString();
+               
+                   if (loc.indexOf("#") == -1) {
+                       pages.setPage(9);
+                       return;
+                   }
+               
+                   loc = loc.substring(loc.indexOf("#") + 1);
+               
+                   switch (loc) {
+                       case "Analytics":
+                           pages.setPage(1);
+                           break;
+                       case "LinkTracking":
+                           pages.setPage(7);
+                           break;
+                       case "LevelSharing":
+                           pages.setPage(2);
+                           break;
+                       case "Leaderboards":
+                           pages.setPage(3);
+                           break;
+                       case "GameVars":
+                           pages.setPage(4);
+                           break;
+                       case "Geolocation":
+                           pages.setPage(5);
+                           break;
+                       case "DataLookup":
+                           pages.setPage(8);
+                           break;
+                       case "ErrorCodes":
+                           pages.setPage(6);
+                           break;
+                       case "SettingUp":
+                           pages.setPage(9);
+                           break;
+                       case "Parse":
+                           pages.setPage(10);
+                           break;
+                   }
+               
+               }());
+               
+               /* ]]> */
+            </script>
+         </div>
+      </div>
+      <div id="FooterContainer">
+         <div class="last">
+            <ul>
+               <li>&copy; 2009 - 2013 <a href="/">Playtomic Inc</a> all rights reserved</li>
+               <li><a href="terms.html">Terms of Service</a></li>
+               <li><a href="privacy.html">Privacy Policy</a></li>
+               <li><a href="#">Contact us</a></li>
+               <li><a href="http://twitter.com/playtomic">Twitter</a></li>
+            </ul>
+         </div>
+         <div id="Footer">
+            <div class="section">
+               <h5>API Documentation:</h5>
+               <ul>
+                  <li><a href="api/ios.html" title="iPhone Game Analytics">iPhone</a></li>
+                  <li><a href="api/unity.html" title="Unity3d Game Analytics">Unity3d</a></li>
+                  <li><a href="api/as3.html" title="Flash ActionScript 3 Game Analytics">AS3</a></li>
+                  <li><a href="api/as2.html" title="Flash ActionScript 2 Game Analytics">AS2</a></li>
+                  <li><a href="api/html5.html" title="HTML5 Game Analytics">HTML5</a></li>
+                  <li><a href="api/cpp.html" title="C++ Game Analytics">C++</a></li>
+                  <li><a href="api/android.html" title="Android Game Analytics">Android</a></li>
+                  <li><a href="api/monoandroid.html" title="Mono for Android Game Analytics">Mono/Android</a></li>
+                  <li><a href="api/java.html" title="Java Game Analytics">Java</a></li>
+                  <li><a href="api/dataexporting.html">Data Exporting</a></li>
+               </ul>
+            </div>
+            <div class="section">
+               <h5>Website:</h5>
+               <ul>
+                  <li><a href="/">Home</a></li>
+                  <!--<li><a href="/jobs">Jobs</a></li>-->
+                  <li><a href="/features.html">Features</a></li>
+                  <li><a href="/iphone-analytics.html">iPhone Analytics</a></li>
+                  <li><a href="/mobile-analytics.html">Mobile Analytics</a></li>
+                  <li><a href="#">Register</a></li>
+                  <li><a href="#">Contact</a></li>
+                  <li><a href="#">Block Playtomic</a></li>
+               </ul>
+            </div>
+            <div class="section">
+               <h5>Games:</h5>
+               <ul>
+                  <li><a href="#">Game Charts</a></li>
+                  <li><a href="#">Game Catalog</a></li>
+                  <li><a href="#">Flash Game Distribution</a></li>
+               </ul>
+            </div>
+            <!--<div class="section">
+               <h5>Community:</h5>
+               <ul>
+               	<li><a href="/community">Forums</a></li>
+                   <li><a href="/community/general">General</a></li>
+                   <li><a href="/community/suggestions">Suggestions</a></li>
+                   <li><a href="/issues">Issue Tracker</a></li>
+               </ul>
+               
+               </div>-->
+            <div class="section">
+               <h5>Blog:</h5>
+               <ul>
+                  <li><a href="#">Latest posts</a></li>
+                  <li><a href="#">Archive</a></li>
+                  <li>Recent post:  <a href="#">Four ways to keep players in love with your game using Playtomic</a></li>
+               </ul>
+            </div>
+            <div class="section">
+               <h5>Friends:</h5>
+               <ul>
+                  <li><a href="http://armorgames.com/">Armor Games</a></li>
+                  <li><a href="http://mochimedia.com/">Mochi Media</a></li>
+                  <li><a href="http://www.youdagames.com/">Youdagames</a></li>
+                  <li><a href="http://fgl.com/">FGL</a></li>
+                  <li><a href="http://mongohq.com/">MongoHQ</a></li>
+                  <li><a href="http://parse.com/">Parse</a></li>
+                  <li><a href="http://newrelic.com/">New Relic</a></li>
+                  <li><a href="http://www.softlayer.com/">Softlayer</a></li>
+                  <li><a href="http://www.minimonstermedia.com">Mini Monster Media</a></li>
+               </ul>
+            </div>
+            <div class="section secondlast">
+               <h5>Attribution:</h5>
+               <ul>
+                  <li>
+                     Background by 
+                     <div class="subtle" xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/" about="http://subtlepatterns.com/">
+                        <span property="dct:title">Subtle Patterns</span>
+                        (<a rel="cc:attributionURL" property="cc:attributionName" href="http://subtlepatterns.com">Subtle Patterns</a>) /
+                        <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a>
+                     </div>
+                  </li>
+                  <li>Icons include works from <a href="http://famfamfam.com/">FamFamFam</a></li>
+               </ul>
+            </div>
+         </div>
+      </div>
+      <div id="Overlay"></div>
+      <div id="LightBox" style="height: 300px;">
+         <div class="goodbye">
+            <h2>Goodbye</h2>
+            <p>Friends, Playtomic has come to an end.  Part of this service will live on at <a href="http://playtomic.org/">Playtomic.org</a> as a 
+               self-hosted, open source platform I am continuing to develop in my spare time.  The rest is unfortunately finished.
+            </p>
+            <p><a href="http://cr.linkedin.com/pub/ben-lowry/2a/537/a8">Ben</a></p>
+         </div>
+      </div>
+      <link rel="stylesheet" href="/api/styles/default.css" />
+      <script src="/api/highlight.pack.js"></script>
+      <script type="text/javascript">
+         /* <![CDATA[ */
+             
+         (function () {
+                 
+             // altenating table rows
+             var tables = document.getElementsByTagName("table");
+             var i;
+         
+             for (i = 0; i < tables.length; i++) {
+                 var rows = tables[i].getElementsByTagName("tr");
+         
+                 for (var j = 0; j < rows.length; j++) {
+                     rows[j].className = j % 2 == 0 ? "alt" : "";
+                 }
+             }
+         
+             // sign in or up
+             if (document.getElementById("ctl00_UserMenu")) {
+                 document.getElementById("SiteMenu").style.display = "none";
+             }
+             
+             if (document.getElementById("TopBarGuestMenu")) {
+                 document.getElementById("TopBarGuestMenu").style.display = "none";
+             }
+             
+             // api menu
+             var menulinks = document.getElementById("APIMenu").getElementsByTagName("a");
+             var ploc = document.location.toString();
+                 
+             for (i = menulinks.length - 1; i > -1; i--) {
+                     
+                 if(ploc.indexOf(menulinks[i].href) > -1) {
+                     menulinks[i].className += " on";
+                     break;
+                 }
+             }
+             
+             // site menu
+             menulinks = document.getElementById("TopBar").getElementsByTagName("a");
+         
+             for (i = menulinks.length - 1; i > -1; i--) {
+         
+                 if (ploc.indexOf(menulinks[i].href) > -1) {
+                     menulinks[i].className += " on";
+                     break;
+                 }
+             }
+             
+             // pretty code
+            hljs.initHighlightingOnLoad();
+         
+         }());
+         
+         /* ]]> */
+      </script>
+      <script type="text/javascript">
+         // LIGHTBOX
+         function d(o) {
+             return document.getElementById(o);
+         }
+         function LightBox() {
+             var pageSize = getPageSize();
+             var overlay = d("Overlay");
+             overlay.style.height = pageSize[1] + "px";
+             overlay.style.display = "block";
+             overlay.style.zIndex = "5";
+         
+             var lightbox = d("LightBox");
+             lightbox.style.display = "block";
+             lightbox.style.left = "-10000px";;
+         
+             var pageSize = getPageSize();
+             var top = getPageScroll() + ((pageSize[3] - 300) / 2);
+             var left = ((pageSize[0] - 536) / 2);
+         
+             var lightbox = d("LightBox");
+             lightbox.style.top = (top < 0) ? "0px" : top + "px";
+             lightbox.style.left = (left < 0) ? "0px" : left + "px";
+             lightbox.style.zIndex = "6";
+         }
+         
+         
+         function getPageScroll() {
+             var yScroll;
+         
+             if (self.pageYOffset)
+                 yScroll = self.pageYOffset;
+             else if (document.documentElement && document.documentElement.scrollTop)
+                 yScroll = document.documentElement.scrollTop;
+             else if (document.body)
+                 yScroll = document.body.scrollTop;
+         
+             return yScroll;
+         }
+         
+         function getPageSize() {
+             var xScroll, yScroll;
+         
+             if (window.innerHeight && window.scrollMaxY) {
+                 xScroll = document.body.scrollWidth;
+                 yScroll = window.innerHeight + window.scrollMaxY;
+             }
+             else if (document.body.scrollHeight > document.body.offsetHeight) {
+                 xScroll = document.body.scrollWidth;
+                 yScroll = document.body.scrollHeight;
+             }
+             else {
+                 xScroll = document.body.offsetWidth;
+                 yScroll = document.body.offsetHeight;
+             }
+         
+             var windowWidth, windowHeight;
+             if (self.innerHeight) {
+                 windowWidth = self.innerWidth;
+                 windowHeight = self.innerHeight;
+             }
+             else if (document.documentElement && document.documentElement.clientHeight) {
+                 windowWidth = document.documentElement.clientWidth;
+                 windowHeight = document.documentElement.clientHeight;
+             }
+             else if (document.body) {
+                 windowWidth = document.body.clientWidth;
+                 windowHeight = document.body.clientHeight;
+             }
+         
+             var pageHeight = (yScroll < windowHeight ? windowHeight : yScroll);
+             var pageWidth = (xScroll < windowWidth ? windowWidth : xScroll);
+             return new Array(pageWidth, pageHeight, windowWidth, windowHeight);
+         }
+         
+         LightBox();
+      </script>
+   </body>
+</html>

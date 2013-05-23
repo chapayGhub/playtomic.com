@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <title>Game analytics and services for iPhone, Android, mobile, web and downloadable games | Playtomic Game Analytics</title>
+      <meta name="description" content="Game analytics for Flash, HTML5, iPhone, iPod, iPad and Unity casual and social games with powerful leaderboards, level sharing and game distribution."/>
+      <meta name="keywords" content="iphone analytics, ipod analytics, ipad analytics, unity analytics, html5 analytics, game analytics, analytics for games, flurry alternative" />
+      <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+      <link rel="stylesheet" href="website.css" />
+      <link rel="icon" href="favicon.ico" type="image/icon" />
+      <style>
+         .goodbye {margin: 10px 0; padding: 10px;background-color: #222;border: 4px solid #333;}
+         .goodbye p { color: #EEE;margin-bottom: 12px;font-size: 15px;line-height: 24px !important; }
+         .goodbye a { font-size: 15px !important;color: #FFF; }
+         .goodbye h2 { font-size: 18px;color: #FFF; margin: 0px 0px 4px 0px}
+         .goodbye a.btn { text-decoration: none !important;padding: 4px; }
+         .goodbye input { padding: 4px; }
+         .goodbye form { margin-bottom: 12px;}
+         .goodbye hr { margin: 12px !important; }
+      </style>
+   </head>
+   <body>
+      <div id="TopBarContainer">
+         <div id="TopBar">
+            <div id="SiteBar">
+               <ul>
+                  <li><a title="Playtomic" href="http://playtomic.com/">Website</a></li>
+                  <li><a title="API Documentation" href="api.html">API Docs</a></li>
+                  <li><a title="Blog" href="#">Blog</a></li>
+                  <li><a href="#">Community</a></li>
+                  <li><a href="#">Jobs</a></li>
+                  <li><a title="Game distribution" href="#">Games</a></li>
+                  <li class="last"><a href="http://twitter.com/playtomic">Twitter</a></li>
+               </ul>
+            </div>
+         </div>
+      </div>
+      <div id="Container">
+         <div id="Header">
+            <a id="Logo" href="/"><span title="Playtomic - Game analytics and tools for iPhone, iPod, iPad, Flash, HTML5 and Unity games"></span></a>
+            <ul id="SiteMenu">
+               <!--<li class="right">
+                  <a href="register" class="btn btn-green">Create an account</a>
+                  <a href="signin" class="btn">Sign in</a>
+                  </li>-->
+               <li><a href="">Home</a></li>
+               <li><a href="features.html">Features</a></li>
+               <li><a href="#">Premium</a></li>
+               <li><a href="#">Contact</a></li>
+               <li><a href="api.html">API Docs</a></li>
+            </ul>
+         </div>
+         <div id="Page">
+            <div class="carousel">
+               <div id="ca-container" class="ca-container" style="height: 400px; overflow: hidden;">
+                  <div class="ca-nav">
+                  </div>
+                  <div class="ca-wrapper">
+                     <!--<div class="ca-item">
+                        <div class="ca-item-main" style="background:url(images/banners/carousel.jpg) no-repeat;background-size:100%;">
+                            <div style="float: right; margin: 40px 40px 0px 0px; width: 450px;">
+                                <h2>Premium Plans have Landed!</h2>
+                                <p style="margin-bottom: 12px;">Check out our new <a style="color: #07C;" href="pricing">premium plans</a> - more features like APIs for exporting data, direct support from our team and enhanced reporting!</p>
+                                <a class="btn btn-large btn-primary" href="register" style="float: left; margin-top: 10px;">Try Playtomic</a>
+                                <a class="btn btn-large" href="pricing" style="float: left; margin-top: 10px; color: #666 !important; margin-left: 10px">See Plans and Pricing</a>
+                            </div>
+                        </div>
+                        </div>-->
+                     <div class="ca-item">
+                        <div class="ca-item-main" style="background:url(images/banners/carousel.jpg) no-repeat;background-size:100%;">
+                           <div style="float: right; margin: 40px 40px 0px 0px; width: 450px;">
+                              <h1>Game analytics<br />for every platform</h1>
+                              <p style="margin-bottom: 12px;">Playtomic lets you effortlessly track and analyze player behavior across all gaming platforms and make your game better. For free.</p>
+                              <p>Check out our case studies from <a style="color: #07C;" href="youda-games.html">Youdagames</a>, <a style="color: #07C;" href="ironhide-game-studio.html">IronHide Games</a> and <a style="color: #07C;" href="zombie-minesweeper.html">Frogtoss</a> to see how they enhance their games.</p>
+                              <a class="btn btn-large btn-primary" href="#" style="float: left; margin-top: 10px;">Sign up for FREE!</a>
+                              <a class="btn btn-large" href="#" style="float: left; margin-top: 10px; color: #666 !important; margin-left: 10px">See Plans and Pricing</a>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="ca-item">
+                        <div class="ca-item-main" style="background:url(images/banners/carousel.jpg) no-repeat 0px -400px;background-size:100%;">
+                           <div style="float: left; margin: 30px 0px 0px 56px; width: 360px;">
+                              <h2>Youdagames</h2>
+                              <p><a style="color: #07C;" href="youda-games.html">Find out why</a> Youdagames, the developer of Governor of Poker and many more great games partners with Playtomic.<br /><br />"Playtomic's metrics helps tell if resources in levels are unbalanced. We can prevent cases where the user suddenly gets too many upgrades, making future levels too easy. We would be in the dark if it wasn't for analytics".</p>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="ca-item">
+                        <div class="ca-item-main" style="background:url(images/banners/carousel.jpg) no-repeat 0px -800px; background-size:100%;">
+                           <div style="float: left; margin: 30px 0px 0px 56px; width: 360px;">
+                              <h2 style="color: #FFF; ">All developers</h2>
+                              <p style="color: #FFF;">Game developers of all sizes leverage Playtomic including top indie developer Frogtoss Games, creator of the hit iPhone game <a style="font-size: 20px; color: #FFC;" href="zombie-minesweeper.html">Zombie Minesweeper</a>.</p>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="features">
+               <div class="left">
+                  <h2>Powerful, real time, game analytics</h2>
+                  <p>Playtomic's game analytics is the most sophisticated platform for casual and social games. It is an intelligence tool that offers deep insight into how people play your game and offers actionable data for improving your game and your players' experience.</p>
+                  <h2>Simple APIs</h2>
+                  <p>The Playtomic APIs drop right into your game and are so easy novice developers implement it without hassle. The APIs are available for Flash games using <a href="api/as3.html">ActionScript 3</a> or <a href="api/as2.html">ActionScript 2</a>, for <a href="api/html5.html">HTML5 games</a> using JavaScript (like the awesome <a href="http://impactjs.com/">ImpactJS</a>), for <a href="api/ios.html">iPhone/iPod/iPad games</a> using Objective C, and for web/mobile games built on <a href="api/unity.html">Unity3d</a>, <a href="api/android.html">Android</a> games using Java or C# (Mono for Android), <a href="api/java.html">Java games</a>, and <a href="api/cpp.html">C++ games</a>.</p>
+                  <h2>Massive scalability</h2>
+                  <p>Casual games today get hit by millions of people.  Playtomic is designed and proven to scale - we track hundreds of millions of events every day, and our leaderboards, level sharing and other services are designed to scale no matter how popular your game is.</p>
+                  <h2>Zero branding</h2>
+                  <p>The services provided by Playtomic have no interfaces or branding in your game allowing it to coexist with your sponsor, distributor or other parties in even the biggest hits, and seamless, deep integration of our player services that fit perfectly in your game.</p>
+                  <h2>Custom Databases</h2>
+                  <p>In conjunction with our friends from <a href="https://parse.com/">Parse.com</a> we are able to provide casual game developers with custom databases they can use for anything they want, through ActionScript, HTML5 and Unity (they support iOS and Android themselves).</p>
+               </div>
+               <div class="right">
+                  <img class="platforms" src="images/platforms.jpg" alt="Platforms supported by Playtomic" width="442" height="70" />
+                  <h2>Level sharing</h2>
+                  <p>The Playtomic level sharing API allows you and your players to create, rate, share and play levels within your game.  The level sharing API allows you to include custom data and filter by it providing a highly versatile platform for your game to build on.</p>
+                  <h2>Leaderboards</h2>
+                  <p>Playtomic leaderboards are the most versatile high scores solution that exists.  Leaderboards can be dynamically created within your game and include custom data for scores.  Score lists can be filtered by custom data automatically providing per-level or anything else leaderboards.</p>
+                  <h2>Heatmaps</h2>
+                  <p>Our heatmaps for games <a href="images/screenshots/ss1.png" title="Create stunning heatmaps for your game" onclick="javascript:LightBox(this, 5); return false;">are just insane</a>.  That's the only way to  describe them.  From in your game you send us x/y coordinates, in the dashboard you upload a screenshot and then when we mash them together you get a stunning visualization that can show you areas of interest.</p>
+                  <p>You can also pull our heatmaps down into the Unity3d editor to get an awesome look at what's happening in your game: <a href="http://u3d.as/content/christopher-ellis/heatmap-emitter/2sn">check it out</a>!</p>
+                  <h2>Distribution</h2>
+                  <p>Playtomic offers a distribution service for developers to spread their Flash games.  Publishers can get games for their websites from leading portals and developers automatically via the customizable Playtomic distribution feed, or manually from the catalog.</p>
+               </div>
+               <br class="clearer" />
+               <div>
+                  <a href="http://www.softlayer.com/" style="float: right;"><img src="images/softlayer.png" alt="Softlayer Hosting"/></a>
+                  <a class="btn btn-large btn-primary" href="#" style="float: left; margin-right: 10px;">Register now</a>
+                  <a class="btn btn-large" href="why.html" style="float: left; color: #666 !important;">Learn more about Playtomic</a>
+               </div>
+            </div>
+            <br class="clearer" />
+         </div>
+         <div id="Footer">
+            <div>
+               <h5>API Documentation:</h5>
+               <ul>
+                  <li><a href="api/ios.html" title="iPhone Game Analytics">iPhone</a></li>
+                  <li><a href="api/unity.html" title="Unity3d Game Analytics">Unity3d</a></li>
+                  <li><a href="api/as3.html" title="Flash ActionScript 3 Game Analytics">AS3</a></li>
+                  <li><a href="api/as2.html" title="Flash ActionScript 2 Game Analytics">AS2</a></li>
+                  <li><a href="api/html5.html" title="HTML5 Game Analytics">HTML5</a></li>
+                  <li><a href="api/cpp.html" title="C++ Game Analytics">C++</a></li>
+                  <li><a href="api/android.html" title="Android Game Analytics">Android</a></li>
+                  <li><a href="api/monoandroid.html" title="Mono for Android Game Analytics">Mono/Android</a></li>
+                  <li><a href="api/java.html" title="Java Game Analytics">Java</a></li>
+                  <li><a href="api/dataexporting.html">Data API</a></li>
+               </ul>
+            </div>
+            <div>
+               <h5>Website:</h5>
+               <ul>
+                  <li><a href="">Home</a></li>
+                  <!--<li><a href="jobs">Jobs</a></li>-->
+                  <li><a href="features.html">Features</a></li>
+                  <li><a href="iphone-analytics.html">iPhone Analytics</a></li>
+                  <li><a href="mobile-analytics.html">Mobile Analytics</a></li>
+                  <li><a href="game-analytics.html">Game Analytics</a></li>
+                  <li><a href="#">Advertising</a></li>
+                  <li><a href="#">Register</a></li>
+                  <li><a href="#">Contact</a></li>
+                  <li><a href="#">Block Playtomic</a></li>
+               </ul>
+            </div>
+            <div>
+               <h5>Games:</h5>
+               <ul>
+                  <li><a href="#">Game Charts</a></li>
+                  <li><a href="#">Game Catalog</a></li>
+                  <li><a href="#">Flash Game Distribution</a></li>
+               </ul>
+            </div>
+            <!--<div>
+               <h5>Community:</h5>
+               <ul>
+               <li><a href="/community">Forums</a></li>
+                   <li><a href="/community/general">General</a></li>
+                   <li><a href="/community/suggestions">Suggestions</a></li>
+                   <li><a href="/issues">Issue Tracker</a></li>
+               </ul>
+               
+               </div>-->
+            <div>
+               <h5>Blog:</h5>
+               <ul>
+                  <li><a href="#">Latest posts</a></li>
+                  <li><a href="#">Archive</a></li>
+                  <li>Recent post:  <a href="#">Playtomic Showcase: Analysis of Governor of Poker 2</a></li>
+               </ul>
+            </div>
+            <div>
+               <h5>Friends:</h5>
+               <ul>
+                  <li><a href="http://armorgames.com/">Armor Games</a></li>
+                  <li><a href="http://mochimedia.com/">Mochi Media</a></li>
+                  <li><a href="http://www.youdagames.com/">Youdagames</a></li>
+                  <li><a href="http://fgl.com/">FGL</a></li>
+                  <li><a href="http://mongohq.com/">MongoHQ</a></li>
+                  <li><a href="http://parse.com/">Parse</a></li>
+                  <li><a href="http://newrelic.com/">New Relic</a></li>
+                  <li><a href="http://www.softlayer.com/">Softlayer</a></li>
+                  <li><a href="http://www.minimonstermedia.com">Mini Monster Media</a></li>
+               </ul>
+            </div>
+            <div class="last">
+               <ul>
+                  <li>&copy; 2009 - 2013 <a href="http://playtomic.com/">Playtomic Inc</a> all rights reserved</li>
+                  <li><a href="terms.html">Terms of Service</a></li>
+                  <li><a href="privacy.html">Privacy Policy</a></li>
+                  <li><a href="http://twitter.com/playtomic">Twitter</a></li>
+               </ul>
+            </div>
+         </div>
+         <div id="Overlay"></div>
+         <div id="LightBox" style="height: 300px;">
+            <div class="goodbye">
+               <h2>Goodbye</h2>
+               <p>Friends, Playtomic has come to an end.  Part of this service will live on at <a href="http://playtomic.org/">Playtomic.org</a> as a 
+                  self-hosted, open source platform I am continuing to develop in my spare time.  The rest is unfortunately finished.
+               </p>
+               <p><a href="http://cr.linkedin.com/pub/ben-lowry/2a/537/a8">Ben</a></p>
+            </div>
+         </div>
+      </div>
+      <script type="text/javascript">
+         // LIGHTBOX
+         function d(o) {
+             return document.getElementById(o);
+         }
+         function LightBox() {
+             var pageSize = getPageSize();
+             var overlay = d("Overlay");
+             overlay.style.height = pageSize[1] + "px";
+             overlay.style.display = "block";
+             overlay.style.zIndex = "5";
+         
+             var lightbox = d("LightBox");
+             lightbox.style.display = "block";
+             lightbox.style.left = "-10000px";;
+         
+             var pageSize = getPageSize();
+             var top = getPageScroll() + ((pageSize[3] - 300) / 2);
+             var left = ((pageSize[0] - 536) / 2);
+         
+             var lightbox = d("LightBox");
+             lightbox.style.top = (top < 0) ? "0px" : top + "px";
+             lightbox.style.left = (left < 0) ? "0px" : left + "px";
+             lightbox.style.zIndex = "6";
+         }
+         
+         
+         function getPageScroll() {
+             var yScroll;
+         
+             if (self.pageYOffset)
+                 yScroll = self.pageYOffset;
+             else if (document.documentElement && document.documentElement.scrollTop)
+                 yScroll = document.documentElement.scrollTop;
+             else if (document.body)
+                 yScroll = document.body.scrollTop;
+         
+             return yScroll;
+         }
+         
+         function getPageSize() {
+             var xScroll, yScroll;
+         
+             if (window.innerHeight && window.scrollMaxY) {
+                 xScroll = document.body.scrollWidth;
+                 yScroll = window.innerHeight + window.scrollMaxY;
+             }
+             else if (document.body.scrollHeight > document.body.offsetHeight) {
+                 xScroll = document.body.scrollWidth;
+                 yScroll = document.body.scrollHeight;
+             }
+             else {
+                 xScroll = document.body.offsetWidth;
+                 yScroll = document.body.offsetHeight;
+             }
+         
+             var windowWidth, windowHeight;
+             if (self.innerHeight) {
+                 windowWidth = self.innerWidth;
+                 windowHeight = self.innerHeight;
+             }
+             else if (document.documentElement && document.documentElement.clientHeight) {
+                 windowWidth = document.documentElement.clientWidth;
+                 windowHeight = document.documentElement.clientHeight;
+             }
+             else if (document.body) {
+                 windowWidth = document.body.clientWidth;
+                 windowHeight = document.body.clientHeight;
+             }
+         
+             var pageHeight = (yScroll < windowHeight ? windowHeight : yScroll);
+             var pageWidth = (xScroll < windowWidth ? windowWidth : xScroll);
+             return new Array(pageWidth, pageHeight, windowWidth, windowHeight);
+         }
+         
+         LightBox();
+      </script>
+   </body>
+</html>

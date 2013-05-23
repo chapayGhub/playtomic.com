@@ -1,0 +1,2105 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,medium,bold" title="roboto" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <title>iOS Game Analytics | Playtomic analytics and services for iPhone, iPad and iPod games</title>
+      <meta name="keywords" content="iphone game analytics, ipad game analytics, ipod game analytics, iOS, iOS api, iOS sdk, playtomic iOS, iOS playtomic, iOS analytics, iOS game analytics, game analytics" />
+      <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+      <link rel="icon" href="../favicon.ico" type="image/icon" />
+      <link rel="stylesheet" href="api.css" />
+      <style>
+         .goodbye {margin: 10px 0; padding: 10px;background-color: #222;border: 4px solid #333;}
+         .goodbye p { color: #EEE;margin-bottom: 12px;font-size: 15px;line-height: 24px !important; }
+         .goodbye a { font-size: 15px !important;color: #FFF; }
+         .goodbye h2 { font-size: 18px;color: #FFF; margin: 0px 0px 4px 0px}
+         .goodbye a.btn { text-decoration: none !important;padding: 4px; }
+         .goodbye input { padding: 4px; }
+         .goodbye form { margin-bottom: 12px;}
+         .goodbye hr { margin: 12px !important; }
+         #LightBox { background-color: #333; width: 808px; height: 604px; display: none; position: absolute; z-index: 1001; top: 0px; left: 0px; }
+         #Overlay { background-image: url(../images/overlay.png); display: none; position: absolute; z-index: 1000; top: 0px; left: 0px; width: 100%; height: 100%; }
+      </style>
+   </head>
+   <body>
+      <div id="TopBarContainer">
+         <div id="TopBar">
+            <div id="SiteBar">
+               <ul>
+                  <li><a title="Playtomic" href="http://playtomic.com/">Website</a></li>
+                  <li><a title="API Documentation" href="../api.html">API Docs</a></li>
+                  <li><a title="Issue Center" href="#">Issues</a></li>
+                  <li><a title="Feature Wish List" href="#">Wish List</a></li>
+                  <li><a title="Blog" href="#">Blog</a></li>
+                  <!--<li><a href="#">Community</a></li>
+                     <li><a href="/jobs">Jobs</a></li>-->
+                  <li><a title="Game distribution" href="#">Games</a></li>
+                  <li class="last"><a href="http://twitter.com/playtomic">Twitter</a></li>
+               </ul>
+            </div>
+         </div>
+      </div>
+      <div id="Container">
+         <div id="Header">
+            <a id="Logo" href="/"><span title="Playtomic - Game analytics and tools for iPhone, iPod, iPad, Flash, HTML5 and Unity games"></span></a>
+         </div>
+         <div id="APIMenu">
+            <div>
+               <ul>
+                  <li><a class="menulink" href="../api.html">API Home</a></li>
+                  <li><a class="menulink" href="api/dataexporting.html">Data Exporting</a></li>
+                  <li><a class="menulink" href="http://playtomic.org/api/unity3d.html">Unity3d</a></li>
+                  <li><a class="menulink" href="http://playtomic.org/api/html5.html">HTML5</a></li>
+                  <li><a class="menulink" href="http://playtomic.org/api/ios.html">iOS / Objective C</a></li>
+                  <li><a class="menulink" href="http://playtomic.org/api/as3.html">Flash / AS3</a></li>
+                  <li><a class="menulink" href="api/as2.html">Flash / AS2</a></li>
+                  <li><a class="menulink" href="api/cpp.html">C++</a></li>
+                  <li><a class="menulink" href="http://playtomic.org/api/android.html">Android / Java</a></li>
+                  <li><a class="menulink" href="http://playtomic.org/api/csharp.html">Android / Mono</a></li>
+                  <li><a class="menulink" href="api/java.html">Java</a></li>
+               </ul>
+            </div>
+         </div>
+         <div id="APIHeading">
+            <h1>iOS Objective C API Documentation</h1>
+         </div>
+         <div id="Content">
+            <div id="APILeft">
+               <ul>
+                  <li id="Section9Handle"><a class="menulink" href="#SettingUp" onclick="javascript:pages.setPage(9);">Setting up</a></li>
+                  <li id="Section1Handle"><a class="menulink" href="http://lvlboost.com/">Analytics</a></li>
+                  <li id="Section7Handle"><a class="menulink" href="#LinkTracking" onclick="javascript:pages.setPage(7);">Link tracking</a></li>
+                  <li id="Section2Handle"><a class="menulink" href="http://playtomic.org/api/ios.html#playerlevels">Level sharing</a></li>
+                  <li id="Section3Handle"><a class="menulink" href="http://playtomic.org/api/ios.html#leaderboards">Leaderboards</a></li>
+                  <li id="Section4Handle"><a class="menulink" href="http://playtomic.org/api/ios.html#gamevars">GameVars</a></li>
+                  <li id="Section5Handle"><a class="menulink" href="http://playtomic.org/api/ios.html#geoip">Geolocation</a></li>
+                  <li id="Section8Handle"><a class="menulink" href="#DataLookup" onclick="javascript:pages.setPage(8);">Data lookup</a></li>
+                  <li id="Section10Handle"><a class="menulink" href="#Parse" onclick="javascript:pages.setPage(10);">Parse Database</a></li>
+                  <li id="Section6Handle"><a class="menulink" href="#ErrorCodes" onclick="javascript:pages.setPage(6);">Error codes</a></li>
+               </ul>
+            </div>
+            <div id="APIRight">
+               <div id="Section9">
+                  <h1>Setting up the iOS API</h1>
+                  <p><a class="btn primary" href="http://github.com/playtomic/gameapi-ios/zipball/master">Download</a>
+                     <a class="btn primary" href="http://github.com/playtomic/gameapi-ios">Browse on Github</a>
+                  </p>
+                  <p>Copy the Playtomic folder and everything in it to your game's folder.</p>
+                  <p>Add these frameworks to your game by clicking the project, then selecting the target -&gt; build phases -&gt; expanding Link Binary with Libraries.</p>
+                  <ul class="list">
+                     <li>libz.1.2.3.dylib (for iOS 4.x)</li>
+                     <li>libz.1.2.5.dylib (for iOS 5.x)</li>
+                     <li>CFNetwork.framework</li>
+                     <li>MobileCoreServices.framework</li>
+                     <li>SystemConfiguration.framework</li>
+                  </ul>
+                  <h2>Initialize the API and log the view</h2>
+                  <p>Before you do anything else you must initialize the API using your credentials from the dashboard. 
+                     Once you have done that, you can log the view when the player opens your game or resumes it.
+                  </p>
+                  <pre><code class="objectivec">// Get your credentials from the Playtomic dashboard (add or select game then go to API page)
+[[Playtomic alloc] initWithGameId:gameid andGUID:@"guid" andAPIKey: @"apikey"]; 
+[[Playtomic Log] view];</code></pre>
+                  <h2>SSL (https)</h2>
+                  <p>Premium users can use SSL for all API communication by calling this method <em>before</em> logging the view:</p>
+                  <pre><code class="objectivec">[Playtomic setSSL];</code></pre>
+                  <h2>ARC users</h2>
+                  <p>If you are using the ARC mode for your project you need to use the playtomic framework.</p>
+                  <p>Please download the <a href="#">precompiled version</a></p>
+                  <p>If you are compiling from github, you will need to:</p>
+                  <p>1) Compile LibPlaytomic project (Inside the Playtomic folder with all the Playtomic API source files)</p>
+                  <p>2) Drag and drop the framework from the build folder to your project.</p>
+                  <p>Also since you are using ARC you need to keep the pointer to the Playtomic instance you create.</p>
+               </div>
+               <div id="Section1" style="display: none;">
+                  <h1>Analytics</h1>
+                  <h2>Views / sessions</h2>
+                  <p>A view occurs whenever somebody views your game. This should go somewhere very early in your code, like before the pre-loader.</p>
+                  <pre><code class="objectivec">[[Playtomic Log] view];</code></pre>
+                  <span style="color: #666; font-size: 10px;">Note: We are currently changing the naming to Sessions as it is more appropriate today.  Changes will be applied in next API version.</span>
+                  <h2>Plays / Engages</h2>
+                  <p>This occurs wherever you feel a player has become engaged in your game.  It's subjective, previously we recommended putting it on the play button but that is less suitable in a mobile environment so you should use this at some point early in your game where you feel a player has decided to really play your game rather than open it.</p>
+                  <span style="color: #666; font-size: 10px;">Note: We are currently changing the naming to Engages.  Changes will be applied in next API version.</span>
+                  <h2>Play time, countries and devices</h2>
+                  <p>This data is logged automatically when you send other events.</p>
+                  <pre><code class="objectivec">-(void) startedGame
+{
+    [[Playtomic Log] play];
+            
+    // continue starting game
+    ...</code></pre>
+                  <h2>Freezing, unfreezing and force-sending events</h2>
+                  <p>Note:  This is inherited from the Flash version which runs on a single thread, and is unlikely to be necessary in iOS games.</p>
+                  <p>Events are sent in batches each time the play timer updates (every 30 seconds after the first minute).  If you want to ensure an event gets sent:</p>
+                  <pre><code class="objectivec">[[Playtomic Log] forceSend];</code></pre>
+                  <p>Some games are very resource-intensive and the API might send off a batch of events at exactly the wrong time.  You can freeze and unfreeze the logging at any time by:</p>
+                  <pre><code class="objectivec">[[Playtomic Log] freeze];
+[[Playtomic Log] unfreeze];</code></pre>
+                  <p>When logging is frozen all events are queued but not sent until you unfreeze the API.</p>
+                  <p>You must add a call to freeze in the method <b>applicationWillResignActive</b> of your <b>UIApplicationDelegate</b> to 
+                     let the Playtomic API stop the timer when your application is becoming inactive and consequently you must add
+                     a call to unfreeze in the method <b>applicationDidBecomeActive</b> to let the Playtomic API restart the timer.
+                  <pre><code class="objectivec">- (void)applicationWillResignActive:(UIApplication *)application
+{
+    /*
+        Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
+        Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+        */
+    
+    // we must freeze Playtomic before get suspended
+        [[Playtomic Log] freeze];
+}
+
+- (void)applicationDidBecomeActive:(UIApplication *)application
+{
+    /*
+        Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        */
+
+    // we must unfreeze Playtomic after became active 
+        [[Playtomic Log] unfreeze];
+}
+</code></pre>
+                  <h2>Offline logging </h2>
+                  <p>When a connection to internet is not active all log are saved to be sent later. 
+                     The maximum size of this cache is 1 MB. You can change this to a lower value
+                     using the method setOfflineQueueMaxSizeInKbytes.
+                  </p>
+                  <pre><code class="objectivec">+ (void)setOfflineQueueMaxSizeInKbytes:(NSInteger)size;</code></pre>
+                  <p>This cache persists even when your game is closed. The log will be sent the next time your game runs and 
+                     internet is active.
+                  </p>
+                  <h2>Custom metrics</h2>
+                  <p>Custom metrics allow you to track how many people do something in your game. For instance, how many play on easy, medium or hard, or how many play in English vs. Spanish, or how many view the tutorial or skip it.  Anything you think can help you improve your game can be defined in custom metrics.</p>
+                  <p>You can define custom metrics directly in your game and they will be added to Playtomic automatically.  Groups can be automatically assigned via an optional second parameter or set up later in the dashboard.</p>
+                  <p>You can also limit custom metrics to unique-per-view occurances with a third parameter.</p>
+                  <pre><code class="objectivec">[[Playtomic Log] customMetricName:@"ViewedCredits" andGroup:nil andUnique:NO]; // metric, names must be alphanumeric
+[[Playtomic Log] customMetricName:@"Credits" andGroup:@"Screens" andUnique:NO]; // metric in a group, groups must be alphanumeric
+[[Playtomic Log] customMetricName:@"ClickedLink" andGroup:@"Links" andUnique:NO]; // unique metric with group</code></pre>
+                  <h2>Level metrics</h2>
+                  <p>Level metrics track events on a per-level basis so you can drill down into your difficulty and retention by identifying which levels have problems and what those problems are.</p>
+                  <p>There are three types of level metrics - counters (like custom metrics), ranged-value and average-value.</p>
+                  <p>Note that you can pass either an integer level number or a string name of the level.  If your game is not using numeric levels (eg an escape game) then you would pass the name of each screen / area as a level.</p>
+                  <p>You can define level metrics directly in your game and they will be added to Playtomic automatically.</p>
+                  <p>Level metrics support unique-per-play occurrances via an optional second parameter.  If the player starts a new game they will be tracked again.</p>
+                  <h2>Counter metrics</h2>
+                  <p>These metrics track how many times something occurs in your levels, for instance deaths and restarts.</p>
+                  <p>One of the most valuable pieces of data you can track is how many people begin each level, this allows you to see where you lose players.</p>
+                  <pre><code class="objectivec">[[Playtomic Log] levelCounterMetricName:@"Began" andLevel:@"named" andUnique:NO]; // level names must be alphanumeric
+[[Playtomic Log] levelCounterMetricName:@"Restarts" andLevelNumber:1 andUnique:NO]; // level numbers are integers</code></pre>
+                  <h2>Average metrics</h2>
+                  <p>These metrics track the average of something in your levels, for instance the average time to finish a level or the average number of retries.  It also tracks the minimum and maximums.</p>
+                  <pre><code class="objectivec">[[Playtomic Log] levelAverageMetricName:@"name" andLevel:@"areaname" andValue:100 andUnique:NO];
+[[Playtomic Log] levelAverageMetricName:@"name" andLevelNumber:1 andValue:100 andUnique:NO];</code></pre>
+                  <h2>Ranged-value metrics</h2>
+                  <p>These metrics track metrics with values, for instance in a golf game you might track how many shots it takes to complete each level, or you might track the % of coins collected on each level.</p>
+                  <pre><code class="objectivec">[[Playtomic Log] levelRangedMetricName:@"Shots" andLevel:@"field" andTrackValue:10 andUnique:NO];
+[[Playtomic Log] levelRangedMetricName:@"PercentCoinsCollected" andLevelNumber:1 andTrackValue:78 andUnique:NO];</code></pre>
+                  <h2>Heatmaps</h2>
+                  <p>Heatmaps allow you to map activity (clicks, deaths, first deaths, or anything else you want) against an image you upload in the dashboard.</p>
+                  <pre><code class="objectivec">[[Playtomic Log] heatmapName:@"metric" andGroup:@"heatmap" andX:10 andY:50];</code></pre>
+                  <p>In the dashboard you upload a background image for the heatmap, and then it is shared by any metrics using it.</p>
+               </div>
+               <div id="Section7" style="display: none;">
+                  <h1>Link tracking</h1>
+                  <p>Link tracking allows you to keep track of how many people open URLs in your game, providing you information on unique and total clicks that can be fully audited to allow you to identify good sources of traffic.</p>
+                  <p>Link tracking does not change your URL or redirect traffic through a different url!</p>
+                  <h2>How to track a link</h2>
+                  <p>You track a link just by passing a URL and some other information to the API.</p>
+                  <pre><code class="objectivec">[[Playtomic Link] trackUrl:(NSString*)url andName:(NSString*)name andGroup:(NSString*)group];</code></pre>
+                  <pre><code class="objectivec">[[Playtomic Link] trackUrl:@"http://armorgames.com/" andName:@"armorgames" andGroup:@"sponsor"];</code></pre>
+                  <h2>Domain Totals</h2>
+                  <p>When you track a link it automatically also tracks the totals for the domain in a group it creates called DomainTotals.  The DomainTotals allows you to see how many unique, total and failed clicks occurred for a single domain even if you have multiple, different links to it (eg walkthrough or differently-structured sponsor links).</p>
+               </div>
+               <div id="Section10" style="display: none;">
+                  <a style="display: block; margin-bottom: 10px;" href="https://www.parse.com/users/new?code=playtomic"><img src="/images/parse.png" alt="Parse" width="168" height="51" /></a>
+                  <h2>Parse custom databases</h2>
+                  <p>Objective C users can use <a href="https://www.parse.com/users/new?code=playtomic">Parse</a> directly through their own iOS SDK.</p>
+                  <p>You can do pretty much anything you want with a custom database, including:</p>
+                  <ul class="list">
+                     <li>User registration</li>
+                     <li>Mailing list (and send through <a href="http://mailchimp.com/">MailChimp</a>)</li>
+                     <li>Saved games</li>
+                     <li>Surveys &amp; feedback</li>
+                     <li>Messaging</li>
+                     <li>etc</li>
+                  </ul>
+               </div>
+               <div id="Section2" style="display: none;">
+                  <h1>Level sharing</h1>
+                  <p>The level sharing API provides a way to store and retrieve user-generated content for your game.  It can operate anonymously or authenticated via any 3rd party service you're already using.</p>
+                  <h2>The PlaytomicLevel object</h2>
+                  <p>Saving and listing levels uses this class to represent a level.</p>
+                  <table cellpadding="0" cellspacing="0">
+                     <tr>
+                        <th class="mode">Property</th>
+                        <th class="modewide">Type</th>
+                        <th class="mode">Accessor</th>
+                        <th>Description</th>
+                     </tr>
+                     <tr>
+                        <td>playerName</td>
+                        <td>NSString</td>
+                        <td>getPlayerName</td>
+                        <td>The name of the player (or "anonymous", "guest", etc), or the name provided by any 3rd party API.</td>
+                     </tr>
+                     <tr>
+                        <td>playerId</td>
+                        <td>NSString</td>
+                        <td>getPlayerId</td>
+                        <td>If you're working under a 3rd party API you can include the player's user id</td>
+                     </tr>
+                     <tr>
+                        <td>playerSource</td>
+                        <td>NSString</td>
+                        <td>getPlayerSource</td>
+                        <td>If you're working under a 3rd party API you can specify which, eg "gamersafe" or "mochicoins"</td>
+                     </tr>
+                     <tr>
+                        <td>name</td>
+                        <td>NSString</td>
+                        <td>getName</td>
+                        <td>The name of the level</td>
+                     </tr>
+                     <tr>
+                        <td>data</td>
+                        <td>NSString</td>
+                        <td>getData</td>
+                        <td>The data for the level.  You can Base 64 encode a ByteArray to a string if necessary.</td>
+                     </tr>
+                     <tr>
+                        <td>votes</td>
+                        <td>NSInteger</td>
+                        <td>getVotes</td>
+                        <td>The number of votes the level has</td>
+                     </tr>
+                     <tr>
+                        <td>score</td>
+                        <td>NSInteger</td>
+                        <td>getScore</td>
+                        <td>The sum of all votes the level has</td>
+                     </tr>
+                     <tr>
+                        <td>plays</td>
+                        <td>NSInteger</td>
+                        <td>getPlays</td>
+                        <td>The number of plays the level has</td>
+                     </tr>
+                     <tr>
+                        <td>rating</td>
+                        <td>NSDecimalNumber</td>
+                        <td>getRating</td>
+                        <td>The rating the level has (score / votes)</td>
+                     </tr>
+                     <tr>
+                        <td>date</td>
+                        <td>NSDate</td>
+                        <td>getDate</td>
+                        <td>The date of the level, determined automatically by Playtomic</td>
+                     </tr>
+                     <tr>
+                        <td>relativeDate</td>
+                        <td>NSString</td>
+                        <td>getRelativeDate</td>
+                        <td>The relative date of the level eg "7 minutes ago", determined automatically by Playtomic</td>
+                     </tr>
+                     <tr>
+                        <td>customData</td>
+                        <td>NSMutableDictionary</td>
+                        <td>getCustomData</td>
+                        <td>Any additional data you want to (or have) attached to a level.</td>
+                     </tr>
+                     <tr>
+                        <td></td>
+                        <td>NSString</td>
+                        <td>getThumbnailUrl</td>
+                        <td>Returns the URL of a thumbnail.</td>
+                     </tr>
+                     <tr>
+                        <td></td>
+                        <td>NSMutableData</td>
+                        <td>getThumbnail</td>
+                        <td>Returns the thumbnail if you included them when listing.</td>
+                     </tr>
+                     <tr>
+                        <td></td>
+                        <td>NSString</td>
+                        <td>getCustomValue</td>
+                        <td>Retrieves a custom property.</td>
+                     </tr>
+                     <tr>
+                        <td></td>
+                        <td>NSString</td>
+                        <td>addCustomValue</td>
+                        <td>Adds a custom property.</td>
+                     </tr>
+                  </table>
+                  <h2>Asynchronous and synchronous methods</h2>
+                  <p>For some methods there are two versions: one synchronous and one asynchronous. We recomend you to use the asynchronous one because it is not 
+                     going to freeze your game while the call is executed. Calling the synchronous version is more easy to code and is there 
+                     for games which are not resource-intensive.
+                  </p>
+                  <p>To call the asynchronous methods the caller must implement the protocol PlaytomicDelegate. All the methods in this protocol are optional so 
+                     you only need to implement the methods you actualy use.
+                  </p>
+                  <h2>Saving levels</h2>
+                  <h3>Asynchronous version</h3>
+                  <pre><code class="objectivec">[[Playtomic PlayerLevels] saveAsyncLevel:level andDelegate:self];</code></pre>
+                  <table cellpadding="0" cellspacing="0">
+                     <tr>
+                        <th class="mode">Parameter</th>
+                        <th class="modewide">Type</th>
+                        <th>Description</th>
+                     </tr>
+                     <tr>
+                        <td>level</td>
+                        <td>PlaytomicLevel</td>
+                        <td>An instance of PlaytomicLevel holding the level data</td>
+                     </tr>
+                     <tr>
+                        <td>delegate</td>
+                        <td>id&lt;PlaytomicDelegate&gt;</td>
+                        <td>A reference to an object which implements the method requestSavePlayerLevelsFinished from the protocol PlaytomicDelgate</td>
+                     </tr>
+                  </table>
+                  <p>To call this method your class must implement the method requestSavePlayerLevelsFinished from the protocol PlaytomicDelegate:</p>
+                  <pre><code class="objectivec">- (void)requestSavePlayerLevelsFinished:(PlaytomicResponse*)response;</code></pre>
+                  <p>Example saving level:</p>
+                  <pre><code class="objectivec">- (void)levelSaveAsync
+{
+    NSLog(@"Level save asynchronous");
+    
+    PlaytomicLevel *level = [[PlaytomicLevel alloc] initWithName:@"level name" 
+                                                    andPlayerName:@"player name" 
+                                                        andPlayerId:0 
+                                                            andData:@"r=-152&amp;i0=13,440,140&amp;i1=24,440,140&amp;i2=25,440,140&amp;i3=37,440,140,ie,37,450,150"];
+    [[Playtomic PlayerLevels] saveAsyncLevel:level andDelegate:self];
+}
+
+// PlaytomicDelegate protocol implementation
+- (void)requestSavePlayerLevelsFinished:(PlaytomicResponse*)response
+{
+    if([response success])
+    {
+        self.levelid = [response getValueForName:@"LevelId"];
+        NSLog(@"Save asynchronous succeeded: %@", levelid);
+    }
+    else
+    {
+        NSLog(@"Save asynchronous failed because of errorcode #%d", [response errorCode]);
+    }
+}</code></pre>
+                  <h3>Synchronous version</h3>
+                  <pre><code class="objectivec">[[Playtomic PlayerLevels] saveLevel:level];</code></pre>
+                  <table cellpadding="0" cellspacing="0">
+                     <tr>
+                        <th class="mode">Parameter</th>
+                        <th class="modewide">Type</th>
+                        <th>Description</th>
+                     </tr>
+                     <tr>
+                        <td>level</td>
+                        <td>PlaytomicLevel</td>
+                        <td>An instance of PlaytomicLevel holding the level data</td>
+                     </tr>
+                  </table>
+                  <p>Example saving level:</p>
+                  <pre><code class="objectivec">PlaytomicLevel *level = [[PlaytomicLevel alloc] initWithName:@"level name" 
+                                                                                 andPlayerName:@"ben" 
+                                                                                   andPlayerId:0 
+                                                                                       andData:@"r=-152&amp;i0=13,440,140&amp;i1=24,440,140&amp;i2=25,440,140&amp;i3=37,440,140"];
+PlaytomicResponse *response = [[Playtomic PlayerLevels] saveLevel:level];
+
+if([response success])
+{
+    NSLog(@"Save succeeded");
+}
+else
+{
+    NSLog(@"Save failed because of errorcode #%d", [response errorCode]);
+}</code></pre>
+                  <h2>Rating levels</h2>
+                  <p>Levels can be rated 1 - 10 by players.  Rating can be done anonymously with some protection against repeat voting, or bound to PlayerIds if you specify them.</p>
+                  <h3>Asynchronous version</h3>
+                  <pre><code class="objectivec">[[Playtomic PlayerLevels] rateAsyncLevelid:levelid andRating:8 andDelegate:self];</code></pre>
+                  <table cellpadding="0" cellspacing="0">
+                     <tr>
+                        <th class="mode">Parameter</th>
+                        <th class="modewide">Type</th>
+                        <th>Description</th>
+                     </tr>
+                     <tr>
+                        <td>levelid</td>
+                        <td>NSString</td>
+                        <td>A level id, which you can retrieve via [level getLevelId]</td>
+                     </tr>
+                     <tr>
+                        <td>rating</td>
+                        <td>NSInteger</td>
+                        <td>1 - 10</td>
+                     </tr>
+                     <tr>
+                        <td>delegate</td>
+                        <td>id&lt;PlaytomicDelegate&gt;</td>
+                        <td>A reference to an object which implements the method requestRatePlayerLevelsFinished from the protocol PlaytomicDelgate</td>
+                     </tr>
+                  </table>
+                  <p>To call this method your class must implement the method requestRatePlayerLevelsFinished from the protocol PlaytomicDelegate:</p>
+                  <pre><code class="objectivec">- (void)requestRatePlayerLevelsFinished:(PlaytomicResponse*)response;</code></pre>
+                  <p>Example rating level:</p>
+                  <pre><code class="objectivec">- (void)levelRateAsync
+{   
+    [[Playtomic PlayerLevels] rateAsyncLevelid:levelid andRating:8 andDelegate:self];
+}
+
+// PlaytomicDelegate protocol implementation
+- (void)requestRatePlayerLevelsFinished:(PlaytomicResponse*)response
+{
+    if([response success])
+    {
+        NSLog(@"Rate asynchronous succeeded");
+    }
+    else
+    {
+        NSLog(@"Rate asynchronous failed because of errorcode #%d", [response errorCode]);
+    }
+}
+</code></pre>
+                  <h3>Synchronous version</h3>
+                  <pre><code class="objectivec">PlaytomicResponse *response = [[Playtomic PlayerLevels] rateLevelid:levelid andRating:id];</code></pre>
+                  <table cellpadding="0" cellspacing="0">
+                     <tr>
+                        <th class="mode">Parameter</th>
+                        <th class="modewide">Type</th>
+                        <th>Description</th>
+                     </tr>
+                     <tr>
+                        <td>levelid</td>
+                        <td>NSString</td>
+                        <td>A level id, which you can retrieve via [level getLevelId]</td>
+                     </tr>
+                     <tr>
+                        <td>rating</td>
+                        <td>NSInteger</td>
+                        <td>1 - 10</td>
+                     </tr>
+                  </table>
+                  <p>Example rating level:</p>
+                  <pre><code class="objectivec">PlaytomicResponse *response = [[Playtomic PlayerLevels] rateLevelid:[level getLevelId] andRating:8];
+    
+if([response success])
+{
+    NSLog(@"Rate succeeded");
+}
+else
+{
+    NSLog(@"Rate failed because of errorcode #%d", [response errorCode]);
+}</code></pre>
+                  <h2>Listing levels</h2>
+                  <p>Listing levels can be done by popular or newest, with optional filtering by date ranges and/or custom Playtomic.Data.</p>
+                  <h3>Asynchronous version</h3>
+                  <pre><code class="objectivec">[[Playtomic PlayerLevels] listModeAsync:@"popular" 
+                                    andPage:1 
+                                 andPerPage:10 
+                             andIncludeData:NO 
+                           andIncludeThumbs:NO 
+                            andCustomFilter:nil 
+                                andDelegate:self];</code></pre>
+                  <pre><code class="objectivec">[[Playtomic PlayerLevels] listAsyncMode:@"popular" 
+                                    andPage:1 
+                                 andPerPage:10 
+                             andIncludeData:NO 
+                          andIncludeThumbs:NO 
+                           andCustomFilter:nil 
+                                andDateMin:fromDate 
+                                andDateMax:toDate 
+                               andDelegate:self];</code></pre>
+                  <table cellpadding="0" cellspacing="0">
+                     <tr>
+                        <th class="mode">Parameter</th>
+                        <th class="modewide">Type</th>
+                        <th>Description</th>
+                     </tr>
+                     <tr>
+                        <td>mode</td>
+                        <td>NSString</td>
+                        <td>popular or newest</td>
+                     </tr>
+                     <tr>
+                        <td>andPage:</td>
+                        <td>NSInteger</td>
+                        <td>1, or determine it yourself</td>
+                     </tr>
+                     <tr>
+                        <td>andPerPage:</td>
+                        <td>NSInteger</td>
+                        <td>Number of levels to return</td>
+                     </tr>
+                     <tr>
+                        <td>andIncludeData</td>
+                        <td>Boolean</td>
+                        <td>Return the level data with the lists.  This lets you go directly into levels without requesting them individually, but if you are displaying a large list there will be less data to transmit without it.</td>
+                     </tr>
+                     <tr>
+                        <td>andIncludeThumbs</td>
+                        <td>Boolean</td>
+                        <td>Returns Base64'd strings of the PNG thumbnails if they're provided.  You may not use thumbnails, or you may generate them directly from the data.</td>
+                     </tr>
+                     <tr>
+                        <td>andCustomFilter</td>
+                        <td>NSDictionary</td>
+                        <td>Filter levels based on custom data you stored with them (eg theme or anything else).</td>
+                     </tr>
+                     <tr>
+                        <td>andDateMin</td>
+                        <td>NSDate</td>
+                        <td>The minimum creation date, eg if you wanted popular levels made this week.</td>
+                     </tr>
+                     <tr>
+                        <td>andDateMax</td>
+                        <td>NSDate</td>
+                        <td>The maximum creation date, eg if you wanted popular levels made last month.</td>
+                     </tr>
+                     <tr>
+                        <td>delegate</td>
+                        <td>id&lt;PlaytomicDelegate&gt;</td>
+                        <td>A reference to an object which implements the method requestListPlayerLevelsFinished from the protocol PlaytomicDelgate</td>
+                     </tr>
+                  </table>
+                  <p>To call this method your class must implement the method requestListPlayerLevelsFinished from the protocol PlaytomicDelegate:</p>
+                  <pre><code class="objectivec">- (void)requestListPlayerLevelsFinished:(PlaytomicResponse*)response;</code></pre>
+                  <p>An example listing levels:</p>
+                  <pre><code class="objectivec">- (void)levelListAsync
+    {
+        NSLog(@"Level list asynchronous");
+    
+        [[Playtomic PlayerLevels] listAsyncMode:@"popular" 
+                                        andPage:1
+                                     andPerPage:10
+                                 andIncludeData:NO 
+                               andIncludeThumbs:NO 
+                                andCustomFilter:nil 
+                                    andDelegate:self];
+    }
+
+    // PlaytomicDelegate protocol implementation
+    - (void)requestListPlayerLevelsFinished:(PlaytomicResponse*)response
+    {
+        if([response success])
+        {
+            NSLog(@"%d levels were returned:", [response getNumResults]);
+        
+            for(PlaytomicLevel *level in [response data])
+            {
+                NSLog(@"%@ by %@ on %@ (%@) with %d votes and %d score and %@ rating and %d plays and levelid %@"
+                                                    , [level getName]
+                                                    , [level getPlayerName]
+                                                    , [level getDate]
+                                                    , [level getRelativeDate]
+                                                    , [level getVotes]
+                                                    , [level getScore]
+                                                    , [level getRating]
+                                                    , [level getPlays]
+                                                    , [level getLevelId]);
+            
+                if([[level getCustomData] count] > 0)
+                {
+                    NSDictionary *data = [level getCustomData];
+                
+                    for(id x in data)
+                    {
+                        NSLog(@" with custom data %@ = %@", x, [data objectForKey:x]);
+                    }
+                }
+            }
+        }
+        else
+        {
+            NSLog(@"Level list asynchronous failed to load because of errorcode #%d", [response errorCode]);
+        }
+    }
+    </code></pre>
+                  <h3>Synchronous version</h3>
+                  <pre><code class="objectivec">PlaytomicResponse *response = [[Playtomic PlayerLevels] listMode:@"popular" 
+                                                             andPage:1 
+                                                          andPerPage:10 
+                                                      andIncludeData:NO 
+                                                    andIncludeThumbs:NO 
+                                                     andCustomFilter:nil];</code></pre>
+                  <pre><code class="objectivec">PlaytomicResponse *response = [[Playtomic PlayerLevels] listMode:@"popular" 
+                                                             andPage:1 
+                                                          andPerPage:10 
+                                                      andIncludeData:NO 
+                                                    andIncludeThumbs:NO 
+                                                     andCustomFilter:nil 
+                                                          andDateMin:fromDate 
+                                                          andDateMax:toDate];</code></pre>
+                  <table cellpadding="0" cellspacing="0">
+                     <tr>
+                        <th class="mode">Parameter</th>
+                        <th class="modewide">Type</th>
+                        <th>Description</th>
+                     </tr>
+                     <tr>
+                        <td>mode</td>
+                        <td>NSString</td>
+                        <td>popular or newest</td>
+                     </tr>
+                     <tr>
+                        <td>andPage:</td>
+                        <td>NSInteger</td>
+                        <td>1, or determine it yourself</td>
+                     </tr>
+                     <tr>
+                        <td>andPerPage:</td>
+                        <td>NSInteger</td>
+                        <td>Number of levels to return</td>
+                     </tr>
+                     <tr>
+                        <td>andIncludeData</td>
+                        <td>Boolean</td>
+                        <td>Return the level data with the lists.  This lets you go directly into levels without requesting them individually, but if you are displaying a large list there will be less data to transmit without it.</td>
+                     </tr>
+                     <tr>
+                        <td>andIncludeThumbs</td>
+                        <td>Boolean</td>
+                        <td>Returns Base64'd strings of the PNG thumbnails if they're provided.  You may not use thumbnails, or you may generate them directly from the data.</td>
+                     </tr>
+                     <tr>
+                        <td>andCustomFilter</td>
+                        <td>NSDictionary</td>
+                        <td>Filter levels based on custom data you stored with them (eg theme or anything else).</td>
+                     </tr>
+                     <tr>
+                        <td>andDateMin</td>
+                        <td>NSDate</td>
+                        <td>The minimum creation date, eg if you wanted popular levels made this week.</td>
+                     </tr>
+                     <tr>
+                        <td>andDateMax</td>
+                        <td>NSDate</td>
+                        <td>The maximum creation date, eg if you wanted popular levels made last month.</td>
+                     </tr>
+                  </table>
+                  <p>An example listing levels:</p>
+                  <pre><code class="objectivec">PlaytomicResponse *response = [[Playtomic PlayerLevels] listMode:@"popular"
+                                                             andPage:1 
+                                                          andPerPage:10 
+                                                      andIncludeData:NO 
+                                                    andIncludeThumbs:NO 
+                                                     andCustomFilter:nil];
+
+    
+if([response success])
+{
+    NSLog(@"%d levels were returned:", [response getNumResults]);
+        
+    for(PlaytomicLevel *level in [response data])
+    {
+        NSLog(@"%@ by %@ on %@ (%@) with %d votes and %d score and %@ rating and %d plays and levelid %@"
+                                        , [level getName]
+                                        , [level getPlayerName]
+                                        , [level getDate]
+                                        , [level getRelativeDate]
+                                        , [level getVotes]
+                                        , [level getScore]
+                                        , [level getRating]
+                                        , [level getPlays]
+                                        , [level getLevelId]);
+            
+        if([[level getCustomData] count] > 0)
+        {
+            NSDictionary *data = [level getCustomData];
+                
+            for(id x in data)
+            {
+                NSLog(@" with custom data %@ = %@", x, [data objectForKey:x]);
+            }
+        }
+    }
+}
+else
+{
+    NSLog(@"Level list failed to load because of errorcode #%d", [response errorCode]);
+}</code></pre>
+                  <h2>Loading levels</h2>
+                  <p>If you do not include the data when you load lists of levels then you can request it seperately:</p>
+                  <h3>Asynchronous version</h3>
+                  <pre><code class="objectivec">[[Playtomic PlayerLevels] loadAsyncLevelid:levelid];</code></pre>
+                  <table cellpadding="0" cellspacing="0">
+                     <tr>
+                        <th class="mode">Parameter</th>
+                        <th class="modewide">Type</th>
+                        <th>Description</th>
+                     </tr>
+                     <tr>
+                        <td>levelid</td>
+                        <td>NSString</td>
+                        <td>[level getLevelId]</td>
+                     </tr>
+                  </table>
+                  <p>To call this method your class must implement the method requestLoadPlayerLevelsFinished from the protocol PlaytomicDelegate:</p>
+                  <pre><code class="objectivec">- (void)requestLoadPlayerLevelsFinished:(PlaytomicResponse*)response;</code></pre>
+                  <p>An example loading a single level</p>
+                  <pre><code class="objectivec">- (void)levelLoadAsync
+{
+    NSLog(@"Level load asynchronous");
+    
+    [[Playtomic PlayerLevels] loadAsyncLevelid:self.levelid andDelegate:self];
+}
+
+// PlaytomicDelegate protocol implementation
+- (void)requestLoadPlayerLevelsFinished:(PlaytomicResponse*)response
+{
+    if([response success])
+    {
+        NSLog(@"%d level was returned:", [response getNumResults]);
+        
+        for(PlaytomicLevel *level in [response data])
+        {
+            NSLog(@"%@ by %@ on %@ (%@) with %d votes and %d score and %@ rating and %d plays and levelid %@"
+                                            , [level getName]
+                                            , [level getPlayerName]
+                                            , [level getDate]
+                                            , [level getRelativeDate]
+                                            , [level getVotes]
+                                            , [level getScore]
+                                            , [level getRating]
+                                            , [level getPlays]
+                                            , [level getLevelId]);
+            
+            if([[level getCustomData] count] > 0)
+            {
+                NSDictionary *data = [level getCustomData];
+                
+                for(id x in data)
+                {
+                    NSLog(@" with custom data %@ = %@", x, [data objectForKey:x]);
+                }
+            }
+            
+            NSLog(@" with data %@", [level getData]);
+        }
+    }
+    else
+    {
+        NSLog(@"Level failed to load because of errorcode #%d", [response errorCode]);
+    }
+}
+</code></pre>
+                  <h3>Synchronous version</h3>
+                  <pre><code class="objectivec">PlaytomicResponse *response = [[Playtomic PlayerLevels] loadLevelid:levelid];</code></pre>
+                  <table cellpadding="0" cellspacing="0">
+                     <tr>
+                        <th class="mode">Parameter</th>
+                        <th class="modewide">Type</th>
+                        <th>Description</th>
+                     </tr>
+                     <tr>
+                        <td>levelid</td>
+                        <td>NSString</td>
+                        <td>[level getLevelId]</td>
+                     </tr>
+                  </table>
+                  <p>An example loading a single level</p>
+                  <pre><code class="objectivec">PlaytomicResponse *response = [[Playtomic PlayerLevels] loadLevelid:[level getLevelId]];
+    
+    if([response success])
+    {
+        NSLog(@"%d level was returned:", [response getNumResults]);
+        
+        for(PlaytomicLevel *level in [response data])
+        {
+            NSLog(@"%@ by %@ on %@ (%@) with %d votes and %d score and %@ rating and %d plays and levelid %@"
+                                                , [level getName]
+                                                , [level getPlayerName]
+                                                , [level getDate]
+                                                , [level getRelativeDate]
+                                                , [level getVotes]
+                                                , [level getScore]
+                                                , [level getRating]
+                                                , [level getPlays]
+                                                , [level getLevelId]);
+            
+            if([[level getCustomData] count] > 0)
+            {
+                NSDictionary *data = [level getCustomData];
+                
+                for(id x in data)
+                {
+                    NSLog(@" with custom data %@ = %@", x, [data objectForKey:x]);
+                }
+            }
+            
+            NSLog(@" with data %@", [level getData]);
+        }
+    }
+    else
+    {
+        NSLog(@"Level failed to load because of errorcode #%d", [response errorCode]);
+    }
+    </code></pre>
+               </div>
+               <div id="Section3" style="display: none;">
+                  <h1>Leaderboards</h1>
+                  <p>The leaderboards API gives you very flexible high and low score Playtomic.Leaderboards. They can be created in your game dynamically or set up in the edit leaderboards page.</p>
+                  <h2>The PlaytomicScore object</h2>
+                  <p>The leaderboards use the PlaytomicScore object for representing the players' scores.</p>
+                  <table cellpadding="0" cellspacing="0">
+                     <tr>
+                        <th class="mode">Property</th>
+                        <th class="modewide">Type</th>
+                        <th class="mode">Accessor</th>
+                        <th>Description</th>
+                     </tr>
+                     <tr>
+                        <td>name</td>
+                        <td>NSString</td>
+                        <td>getName</td>
+                        <td>The player name.  This can be by the player or provided by any 3rd party</td>
+                     </tr>
+                     <tr>
+                        <td>points</td>
+                        <td>NSInteger</td>
+                        <td>getPoints</td>
+                        <td>The player's score</td>
+                     </tr>
+                     <tr>
+                        <td>rank</td>
+                        <td>NSInteger</td>
+                        <td>getRank</td>
+                        <td>The player's rank based on the listing criteria you use.</td>
+                     </tr>
+                     <tr>
+                        <td>date</td>
+                        <td>NSDate</td>
+                        <td>getDate</td>
+                        <td>The date of the score, determined automatically by Playtomic</td>
+                     </tr>
+                     <tr>
+                        <td>relativeDate</td>
+                        <td>NSString</td>
+                        <td>getRelativeDate</td>
+                        <td>The relative date of the score eg "7 minutes ago", determined automatically by Playtomic</td>
+                     </tr>
+                     <tr>
+                        <td>customData</td>
+                        <td>NSDictionary</td>
+                        <td>getCustomData</td>
+                        <td>Any additional data you want to (or have) attached to a score, like the level the player reached or what character they used</td>
+                     </tr>
+                     <tr>
+                        <td></td>
+                        <td>NSString</td>
+                        <td>getCustomValue</td>
+                        <td>Retrieves a custom property.</td>
+                     </tr>
+                     <tr>
+                        <td></td>
+                        <td>NSString</td>
+                        <td>addCustomValue</td>
+                        <td>Adds a custom property.</td>
+                     </tr>
+                  </table>
+                  <h2>Asynchronous and synchronous methods</h2>
+                  <p>For some methods there are two versions: one synchronous and one asynchronous. We recomend you to use the asynchronous one because it is not 
+                     going to freeze your game while the call is executed. Calling the synchronous version is more easy to code and is there 
+                     for games which are not resource-intensive.
+                  </p>
+                  <p>To call the asynchronous methods the caller must implement the protocol PlaytomicDelegate. All the methods in this protocol are optional so 
+                     you only need to implement the methods you actualy use.
+                  </p>
+                  <h2>Submitting scores</h2>
+                  <h3>Asynchronous version</h3>
+                  <p>Score submission is handled by:</p>
+                  <pre><code class="objectivec">[[Playtomic Leaderboards] saveAsyncTable:@"High scores"
+                                    andScore:score 
+                                  andHighest:YES 
+                          andAllowDuplicates:YES
+                                 andDelegate:self];</code></pre>
+                  <table cellpadding="0" cellspacing="0">
+                     <tr>
+                        <th class="mode">Parameter</th>
+                        <th class="modewide">Type</th>
+                        <th>Description</th>
+                     </tr>
+                     <tr>
+                        <td>table</td>
+                        <td>NSString</td>
+                        <td>The score table to submit to, alphanumeric</td>
+                     </tr>
+                     <tr>
+                        <td>score</td>
+                        <td>PlaytomicScore</td>
+                        <td>An instance of PlayerScore which contains score information</td>
+                     </tr>
+                     <tr>
+                        <td>highest</td>
+                        <td>Boolean</td>
+                        <td>Leaderboard tables can be created dynamically from within your game so you specify the mode.</td>
+                     </tr>
+                     <tr>
+                        <td>allowduplicates</td>
+                        <td>Boolean</td>
+                        <td>If you don't allow duplicates new, worse scores will not be saved by a player.</td>
+                     </tr>
+                     <tr>
+                        <td>delegate</td>
+                        <td>id&lt;PlaytomicDelegate&gt;</td>
+                        <td>A reference to an object which implements the method requestSaveLeaderboardFinished from the protocol PlaytomicDelgate</td>
+                     </tr>
+                  </table>
+                  <p>To call this method your class must implement the method requestSaveLeaderboardFinished from the protocol PlaytomicDelegate:</p>
+                  <pre><code class="objectivec">- (void)requestSaveLeaderboardFinished:(PlaytomicResponse*)response;</code></pre>
+                  <p>An example submitting an score</p>
+                  <pre><code class="objectivec">- (void)leaderboardSaveAsync
+    {
+        NSLog(@"Leaderboard SaveAsync");
+    
+        PlaytomicScore *score = [[PlaytomicScore alloc] initNewScoreWithName:@"Ben" andPoints:2000000];
+        [score addCustomValue:@"customdata" andValue:@"this is the custom data"];
+    
+    
+        [[Playtomic Leaderboards] saveAsyncTable:@"High scores" 
+                                        andScore:score 
+                                      andHighest:YES 
+                              andAllowDuplicates:YES 
+                                     andDelegate:self];
+    }
+
+    // PlaytomicDelegate protocol implementation
+    - (void)requestSaveLeaderboardFinished:(PlaytomicResponse*)response
+    {
+        if([response success])
+        {
+            NSLog(@"Score saved successfully");
+        }
+        else
+        {
+            NSLog(@"Leaderboard save failed to load because of errorcode #%d", [response errorCode]);
+        }
+    }
+    </code></pre>
+                  <h3>Synchronous version</h3>
+                  <p>Score submission is handled by:</p>
+                  <pre><code class="objectivec">PlaytomicResponse *response = [[Playtomic Leaderboards] saveTable:@"High scores" 
+                                                             andScore:score 
+                                                           andHighest:YES 
+                                                   andAllowDuplicates:YES];</code></pre>
+                  <table cellpadding="0" cellspacing="0">
+                     <tr>
+                        <th class="mode">Parameter</th>
+                        <th class="modewide">Type</th>
+                        <th>Description</th>
+                     </tr>
+                     <tr>
+                        <td>table</td>
+                        <td>NSString</td>
+                        <td>The score table to submit to, alphanumeric</td>
+                     </tr>
+                     <tr>
+                        <td>score</td>
+                        <td>PlaytomicScore</td>
+                        <td>An instance of PlayerScore which contains score information</td>
+                     </tr>
+                     <tr>
+                        <td>highest</td>
+                        <td>Boolean</td>
+                        <td>Leaderboard tables can be created dynamically from within your game so you specify the mode.</td>
+                     </tr>
+                     <tr>
+                        <td>allowduplicates</td>
+                        <td>Boolean</td>
+                        <td>If you don't allow duplicates new, worse scores will not be saved by a player.</td>
+                     </tr>
+                  </table>
+                  <p>An example submitting an score</p>
+                  <pre><code class="objectivec">PlaytomicScore *score = [[PlaytomicScore alloc] initNewScoreWithName:@"Ben" andPoints:2000000];
+    [score addCustomValue:@"character" andValue:@"barbarian"];
+    
+    PlaytomicResponse *response = [[Playtomic Leaderboards] saveTable:@"HighScores" 
+                                                             andScore:score 
+                                                           andHighest:NO 
+                                                   andAllowDuplicates:NO];
+    
+    if([response success])
+    {
+        NSLog(@"Score saved successfully");
+    }
+    else
+    {
+        NSLog(@"Leaderboard save failed to load because of errorcode #%d", [response errorCode]);
+    }</code></pre>
+                  <h2>Showing scores</h2>
+                  <p>Scores are loaded via a simple method that returns an array of PlayerScore objects to your function where you can display the data in your leaderboard.</p>
+                  <h3>Asynchronous version</h3>
+                  <pre><code class="objectivec">[[Playtomic Leaderboards] listAsyncTable:@"High scores" 
+                                  andHighest:YES 
+                                     andMode:@"alltime"
+                                     andPage:1 
+                             andCustomFilter:nil
+                                 andDelegate:self];</code></pre>
+                  <table cellpadding="0" cellspacing="0">
+                     <tr>
+                        <th class="mode">Parameter</th>
+                        <th class="modewide">Type</th>
+                        <th>Description</th>
+                     </tr>
+                     <tr>
+                        <td>table</td>
+                        <td>String</td>
+                        <td>Your leaderboard table name</td>
+                     </tr>
+                     <tr>
+                        <td>highest</td>
+                        <td>Boolean</td>
+                        <td>If the table does not exist it will be created with this mode.</td>
+                     </tr>
+                     <tr>
+                        <td>mode</td>
+                        <td>NSString</td>
+                        <td>
+                           The list mode can return scores from:
+                           <ul class="list">
+                              <li>'last7days'</li>
+                              <li>'last30days'</li>
+                              <li>'alltime'</li>
+                              <li>'today'</li>
+                              <li>'newest' which gives you a stream of unranked scores</li>
+                           </ul>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>delegate</td>
+                        <td>id&lt;PlaytomicDelegate&gt;</td>
+                        <td>A reference to an object which implements the method requestListLeaderboardFinished from the protocol PlaytomicDelgate</td>
+                     </tr>
+                  </table>
+                  <p>To call this method your class must implement the method requestListLeaderboardFinished from the protocol PlaytomicDelegate:</p>
+                  <pre><code class="objectivec">- (void)requestListLeaderboardFinished:(PlaytomicResponse*)response;</code></pre>
+                  <p>An example showing scores</p>
+                  <pre><code class="objectivec">- (void)leaderboardListAsync
+    {   
+        [[Playtomic Leaderboards] listAsyncTable:@"High scores" 
+                                      andHighest:YES 
+                                         andMode:@"alltime" 
+                                         andPage:1 
+                                      andPerPage:20 
+                                 andCustomFilter:nil 
+                                     andDelegate:self];
+    }
+
+    // PlaytomicDelegate protocol implementation
+    - (void)requestListLeaderboardFinished:(PlaytomicResponse*)response
+    {   
+        if([response success])
+        {
+            NSLog(@"%d scores were returned:", [response getNumResults]);
+        
+            for(PlaytomicScore *score in [response data])
+            {
+                NSLog(@"%@ scored %d on %@"
+                      , [score getName]
+                      , [score getPoints]
+                      , [score getRelativeDate]);
+            
+                if([[score getCustomData] count] > 0)
+                {
+                    NSDictionary *data = [score getCustomData];
+                
+                    for(id x in data)
+                    {
+                        NSLog(@" with custom data %@ = %@", x, [data objectForKey:x]);
+                    }
+                }
+            }
+        }
+        else
+        {
+            NSLog(@"Leaderboard listAsync failed to load because of errorcode #%d", [response errorCode]);
+        }
+    }</code></pre>
+                  <h3>Synchronous version</h3>
+                  <pre><code class="objectivec">PlaytomicResponse *response = [[Playtomic Leaderboards] listTable:@"High scores" 
+                                                           andHighest:YES 
+                                                              andMode:@"alltime"
+                                                              andPage:1 
+                                                           andPerPage:20 
+                                                      andCustomFilter:nil];</code></pre>
+                  <table cellpadding="0" cellspacing="0">
+                     <tr>
+                        <th class="mode">Parameter</th>
+                        <th class="modewide">Type</th>
+                        <th>Description</th>
+                     </tr>
+                     <tr>
+                        <td>table</td>
+                        <td>String</td>
+                        <td>Your leaderboard table name</td>
+                     </tr>
+                     <tr>
+                        <td>highest</td>
+                        <td>Boolean</td>
+                        <td>If the table does not exist it will be created with this mode.</td>
+                     </tr>
+                     <tr>
+                        <td>mode</td>
+                        <td>NSString</td>
+                        <td>
+                           The list mode can return scores from:
+                           <ul class="list">
+                              <li>'last7days'</li>
+                              <li>'last30days'</li>
+                              <li>'alltime'</li>
+                              <li>'today'</li>
+                              <li>'newest' which gives you a stream of unranked scores</li>
+                           </ul>
+                        </td>
+                     </tr>
+                  </table>
+                  <p>An example showing scores</p>
+                  <pre><code class="objectivec">PlaytomicResponse *response = [[Playtomic Leaderboards] listTable:@"HighScores" 
+                                                           andHighest:NO 
+                                                              andMode:@"alltime" 
+                                                              andPage:1 
+                                                           andPerPage:20 
+                                                      andCustomFilter:nil];
+    
+        if([response success])
+        {
+            NSLog(@"%d scores were returned:", [response getNumResults]);
+        
+            for(PlaytomicScore *score in [response data])
+            {
+                NSLog(@"%@ scored %d on %@", [score getName], [score getPoints], [score getRelativeDate]);
+            
+                if([[score getCustomData] count] > 0)
+                {
+                    NSDictionary *data = [score getCustomData];
+                
+                    for(id x in data)
+                    {
+                        NSLog(@" with custom data %@ = %@", x, [data objectForKey:x]);
+                    }
+                }
+            }
+        }
+        else
+        {
+            NSLog(@"Leaderboard list failed to load because of errorcode #%d", [response errorCode]);
+        }</code></pre>
+                  <h2>Save and List</h2>
+                  <p>You can now submit scores and at the same time return the leaderboard page that that score is on.</p>
+                  <p>This combines the Save and List approaches from above:</p>
+                  <h3>Asynchronous version</h3>
+                  <pre><code class="objectivec">[[Playtomic Leaderboards] saveAndListAsyncTable:table 
+                                           andScore:score 
+                                         andHighest:highest 
+                                 andAllowDuplicates:allowduplicates 
+                                            andMode:mode 
+                                         andPerPage:perpage 
+                                    andCustomFilter:customfilter
+                                        andDelegate:self</code></pre>
+                  <h3>Synchronous version</h3>
+                  <pre><code class="objectivec">PlaytomicResponse *response = [[Playtomic Leaderboards] saveAndListTable:table 
+                                                                    andScore:score 
+                                                                  andHighest:highest 
+                                                          andAllowDuplicates:allowduplicates 
+                                                                     andMode:mode 
+                                                                  andPerPage:perpage 
+                                                             andCustomFilter:customfilter</code></pre>
+                  <p>Some important notes:</p>
+                  <ul class="list">
+                     <li>You don't specify a page, you specify the PerPage (default 20) and it will automatically decide which page to return based on the submitted score's rank.  If you submit the 1187th best score at 30 per page then it will show you page 39, scores #1170 - #1200.</li>
+                     <li>Ranks are returned, so you are not viewing the top N scores you are viewing the top N scores from rank X onwards.</li>
+                  </ul>
+                  <h2>Embedding scores on your website</h2>
+                  <p>Scores are no longer available directly via URL as they expect POST data now.  You will need to use the HTML5 / JavaScript API for showing scores on your web page, or the Flash or other APIs for embedding them in a SWF or other container.</p>
+               </div>
+               <div id="Section4" style="display: none;">
+                  <h1>GameVars</h1>
+                  <p>GameVars let you change the value of key variables in your game any time you want.  They must be configured on the edit GameVars page in advance.</p>
+                  <p>You store a bunch of data in Playtomic, have it in your game as a backup for when there's no client connectivity, 
+                     and then whenever possible, the player can use the most recent values.
+                  </p>
+                  <h2>Asynchronous and synchronous methods</h2>
+                  <p>For some methods there are two versions: one synchronous and one asynchronous. We recomend you to use the asynchronous one because it is not 
+                     going to freeze your game while the call is executed. Calling the synchronous version is more easy to code and is there 
+                     for games which are not resource-intensive.
+                  </p>
+                  <p>To call the asynchronous methods the caller must implement the protocol PlaytomicDelegate. All the methods in this protocol are optional so 
+                     you only need to implement the methods you actualy use.
+                  </p>
+                  <p>It is called via:</p>
+                  <h3>Asynchronous version</h3>
+                  <pre><code class="objectivec">[[Playtomic GameVars] loadAsync];</code></pre>
+                  <h2>Load individually</h2>
+                  <p>You can load variables individually, for instance if you are caching the GameVars you can check a 'version' GameVar to decide whether to reload the full collection.</p>
+                  <pre><code class="objectivec">[[Playtomic GameVars] loadSingleAsync: @"name"];</code></pre>
+                  <p>To call this method your class must implement the method requestLoadGameVarsFinished from the protocol PlaytomicDelegate:</p>
+                  <pre><code class="objectivec">- (void)requestLoadGameVarsFinished:(PlaytomicResponse*)response;</code></pre>
+                  <p>A complete example:</p>
+                  <pre><code class="objectivec">- (void)loadGameVarsAsync
+    {
+        NSLog(@"Loading GameVarsAsync");
+        [[Playtomic GameVars] loadAsync:self];
+    }
+
+    // PlaytomicDelegate protocol implementation
+    - (void)requestLoadGameVarsFinished:(PlaytomicResponse*)response
+    {    
+        if([response success])
+        {            
+            NSLog(@"%@ = %@", @"GameVar1", [response getValueForName:@"GameVar1"]);
+            NSLog(@"%@ = %@", @"GameVar2", [response getValueForName:@"GameVar2"]);
+        }
+        else
+        {
+            NSLog(@"GameVarsAsync failed to load because of errorcode #%d", [response errorCode]);
+        }
+    }</code></pre>
+                  <h3>Synchronous version</h3>
+                  <pre><code class="objectivec">PlaytomicResponse *gamevars = [[Playtomic GameVars] load];</code></pre>
+                  <pre><code class="objectivec">PlaytomicResponse *gamevars = [[Playtomic GameVars] loadSingle];</code></pre>
+                  <p>A complete example:</p>
+                  <pre><code class="objectivec">PlaytomicResponse *gamevars = [[Playtomic GameVars] load];
+        
+    if([gamevars success])
+    {    
+        NSLog(@"%@ = %@",@"myVar", [gamevars getValue:@"myVar"]);
+        NSLog(@"%@ = %@",@"otherVar", [gamevars getValue:@"otherVar"]);
+    }
+    else
+    {
+        NSLog(@"GameVars failed to load because of errorcode #%d", [gamevars errorCode]);
+    }</code></pre>
+               </div>
+               <div id="Section5" style="display: none;">
+                  <h1>Geolocation</h1>
+                  <p>The GeoIP service identifies which country the player is from, returning their country code and name.</p>
+                  <h2>Asynchronous and synchronous methods</h2>
+                  <p>For some methods there are two versions: one synchronous and one asynchronous. We recomend you to use the asynchronous one because it is not 
+                     going to freeze your game while the call is executed. Calling the synchronous version is more easy to code and is there 
+                     for games which are not resource-intensive.
+                  </p>
+                  <p>To call the asynchronous methods the caller must implement the protocol PlaytomicDelegate. All the methods in this protocol are optional so 
+                     you only need to implement the methods you actualy use.
+                  </p>
+                  <p>It is called via:</p>
+                  <h3>Asynchronous version</h3>
+                  <pre><code class="objectivec">[[Playtomic GeoIP] loadGeoIPAsync];</code></pre>
+                  <p>To call this method your class must implement the method requestLoadGeoIPFinished from the protocol PlaytomicDelegate:</p>
+                  <pre><code class="objectivec">- (void)requestLoadGeoIPFinished:(PlaytomicResponse*)response;</code></pre>
+                  <p>A complete example:</p>
+                  <pre><code class="objectivec">- (void)loadGeoIPAsync
+    {
+        NSLog(@"Loading GeoIPAsync");
+    
+        [[Playtomic GeoIP] loadAsync:self];
+    }
+
+    // PlaytomicDelegate protocol implementation
+    - (void)requestLoadGeoIPFinished:(PlaytomicResponse*)response
+    {
+        if([response success])
+        {   
+            NSLog(@"Location code: %@, name: %@"
+                  , [response getValueForName:@"Code"]
+                  , [response getValueForName:@"Name"]);
+        }
+        else
+        {
+            NSLog(@"GeoIPAsync failed to load because of errorcode #%d", [response errorCode]);
+        }
+    }</code></pre>
+                  <h3>Synchronous version</h3>
+                  <pre><code class="objectivec">PlaytomicResponse *lookup = [[Playtomic GeoIP] loadGeoIP];</code></pre>
+                  <p>Using it is very simple:</p>
+                  <pre><code class="objectivec">PlaytomicResponse *lookup = [[Playtomic GeoIP] loadGeoIP];
+    
+    if([lookup success])
+    {    
+        
+        NSLog(@"Location code:%@, name:%@", [lookup getValue:@"Code"], [lookup getValue:@"Name"]);
+    }
+    else
+    {
+        NSLog(@"GeoIP failed to load because of errorcode #%d", [lookup errorCode]);
+    }</code></pre>
+               </div>
+               <div id="Section8" style="display: none;">
+                  <h1>Data lookup</h1>
+                  <p>Note: You must enable this functionality in each game's settings.  By default it is disabled becaue it can expose your game data.</p>
+                  <p>The Data class in the API allows you to retrieve any of your game data to display in your game.</p>
+                  <p>Each function for retrieving data takes an optional parameters object for day, month and year, with default values of 0.</p>
+                  <ul class="list">
+                     <li>When day, month and year are specified you will receive data for that specific day.</li>
+                     <li>When month and year are specified you will receive data for that specific month.</li>
+                     <li>When day, month and year are unspecified or 0 then you will receive data for all time.</li>
+                  </ul>
+                  <p>When the request succeeds the returned data is available via:</p>
+                  <pre><code class="objectivec">[the_response getValue:@"key"];</code></pre>
+                  <h2>Asynchronous and synchronous methods</h2>
+                  <p>For some methods there are two versions: one synchronous and one asynchronous. We recomend you to use the asynchronous one because it is not 
+                     going to freeze your game while the call is executed. Calling the synchronous version is more easy to code and is there 
+                     for games which are not resource-intensive.
+                  </p>
+                  <p>To call the asynchronous methods the caller must implement the protocol PlaytomicDelegate. All the methods in this protocol are optional so 
+                     you only need to implement the methods you actualy use.
+                  </p>
+                  <h2>Asynchronous version</h2>
+                  <h2>Views, Plays and Play Time</h2>
+                  <p>The Views, Plays and PlayTime functions returns this data to you for processing:</p>
+                  <p>To call these methods your class must implement the methods requestViewsDataFinished, requestPlaysDataFinished and requestPlaytimeDataFinished 
+                     from the protocol PlaytomicDelegate:
+                  </p>
+                  <pre><code class="objectivec">- (void)requestViewsDataFinished:(PlaytomicResponse*)response;
+    - (void)requestPlaysDataFinished:(PlaytomicResponse*)response;
+    - (void)requestPlaytimeDataFinished:(PlaytomicResponse*)response;</code></pre>
+                  <p>A complete example:</p>
+                  <pre><code class="objectivec">- (void)getViewsAsync
+    {
+        NSLog(@"get views asynchronous");
+    
+        [[Playtomic Data] viewsAsync:self];
+        [[Playtomic Data] viewsAsyncMonth:1 andYear:2010 andDelegate:self];
+        [[Playtomic Data] viewsAsyncDay:1 andMonth:1 andYear:2010 andDelegate:self];
+    }
+
+    // PlaytomicDelegate protocol implementation
+    - (void)requestViewsDataFinished:(PlaytomicResponse*)response
+    {
+        if([response success])
+        {
+            NSLog(@"view data was returned: %@", [response getValueForName:@"Value"]);        
+        }
+        else
+        {
+            NSLog(@"view data failed to load asynchronous because of errorcode #%d", [response errorCode]);
+        }
+    }
+
+    - (void)getPlaysAsync
+    {
+        NSLog(@"get plays asynchronous");
+    
+        [[Playtomic Data] playsAsync:self];
+        [[Playtomic Data] playsAsyncMonth:1 andYear:2010 andDelegate:self];
+        [[Playtomic Data] playsAsyncDay:1 andMonth:1 andYear:2010 andDelegate:self];
+    }
+
+    // PlaytomicDelegate protocol implementation
+    - (void)requestPlaysDataFinished:(PlaytomicResponse*)response
+    {
+        if([response success])
+        {
+            NSLog(@"play data was returned: %@", [response getValueForName:@"Value"]);        
+        }
+        else
+        {
+            NSLog(@"play data failed to load asynchronous because of errorcode #%d", [response errorCode]);
+        }
+    }
+
+    - (void)getPlaytimeAsync
+    {
+        NSLog(@"get playtime asynchronous");
+    
+        [[Playtomic Data] playtimeAsync:self];
+        [[Playtomic Data] playtimeAsyncMonth:1 andYear:2010 andDelegate:self];
+        [[Playtomic Data] playtimeAsyncDay:1 andMonth:1 andYear:2010 andDelegate:self];
+    }
+
+    // PlaytomicDelegate protocol implementation
+    - (void)requestPlaytimeDataFinished:(PlaytomicResponse*)response
+    {
+        if([response success])
+        {
+            NSLog(@"playtime data was returned: %@", [response getValueForName:@"Value"]);        
+        }
+        else
+        {
+            NSLog(@"playtime data failed to load asynchronous because of errorcode #%d", [response errorCode]);
+        }
+    }
+
+    </code></pre>
+                  <p>Available keys are:</p>
+                  <ul class="list">
+                     <li>Value</li>
+                     <li>Day</li>
+                     <li>Month</li>
+                     <li>Year</li>
+                  </ul>
+                  <h2>Custom metrics</h2>
+                  <p>The CustomMetric function returns data about a custom metric to your function, which receives the same parameters as views/plays/play time above.</p>
+                  <p>To call this method your class must implement the method requestCustomMetricDataFinished from the protocol PlaytomicDelegate:</p>
+                  <pre><code class="objectivec">- (void)requestCustomMetricDataFinished:(PlaytomicResponse*)response;</code></pre>
+                  <p>A complete example:</p>
+                  <pre><code class="objectivec">- (void)getCustomAsync
+    {
+        NSLog(@"get custom asynchronous");
+    
+        [[Playtomic Data] customMetricAsyncName:@"hi" andDelegate:self];
+        [[Playtomic Data] customMetricAsyncName:@"hi" andMonth:1 andYear:2010 andDelegate:self];
+        [[Playtomic Data] customMetricAsyncName:@"hi" andDay:1 andMonth:1 andYear:2010 andDelegate:self];
+
+    }
+
+    // PlaytomicDelegate protocol implementation
+    - (void)requestCustomMetricDataFinished:(PlaytomicResponse*)response
+    {
+        if([response success])
+        {
+            NSLog(@"custom data was returned: %@", [response getValueForName:@"Value"]);        
+        }
+        else
+        {
+            NSLog(@"custom data failed to load asynchronous because of errorcode #%d", [response errorCode]);
+        }
+    }
+    </code></pre>
+                  <p>Available keys are:</p>
+                  <ul class="list">
+                     <li>Name</li>
+                     <li>Value</li>
+                     <li>Day</li>
+                     <li>Month</li>
+                     <li>Year</li>
+                  </ul>
+                  <h2>Level metrics</h2>
+                  <p>Retrieving level metrics is the same as retrieving custom metrics with an additional property for the level name or number.</p>
+                  <p>To call these methods your class must implement the methods requestLevelMetricCounterDataFinished, 
+                     requestLevelMetricAverageDataFinished and requestLevelMetricRangeDataFinished 
+                     from the protocol PlaytomicDelegate:
+                  </p>
+                  <pre><code class="objectivec">- (void)requestLevelMetricCounterDataFinished:(PlaytomicResponse*)response;
+    - (void)requestLevelMetricAverageDataFinished:(PlaytomicResponse*)response;
+    - (void)requestLevelMetricRangeDataFinished:(PlaytomicResponse*)response;</code></pre>
+                  <p>A complete example:</p>
+                  <pre><code class="objectivec">
+    - (void)getMetricAsync
+    {
+        NSLog(@"get counter metric asynchronous");
+    
+        [[Playtomic Data] levelCounterMetricAsyncName:@"hi" andLevel:@"level 1" andDelegate:self];
+        [[Playtomic Data] levelAverageMetricAsyncName:@"hi" andLevelNumber:@"level 1" andMonth:1 andYear:2010 andDelegate:self];
+        [[Playtomic Data] levelRangedMetricAsyncName:@"hi" andLevel:@"level 1" andDay:1 andMonth:1 andYear:2010 andDelegate:self];
+    }
+
+    // PlaytomicDelegate protocol implementation
+    - (void)requestLevelMetricCounterDataFinished:(PlaytomicResponse*)response
+    {
+        if([response success])
+        {
+            NSLog(@"counter data was returned: %@", [response getValueForName:@"Value"]);        
+        }
+        else
+        {
+            NSLog(@"counter data failed to load asynchronous because of errorcode #%d", [response errorCode]);
+        }
+    }
+
+    // PlaytomicDelegate protocol implementation
+    - (void)requestLevelMetricAverageDataFinished:(PlaytomicResponse*)response
+    {
+        if([response success])
+        {
+            NSLog(@"average data was returned: %@", [response getValueForName:@"Value"]);        
+        }
+        else
+        {
+            NSLog(@"average data failed to load asynchronous because of errorcode #%d", [response errorCode]);
+        }
+    }
+
+    // PlaytomicDelegate protocol implementation
+    - (void)requestLevelMetricRangeDataFinished:(PlaytomicResponse*)response
+    {
+        if([response success])
+        {
+            NSLog(@"range data was returned: %@", [response getValueForName:@"Value"]);        
+        }
+        else
+        {
+            NSLog(@"range data failed to load asynchronous because of errorcode #%d", [response errorCode]);
+        }
+    }
+
+    </code></pre>
+                  <p>Available keys are:</p>
+                  <ul class="list">
+                     <li>Name</li>
+                     <li>Level</li>
+                     <li>Value</li>
+                     <li>Day</li>
+                     <li>Month</li>
+                     <li>Year</li>
+                  </ul>
+                  <h2>Synchronous version</h2>
+                  <h2>Views, Plays and Play Time</h2>
+                  <p>The Views, Plays and PlayTime functions returns this data to you for processing:</p>
+                  <pre><code class="objectivec">PlaytomicResponse *views_total = [[Playtomic Data] views]
+    PlaytomicResponse *views_on_month = [[Playtomic Data] viewsMonth:1 andYear:2010]
+    PlaytomicResponse *views_on_date = [[Playtomic Data] viewsDay:1 andMonth:1 andYear:2010]
+    PlaytomicResponse *plays_total = [[Playtomic Data] plays]
+    PlaytomicResponse *plays_on_month = [[Playtomic Data] playsMonth:1 andYear:2010]
+    PlaytomicResponse *plays_on_date = [[Playtomic Data] playsDay:1 andMonth:1 andYear:2010]
+    PlaytomicResponse *playtime_total = [[Playtomic Data] playtime]
+    PlaytomicResponse *playtime_on_month = [[Playtomic Data] playtimeMonth:1 andYear:2010]
+    PlaytomicResponse *playtime_on_day = [[Playtomic Data] playtimeDay:1 andMonth:1 andYear:2010]</code></pre>
+                  <p>Available keys are:</p>
+                  <ul class="list">
+                     <li>Value</li>
+                     <li>Day</li>
+                     <li>Month</li>
+                     <li>Year</li>
+                  </ul>
+                  <h2>Custom metrics</h2>
+                  <p>The CustomMetric function returns data about a custom metric to your function, which receives the same parameters as views/plays/play time above.</p>
+                  <pre><code class="objectivec">PlaytomicResponse *views_total = [[Playtomic Data] customMetricName:@"hi"]
+    PlaytomicResponse *views_on_month = [[Playtomic Data] customMetricName:@"hi" andMonth:1 andYear:2010]
+    PlaytomicResponse *views_on_date = [[Playtomic Data] customMetricName:@"hi" andDay:1 andMonth:1 andYear:2010]</code></pre>
+                  <p>Available keys are:</p>
+                  <ul class="list">
+                     <li>Name</li>
+                     <li>Value</li>
+                     <li>Day</li>
+                     <li>Month</li>
+                     <li>Year</li>
+                  </ul>
+                  <h2>Level metrics</h2>
+                  <p>Retrieving level metrics is the same as retrieving custom metrics with an additional property for the level name or number.</p>
+                  <pre><code class="objectivec">PlaytomicResponse *views_total = [[Playtomic Data] levelCounterMetricName:@"hi" andLevel:@"level 1"]
+    PlaytomicResponse *views_on_month = [[Playtomic Data] levelAverageMetricName:@"hi" andLevelNumber:@"level 1" andMonth:1 andYear:2010]
+    PlaytomicResponse *views_on_date = [[Playtomic Data] levelRangedMetricName:@"hi" andLevel:@"level 1" andDay:1 andMonth:1 andYear:2010]</code></pre>
+                  <p>Available keys are:</p>
+                  <ul class="list">
+                     <li>Name</li>
+                     <li>Level</li>
+                     <li>Value</li>
+                     <li>Day</li>
+                     <li>Month</li>
+                     <li>Year</li>
+                  </ul>
+               </div>
+               <div id="Section6" style="display: none;">
+                  <h1>Error codes</h1>
+                  <p>When a Playtomic service is unreachable or has an error it will return a numeric error code.  This table describes those errors:</p>
+                  <h2>General errors</h2>
+                  <p>These errors may be returned from any service.</p>
+                  <table cellpadding="0" cellspacing="0">
+                     <tr>
+                        <th class="mode">Code</th>
+                        <th>Meaning</th>
+                     </tr>
+                     <tr>
+                        <td>0</td>
+                        <td>No error</td>
+                     </tr>
+                     <tr>
+                        <td>1</td>
+                        <td>General error, this typically means the player is unable to connect to the Playtomic servers</td>
+                     </tr>
+                     <tr>
+                        <td>2</td>
+                        <td>Invalid game credentials.  Make sure you use your SWFId and GUID from the "API" section in the dashboard.</td>
+                     </tr>
+                     <tr>
+                        <td>3</td>
+                        <td>Request timed out.</td>
+                     </tr>
+                     <tr>
+                        <td>4</td>
+                        <td>Invalid request.  This means the request wasn't formed right, probably because the API key wasn't provided or was incorrect.</td>
+                     </tr>
+                  </table>
+                  <h2>GeoIP errors</h2>
+                  <table cellpadding="0" cellspacing="0">
+                     <tr>
+                        <th class="mode">Code</th>
+                        <th>Meaning</th>
+                     </tr>
+                     <tr>
+                        <td>100</td>
+                        <td>GeoIP API has been disabled.  This may occur if your game is faulty or overwhelming the Playtomic servers.</td>
+                     </tr>
+                  </table>
+                  <h2>Leaderboard errors</h2>
+                  <table cellpadding="0" cellspacing="0">
+                     <tr>
+                        <th class="mode">Code</th>
+                        <th>Meaning</th>
+                     </tr>
+                     <tr>
+                        <td>200</td>
+                        <td>Leaderboard API has been disabled.  This may occur if your game is faulty or overwhelming the Playtomic servers.</td>
+                     </tr>
+                     <tr>
+                        <td>201</td>
+                        <td>The source URL or name weren't provided when saving a score.  Make sure the player specifies a name and the game is initialized before anything else using the code in the "Set your game up" section.</td>
+                     </tr>
+                     <tr>
+                        <td>202</td>
+                        <td>Invalid auth key.  You should not see this normally, players might if they tamper with your game.</td>
+                     </tr>
+                     <tr>
+                        <td>203</td>
+                        <td>No Facebook user id on a score specified as a Facebook submission.</td>
+                     </tr>
+                     <tr>
+                        <td>204</td>
+                        <td>Table name wasn't specified for creating a private leaderboard.</td>
+                     </tr>
+                     <tr>
+                        <td>205</td>
+                        <td>Permalink structure wasn't specified:  http://website.com/game/whatever?leaderboard=</td>
+                     </tr>
+                     <tr>
+                        <td>206</td>
+                        <td>Leaderboard id wasn't provided loading a private leaderboard.</td>
+                     </tr>
+                     <tr>
+                        <td>207</td>
+                        <td>Invalid leaderboard id was provided for a private leaderboard.</td>
+                     </tr>
+                     <tr>
+                        <td>208</td>
+                        <td>Player is banned from your leaderboard.</td>
+                     </tr>
+                     <tr>
+                        <td>209</td>
+                        <td>SaveAndList only.  The score was not the player's best score.  You can message the player, highlight their best via the SubmittedOrBest boolean property of scores, or override this by setting allowduplicates to true.</td>
+                     </tr>
+                  </table>
+                  <h2>GameVars errors</h2>
+                  <table cellpadding="0" cellspacing="0">
+                     <tr>
+                        <th class="mode">Code</th>
+                        <th>Meaning</th>
+                     </tr>
+                     <tr>
+                        <td>300</td>
+                        <td>GameVars API has been disabled.  This may occur if your game is faulty or overwhelming the Playtomic servers.</td>
+                     </tr>
+                  </table>
+                  <h2>Level sharing errors</h2>
+                  <table cellpadding="0" cellspacing="0">
+                     <tr>
+                        <th class="mode">Code</th>
+                        <th>Meaning</th>
+                     </tr>
+                     <tr>
+                        <td>400</td>
+                        <td>Level sharing API has been disabled.  This may occur if your game is faulty or overwhelming the Playtomic servers.</td>
+                     </tr>
+                     <tr>
+                        <td>401</td>
+                        <td>Invalid rating value (must be 1 - 10).</td>
+                     </tr>
+                     <tr>
+                        <td>402</td>
+                        <td>Player has already rated that level.</td>
+                     </tr>
+                     <tr>
+                        <td>403</td>
+                        <td>The level name wasn't provided when saving a level.</td>
+                     </tr>
+                     <tr>
+                        <td>404</td>
+                        <td>Invalid image auth.  You should not see this normally, players might if they tamper with your game.</td>
+                     </tr>
+                     <tr>
+                        <td>405</td>
+                        <td>Invalid image auth (again).  You should not see this normally, players might if they tamper with your game.</td>
+                     </tr>
+                     <tr>
+                        <td>406</td>
+                        <td>The level already exists.  This is determined via a hash of the game id, level name, player ip address and name, and source url.</td>
+                     </tr>
+                  </table>
+                  <h2>Data API errors</h2>
+                  <table cellpadding="0" cellspacing="0">
+                     <tr>
+                        <th class="mode">Code</th>
+                        <th>Meaning</th>
+                     </tr>
+                     <tr>
+                        <td>500</td>
+                        <td>Data API has been disabled.  This may occur if the Data API is not enabled for your game, or your game is faulty or overwhelming the Playtomic servers.</td>
+                     </tr>
+                  </table>
+                  <h2>Parse Custom Database errors</h2>
+                  <table cellpadding="0" cellspacing="0">
+                     <tr>
+                        <th class="mode">Code</th>
+                        <th>Meaning</th>
+                     </tr>
+                     <tr>
+                        <td>600</td>
+                        <td>You have not configured your Parse.com database.  Sign up at Parse and then enter your API credentials in your Playtomic dashboard.</td>
+                     </tr>
+                     <tr>
+                        <td>601</td>
+                        <td>No response was returned from Parse.  If you experience this a lot let us know exactly what you're doing so we can sort out a fix for it.</td>
+                     </tr>
+                     <tr>
+                        <td>6021</td>
+                        <td>Parse's servers had an error.</td>
+                     </tr>
+                     <tr>
+                        <td>602101</td>
+                        <td>Object not found.  Make sure you include the classname and objectid and that they are correct.</td>
+                     </tr>
+                     <tr>
+                        <td>602102</td>
+                        <td>Invalid query.  If you think you're doing it right let us know what you're doing and we'll look into it.</td>
+                     </tr>
+                     <tr>
+                        <td>602103</td>
+                        <td>Invalid classname.</td>
+                     </tr>
+                     <tr>
+                        <td>602104</td>
+                        <td>Missing objectid.</td>
+                     </tr>
+                     <tr>
+                        <td>602105</td>
+                        <td>Invalid key name.</td>
+                     </tr>
+                     <tr>
+                        <td>602106</td>
+                        <td>Invalid pointer.</td>
+                     </tr>
+                     <tr>
+                        <td>602107</td>
+                        <td>Invalid JSON.</td>
+                     </tr>
+                     <tr>
+                        <td>602108</td>
+                        <td>Command unavailable.</td>
+                     </tr>
+                  </table>
+               </div>
+               <script type="text/javascript">
+                  /* <![CDATA[ */
+                  
+                  (function () {
+                  
+                      function pageSet(n, oncomplete) {
+                          this.pages = [];
+                          this.handles = [];
+                          this.onComplete = oncomplete;
+                  
+                          var i;
+                  
+                          for (i = 0; i < n; i++) {
+                              this.pages[i] = document.getElementById("Section" + (i + 1));
+                              this.handles[i] = document.getElementById("Section" + (i + 1) + "Handle").getElementsByTagName("a")[0];
+                          }
+                  
+                          this.setPage = function (page) {
+                              for (i = this.pages.length - 1; i > -1; i--) {
+                                  this.pages[i].style.display = (i + 1 == page ? "" : "none");
+                                  this.handles[i].className = (i + 1 == page ? "menulink on" : "menulink");
+                              }
+                  
+                              if (this.onComplete != null) {
+                                  this.onComplete(n);
+                              }
+                          };
+                      }
+                  
+                      window.pages = new pageSet(10);
+                  
+                      var loc = document.location.toString();
+                  
+                      if (loc.indexOf("#") == -1) {
+                          pages.setPage(9);
+                          return;
+                      }
+                  
+                      loc = loc.substring(loc.indexOf("#") + 1);
+                  
+                      switch (loc) {
+                          case "Analytics":
+                              pages.setPage(1);
+                              break;
+                          case "LinkTracking":
+                              pages.setPage(7);
+                              break;
+                          case "LevelSharing":
+                              pages.setPage(2);
+                              break;
+                          case "Leaderboards":
+                              pages.setPage(3);
+                              break;
+                          case "GameVars":
+                              pages.setPage(4);
+                              break;
+                          case "Geolocation":
+                              pages.setPage(5);
+                              break;
+                          case "DataLookup":
+                              pages.setPage(8);
+                              break;
+                          case "ErrorCodes":
+                              pages.setPage(6);
+                              break;
+                          case "SettingUp":
+                              pages.setPage(9);
+                              break;
+                          case "Parse":
+                              pages.setPage(10);
+                              break;
+                      }
+                  
+                  }());
+                  
+                  /* ]]> */
+               </script>
+            </div>
+         </div>
+      </div>
+      <div id="FooterContainer">
+         <div class="last">
+            <ul>
+               <li>&copy; 2009 - 2013 <a href="/">Playtomic Inc</a> all rights reserved</li>
+               <li><a href="terms.html">Terms of Service</a></li>
+               <li><a href="privacy.html">Privacy Policy</a></li>
+               <li><a href="#">Contact us</a></li>
+               <li><a href="http://twitter.com/playtomic">Twitter</a></li>
+            </ul>
+         </div>
+         <div id="Footer">
+            <div class="section">
+               <h5>API Documentation:</h5>
+               <ul>
+                  <li><a href="api/ios.html" title="iPhone Game Analytics">iPhone</a></li>
+                  <li><a href="api/unity.html" title="Unity3d Game Analytics">Unity3d</a></li>
+                  <li><a href="api/as3.html" title="Flash ActionScript 3 Game Analytics">AS3</a></li>
+                  <li><a href="api/as2.html" title="Flash ActionScript 2 Game Analytics">AS2</a></li>
+                  <li><a href="api/html5.html" title="HTML5 Game Analytics">HTML5</a></li>
+                  <li><a href="api/cpp.html" title="C++ Game Analytics">C++</a></li>
+                  <li><a href="api/android.html" title="Android Game Analytics">Android</a></li>
+                  <li><a href="api/monoandroid.html" title="Mono for Android Game Analytics">Mono/Android</a></li>
+                  <li><a href="api/java.html" title="Java Game Analytics">Java</a></li>
+                  <li><a href="api/dataexporting.html">Data Exporting</a></li>
+               </ul>
+            </div>
+            <div class="section">
+               <h5>Website:</h5>
+               <ul>
+                  <li><a href="/">Home</a></li>
+                  <!--<li><a href="/jobs">Jobs</a></li>-->
+                  <li><a href="/features.html">Features</a></li>
+                  <li><a href="/iphone-analytics.html">iPhone Analytics</a></li>
+                  <li><a href="/mobile-analytics.html">Mobile Analytics</a></li>
+                  <li><a href="#">Register</a></li>
+                  <li><a href="#">Contact</a></li>
+                  <li><a href="#">Block Playtomic</a></li>
+               </ul>
+            </div>
+            <div class="section">
+               <h5>Games:</h5>
+               <ul>
+                  <li><a href="#">Game Charts</a></li>
+                  <li><a href="#">Game Catalog</a></li>
+                  <li><a href="#">Flash Game Distribution</a></li>
+               </ul>
+            </div>
+            <!--<div class="section">
+               <h5>Community:</h5>
+               <ul>
+               	<li><a href="/community">Forums</a></li>
+                   <li><a href="/community/general">General</a></li>
+                   <li><a href="/community/suggestions">Suggestions</a></li>
+                   <li><a href="/issues">Issue Tracker</a></li>
+               </ul>
+               
+               </div>-->
+            <div class="section">
+               <h5>Blog:</h5>
+               <ul>
+                  <li><a href="#">Latest posts</a></li>
+                  <li><a href="#">Archive</a></li>
+                  <li>Recent post:  <a href="#">Four ways to keep players in love with your game using Playtomic</a></li>
+               </ul>
+            </div>
+            <div class="section">
+               <h5>Friends:</h5>
+               <ul>
+                  <li><a href="http://armorgames.com/">Armor Games</a></li>
+                  <li><a href="http://mochimedia.com/">Mochi Media</a></li>
+                  <li><a href="http://www.youdagames.com/">Youdagames</a></li>
+                  <li><a href="http://fgl.com/">FGL</a></li>
+                  <li><a href="http://mongohq.com/">MongoHQ</a></li>
+                  <li><a href="http://parse.com/">Parse</a></li>
+                  <li><a href="http://newrelic.com/">New Relic</a></li>
+                  <li><a href="http://www.softlayer.com/">Softlayer</a></li>
+                  <li><a href="http://www.minimonstermedia.com">Mini Monster Media</a></li>
+               </ul>
+            </div>
+            <div class="section secondlast">
+               <h5>Attribution:</h5>
+               <ul>
+                  <li>
+                     Background by 
+                     <div class="subtle" xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/" about="http://subtlepatterns.com/">
+                        <span property="dct:title">Subtle Patterns</span>
+                        (<a rel="cc:attributionURL" property="cc:attributionName" href="http://subtlepatterns.com">Subtle Patterns</a>) /
+                        <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a>
+                     </div>
+                  </li>
+                  <li>Icons include works from <a href="http://famfamfam.com/">FamFamFam</a></li>
+               </ul>
+            </div>
+         </div>
+      </div>
+      <div id="Overlay"></div>
+      <div id="LightBox" style="height: 300px;">
+         <div class="goodbye">
+            <h2>Goodbye</h2>
+            <p>Friends, Playtomic has come to an end.  Part of this service will live on at <a href="http://playtomic.org/">Playtomic.org</a> as a 
+               self-hosted, open source platform I am continuing to develop in my spare time.  The rest is unfortunately finished.
+            </p>
+            <p><a href="http://cr.linkedin.com/pub/ben-lowry/2a/537/a8">Ben</a></p>
+         </div>
+      </div>
+      <link rel="stylesheet" href="/api/styles/default.css" />
+      <script src="/api/highlight.pack.js"></script>
+      <script type="text/javascript">
+         /* <![CDATA[ */
+             
+         (function () {
+                 
+             // altenating table rows
+             var tables = document.getElementsByTagName("table");
+             var i;
+         
+             for (i = 0; i < tables.length; i++) {
+                 var rows = tables[i].getElementsByTagName("tr");
+         
+                 for (var j = 0; j < rows.length; j++) {
+                     rows[j].className = j % 2 == 0 ? "alt" : "";
+                 }
+             }
+         
+             // sign in or up
+             if (document.getElementById("ctl00_UserMenu")) {
+                 document.getElementById("SiteMenu").style.display = "none";
+             }
+             
+             if (document.getElementById("TopBarGuestMenu")) {
+                 document.getElementById("TopBarGuestMenu").style.display = "none";
+             }
+             
+             // api menu
+             var menulinks = document.getElementById("APIMenu").getElementsByTagName("a");
+             var ploc = document.location.toString();
+                 
+             for (i = menulinks.length - 1; i > -1; i--) {
+                     
+                 if(ploc.indexOf(menulinks[i].href) > -1) {
+                     menulinks[i].className += " on";
+                     break;
+                 }
+             }
+             
+             // site menu
+             menulinks = document.getElementById("TopBar").getElementsByTagName("a");
+         
+             for (i = menulinks.length - 1; i > -1; i--) {
+         
+                 if (ploc.indexOf(menulinks[i].href) > -1) {
+                     menulinks[i].className += " on";
+                     break;
+                 }
+             }
+             
+             // pretty code
+            hljs.initHighlightingOnLoad();
+         
+         }());
+         
+         /* ]]> */
+      </script>
+      <script type="text/javascript">
+         // LIGHTBOX
+         function d(o) {
+             return document.getElementById(o);
+         }
+         function LightBox() {
+             var pageSize = getPageSize();
+             var overlay = d("Overlay");
+             overlay.style.height = pageSize[1] + "px";
+             overlay.style.display = "block";
+             overlay.style.zIndex = "5";
+         
+             var lightbox = d("LightBox");
+             lightbox.style.display = "block";
+             lightbox.style.left = "-10000px";;
+         
+             var pageSize = getPageSize();
+             var top = getPageScroll() + ((pageSize[3] - 300) / 2);
+             var left = ((pageSize[0] - 536) / 2);
+         
+             var lightbox = d("LightBox");
+             lightbox.style.top = (top < 0) ? "0px" : top + "px";
+             lightbox.style.left = (left < 0) ? "0px" : left + "px";
+             lightbox.style.zIndex = "6";
+         }
+         
+         
+         function getPageScroll() {
+             var yScroll;
+         
+             if (self.pageYOffset)
+                 yScroll = self.pageYOffset;
+             else if (document.documentElement && document.documentElement.scrollTop)
+                 yScroll = document.documentElement.scrollTop;
+             else if (document.body)
+                 yScroll = document.body.scrollTop;
+         
+             return yScroll;
+         }
+         
+         function getPageSize() {
+             var xScroll, yScroll;
+         
+             if (window.innerHeight && window.scrollMaxY) {
+                 xScroll = document.body.scrollWidth;
+                 yScroll = window.innerHeight + window.scrollMaxY;
+             }
+             else if (document.body.scrollHeight > document.body.offsetHeight) {
+                 xScroll = document.body.scrollWidth;
+                 yScroll = document.body.scrollHeight;
+             }
+             else {
+                 xScroll = document.body.offsetWidth;
+                 yScroll = document.body.offsetHeight;
+             }
+         
+             var windowWidth, windowHeight;
+             if (self.innerHeight) {
+                 windowWidth = self.innerWidth;
+                 windowHeight = self.innerHeight;
+             }
+             else if (document.documentElement && document.documentElement.clientHeight) {
+                 windowWidth = document.documentElement.clientWidth;
+                 windowHeight = document.documentElement.clientHeight;
+             }
+             else if (document.body) {
+                 windowWidth = document.body.clientWidth;
+                 windowHeight = document.body.clientHeight;
+             }
+         
+             var pageHeight = (yScroll < windowHeight ? windowHeight : yScroll);
+             var pageWidth = (xScroll < windowWidth ? windowWidth : xScroll);
+             return new Array(pageWidth, pageHeight, windowWidth, windowHeight);
+         }
+         
+         LightBox();
+      </script>
+   </body>
+</html>

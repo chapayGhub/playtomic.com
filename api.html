@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,medium,bold" title="roboto" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <title>Playtomic API documentation | Game analytics and services</title>
+      <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+      <link rel="stylesheet" href="api/api.css" />
+      <link rel="icon" href="favicon.ico" type="image/icon" />
+      <style>
+         .goodbye {margin: 10px 0; padding: 10px;background-color: #222;border: 4px solid #333;}
+         .goodbye p { color: #EEE;margin-bottom: 12px;font-size: 15px;line-height: 24px !important; }
+         .goodbye a { font-size: 15px !important;color: #FFF; }
+         .goodbye h2 { font-size: 18px;color: #FFF; margin: 0px 0px 4px 0px}
+         .goodbye a.btn { text-decoration: none !important;padding: 4px; }
+         .goodbye input { padding: 4px; }
+         .goodbye form { margin-bottom: 12px;}
+         .goodbye hr { margin: 12px !important; }
+         #LightBox { background-color: #333; width: 808px; height: 604px; display: none; position: absolute; z-index: 1001; top: 0px; left: 0px; }
+         #Overlay { background-image: url(images/overlay.png); display: none; position: absolute; z-index: 1000; top: 0px; left: 0px; width: 100%; height: 100%; }
+      </style>
+   </head>
+   <body>
+      <div id="TopBarContainer">
+         <div id="TopBar">
+            <div id="SiteBar">
+               <ul>
+                  <li><a title="Playtomic" href="http://playtomic.com/">Website</a></li>
+                  <li><a title="API Documentation" href="../api.html">API Docs</a></li>
+                  <li><a title="Issue Center" href="#">Issues</a></li>
+                  <li><a title="Feature Wish List" href="#">Wish List</a></li>
+                  <li><a title="Blog" href="#">Blog</a></li>
+                  <!--<li><a href="#">Community</a></li>
+                     <li><a href="/jobs">Jobs</a></li>-->
+                  <li><a title="Game distribution" href="#">Games</a></li>
+                  <li class="last"><a href="http://twitter.com/playtomic">Twitter</a></li>
+               </ul>
+            </div>
+         </div>
+      </div>
+      <div id="Container">
+         <div id="Header">
+            <a id="Logo" href="/"><span title="Playtomic - Game analytics and tools for iPhone, iPod, iPad, Flash, HTML5 and Unity games"></span></a>
+         </div>
+         <div id="APIMenu">
+            <div>
+               <ul>
+                  <li><a class="menulink" href="../api.html">API Home</a></li>
+                  <li><a class="menulink" href="api/dataexporting.html">Data Exporting</a></li>
+                  <li><a class="menulink" href="api/unity.html">Unity3d</a></li>
+                  <li><a class="menulink" href="api/html5.html">HTML5</a></li>
+                  <li><a class="menulink" href="api/ios.html">iOS / Objective C</a></li>
+                  <li><a class="menulink" href="api/as3.html">Flash / AS3</a></li>
+                  <li><a class="menulink" href="api/as2.html">Flash / AS2</a></li>
+                  <li><a class="menulink" href="api/cpp.html">C++</a></li>
+                  <li><a class="menulink" href="api/android.html">Android / Java</a></li>
+                  <li><a class="menulink" href="api/monoandroid.html">Android / Mono</a></li>
+                  <li><a class="menulink" href="api/java.html">Java</a></li>
+               </ul>
+            </div>
+         </div>
+         <div id="APIHeading">
+            <h1>API Documentation</h1>
+         </div>
+         <div id="Content">
+            <h1>Missing the language you need?</h1>
+            <p>All of our APIs are available on GitHub, you're free to port it to other platforms.</p>
+            <h2>Unity3d</h2>
+            <p class="langblurb">For web, mobile and downloadable:</p>
+            <p class="langoptions">
+               <a class="btn" href="api/unity.html">Documentation</a>
+               <a class="btn" href="https://github.com/playtomic/gameapi-unity3d">Github Repo</a>
+               <a class="btn primary" href="http://github.com/playtomic/gameapi-unity3d/zipball/master">Download</a>
+            </p>
+            <h2>iOS / Objective C</h2>
+            <p class="langblurb">For iPhone, iPad and iPod:</p>
+            <p class="langoptions">
+               <a class="btn" href="api/ios.html">Documentation</a>
+               <a class="btn" href="https://github.com/playtomic/gameapi-ios">Github Repo</a>
+               <a class="btn primary" href="http://github.com/playtomic/gameapi-ios/zipball/master">Download</a>
+            </p>
+            <h2>HTML5 / JavaScript</h2>
+            <p class="langblurb">For web and mobile:</p>
+            <p class="langoptions">
+               <a class="btn" href="api/html5.html">Documentation</a>
+               <a class="btn" href="https://github.com/playtomic/gameapi-html5">Github Repo</a>
+               <a class="btn primary" href="http://github.com/playtomic/gameapi-html/zipball/master">Download</a>
+            </p>
+            <h2>C++</h2>
+            <p class="langblurb">For Mac, Windows and Linux downloadable, and iOS and Android mobile:</p>
+            <p class="langoptions">
+               <a class="btn" href="api/cpp.html">Documentation</a>
+               <a class="btn" href="#">Github Repo</a>
+               <a class="btn primary" href="#">Download</a>
+            </p>
+            <h2>Java</h2>
+            <p class="langblurb">For clientside games, and an extension for SmarterFox Server SFS2X:</p>
+            <p class="langoptions">
+               <a class="btn" href="api/java.html">Documentation</a>
+               <a class="btn" href="#">Github Repo</a> 
+               <a class="btn primary" href="#">Download</a>
+            </p>
+            <h2>Android / Java</h2>
+            <p class="langblurb">For Android phones and tablets:</p>
+            <p class="langoptions">
+               <a class="btn" href="api/android.html">Documentation</a>
+               <a class="btn" href="https://github.com/playtomic/gameapi-android">Github Repo</a>
+               <a class="btn primary" href="http://github.com/playtomic/gameapi-android/zipball/master">Download</a>
+            </p>
+            <h2>Android / Mono</h2>
+            <p class="langblurb">For Android phones and tablets using the Mono for Android framework</p>
+            <p class="langoptions">
+               <a class="btn" href="api/monoandroid.html">Documentation</a>
+               <a class="btn" href="https://github.com/playtomic/gameapi-android">Github Repo</a>
+               <a class="btn primary" href="http://github.com/playtomic/gameapi-android/zipball/master">Download</a>
+            </p>
+            <h2>Flash ActionScript 3</h2>
+            <p class="langblurb">For Flash and AIR including iOS and Android publishing:</p>
+            <p class="langoptions">
+               <a class="btn" href="api/as3.html">Documentation</a>
+               <a class="btn" href="https://github.com/playtomic/gameapi-as3">Github Repo</a>
+               <a class="btn primary" href="http://github.com/playtomic/gameapi-as3/zipball/master">Download</a>
+            </p>
+            <h2>Flash ActionScript 2 (discontinued)</h2>
+            <p class="langblurb">For people who haven't looked at a calendar in years:</p>
+            <p class="langoptions">
+               <a class="btn" href="api/as2.html">Documentation</a>
+               <a class="btn" href="#">Github Repo</a>
+               <a class="btn primary" href="#">Download</a>
+            </p>
+         </div>
+      </div>
+      <div id="FooterContainer">
+         <div class="last">
+            <ul>
+               <li>&copy; 2009 - 2013 <a href="/">Playtomic Inc</a> all rights reserved</li>
+               <li><a href="terms.html">Terms of Service</a></li>
+               <li><a href="privacy.html">Privacy Policy</a></li>
+               <li><a href="#">Contact us</a></li>
+               <li><a href="http://twitter.com/playtomic">Twitter</a></li>
+            </ul>
+         </div>
+         <div id="Footer">
+            <div class="section">
+               <h5>API Documentation:</h5>
+               <ul>
+                  <li><a href="api/ios.html" title="iPhone Game Analytics">iPhone</a></li>
+                  <li><a href="api/unity.html" title="Unity3d Game Analytics">Unity3d</a></li>
+                  <li><a href="api/as3.html" title="Flash ActionScript 3 Game Analytics">AS3</a></li>
+                  <li><a href="api/as2.html" title="Flash ActionScript 2 Game Analytics">AS2</a></li>
+                  <li><a href="api/html5.html" title="HTML5 Game Analytics">HTML5</a></li>
+                  <li><a href="api/cpp.html" title="C++ Game Analytics">C++</a></li>
+                  <li><a href="api/android.html" title="Android Game Analytics">Android</a></li>
+                  <li><a href="api/monoandroid.html" title="Mono for Android Game Analytics">Mono/Android</a></li>
+                  <li><a href="api/java.html" title="Java Game Analytics">Java</a></li>
+                  <li><a href="api/dataexporting.html">Data Exporting</a></li>
+               </ul>
+            </div>
+            <div class="section">
+               <h5>Website:</h5>
+               <ul>
+                  <li><a href="/">Home</a></li>
+                  <!--<li><a href="/jobs">Jobs</a></li>-->
+                  <li><a href="/features.html">Features</a></li>
+                  <li><a href="/iphone-analytics.html">iPhone Analytics</a></li>
+                  <li><a href="/mobile-analytics.html">Mobile Analytics</a></li>
+                  <li><a href="#">Register</a></li>
+                  <li><a href="#">Contact</a></li>
+                  <li><a href="#">Block Playtomic</a></li>
+               </ul>
+            </div>
+            <div class="section">
+               <h5>Games:</h5>
+               <ul>
+                  <li><a href="#">Game Charts</a></li>
+                  <li><a href="#">Game Catalog</a></li>
+                  <li><a href="#">Flash Game Distribution</a></li>
+               </ul>
+            </div>
+            <!--<div class="section">
+               <h5>Community:</h5>
+               <ul>
+               	<li><a href="/community">Forums</a></li>
+                   <li><a href="/community/general">General</a></li>
+                   <li><a href="/community/suggestions">Suggestions</a></li>
+                   <li><a href="/issues">Issue Tracker</a></li>
+               </ul>
+               
+               </div>-->
+            <div class="section">
+               <h5>Blog:</h5>
+               <ul>
+                  <li><a href="#">Latest posts</a></li>
+                  <li><a href="#">Archive</a></li>
+                  <li>Recent post:  <a href="#">Four ways to keep players in love with your game using Playtomic</a></li>
+               </ul>
+            </div>
+            <div class="section">
+               <h5>Friends:</h5>
+               <ul>
+                  <li><a href="http://armorgames.com/">Armor Games</a></li>
+                  <li><a href="http://mochimedia.com/">Mochi Media</a></li>
+                  <li><a href="http://www.youdagames.com/">Youdagames</a></li>
+                  <li><a href="http://fgl.com/">FGL</a></li>
+                  <li><a href="http://mongohq.com/">MongoHQ</a></li>
+                  <li><a href="http://parse.com/">Parse</a></li>
+                  <li><a href="http://newrelic.com/">New Relic</a></li>
+                  <li><a href="http://www.softlayer.com/">Softlayer</a></li>
+                  <li><a href="http://www.minimonstermedia.com">Mini Monster Media</a></li>
+               </ul>
+            </div>
+            <div class="section secondlast">
+               <h5>Attribution:</h5>
+               <ul>
+                  <li>
+                     Background by 
+                     <div class="subtle" xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/" about="http://subtlepatterns.com/">
+                        <span property="dct:title">Subtle Patterns</span>
+                        (<a rel="cc:attributionURL" property="cc:attributionName" href="http://subtlepatterns.com">Subtle Patterns</a>) /
+                        <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a>
+                     </div>
+                  </li>
+                  <li>Icons include works from <a href="http://famfamfam.com/">FamFamFam</a></li>
+               </ul>
+            </div>
+         </div>
+      </div>
+      <div id="Overlay"></div>
+      <div id="LightBox" style="height: 300px;">
+         <div class="goodbye">
+            <h2>Goodbye</h2>
+            <p>Friends, Playtomic has come to an end.  Part of this service will live on at <a href="http://playtomic.org/">Playtomic.org</a> as a 
+               self-hosted, open source platform I am continuing to develop in my spare time.  The rest is unfortunately finished.
+            </p>
+            <p><a href="http://cr.linkedin.com/pub/ben-lowry/2a/537/a8">Ben</a></p>
+         </div>
+      </div>
+      <link rel="stylesheet" href="api/styles/default.css" />
+      <script src="/api/highlight.pack.js"></script>
+      <script type="text/javascript">
+         /* <![CDATA[ */
+             
+         (function () {
+                 
+             // altenating table rows
+             var tables = document.getElementsByTagName("table");
+             var i;
+         
+             for (i = 0; i < tables.length; i++) {
+                 var rows = tables[i].getElementsByTagName("tr");
+         
+                 for (var j = 0; j < rows.length; j++) {
+                     rows[j].className = j % 2 == 0 ? "alt" : "";
+                 }
+             }
+         
+             // sign in or up
+             if (document.getElementById("ctl00_UserMenu")) {
+                 document.getElementById("SiteMenu").style.display = "none";
+             }
+             
+             if (document.getElementById("TopBarGuestMenu")) {
+                 document.getElementById("TopBarGuestMenu").style.display = "none";
+             }
+             
+             // api menu
+             var menulinks = document.getElementById("APIMenu").getElementsByTagName("a");
+             var ploc = document.location.toString();
+                 
+             for (i = menulinks.length - 1; i > -1; i--) {
+                     
+                 if(ploc.indexOf(menulinks[i].href) > -1) {
+                     menulinks[i].className += " on";
+                     break;
+                 }
+             }
+             
+             // site menu
+             menulinks = document.getElementById("TopBar").getElementsByTagName("a");
+         
+             for (i = menulinks.length - 1; i > -1; i--) {
+         
+                 if (ploc.indexOf(menulinks[i].href) > -1) {
+                     menulinks[i].className += " on";
+                     break;
+                 }
+             }
+             
+             // pretty code
+            hljs.initHighlightingOnLoad();
+         
+         }());
+         
+         // LIGHTBOX
+         function d(o) {
+             return document.getElementById(o);
+         }
+         function LightBox() {
+             var pageSize = getPageSize();
+             var overlay = d("Overlay");
+             overlay.style.height = pageSize[1] + "px";
+             overlay.style.display = "block";
+             overlay.style.zIndex = "5";
+         
+             var lightbox = d("LightBox");
+             lightbox.style.display = "block";
+             lightbox.style.left = "-10000px";;
+         
+             var pageSize = getPageSize();
+             var top = getPageScroll() + ((pageSize[3] - 300) / 2);
+             var left = ((pageSize[0] - 536) / 2);
+         
+             var lightbox = d("LightBox");
+             lightbox.style.top = (top < 0) ? "0px" : top + "px";
+             lightbox.style.left = (left < 0) ? "0px" : left + "px";
+             lightbox.style.zIndex = "6";
+         }
+         
+         
+         function getPageScroll() {
+             var yScroll;
+         
+             if (self.pageYOffset)
+                 yScroll = self.pageYOffset;
+             else if (document.documentElement && document.documentElement.scrollTop)
+                 yScroll = document.documentElement.scrollTop;
+             else if (document.body)
+                 yScroll = document.body.scrollTop;
+         
+             return yScroll;
+         }
+         
+         function getPageSize() {
+             var xScroll, yScroll;
+         
+             if (window.innerHeight && window.scrollMaxY) {
+                 xScroll = document.body.scrollWidth;
+                 yScroll = window.innerHeight + window.scrollMaxY;
+             }
+             else if (document.body.scrollHeight > document.body.offsetHeight) {
+                 xScroll = document.body.scrollWidth;
+                 yScroll = document.body.scrollHeight;
+             }
+             else {
+                 xScroll = document.body.offsetWidth;
+                 yScroll = document.body.offsetHeight;
+             }
+         
+             var windowWidth, windowHeight;
+             if (self.innerHeight) {
+                 windowWidth = self.innerWidth;
+                 windowHeight = self.innerHeight;
+             }
+             else if (document.documentElement && document.documentElement.clientHeight) {
+                 windowWidth = document.documentElement.clientWidth;
+                 windowHeight = document.documentElement.clientHeight;
+             }
+             else if (document.body) {
+                 windowWidth = document.body.clientWidth;
+                 windowHeight = document.body.clientHeight;
+             }
+         
+             var pageHeight = (yScroll < windowHeight ? windowHeight : yScroll);
+             var pageWidth = (xScroll < windowWidth ? windowWidth : xScroll);
+             return new Array(pageWidth, pageHeight, windowWidth, windowHeight);
+         }
+		 
+         LightBox();
+		 
+		 /* ]]> */
+
+      </script>
+   </body>
+</html>
